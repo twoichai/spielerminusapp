@@ -3,6 +3,5 @@ package com.example.spielerminusapp.model.enums;
 public enum Metric {
     MINUTES,
     METERS,
-    SECONDS,
-    
+    SECONDS
 }

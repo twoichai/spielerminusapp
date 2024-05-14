@@ -1,13 +1,27 @@
 package com.example.spielerminusapp.service;
 import com.example.spielerminusapp.model.Athlete;
-import com.example.spielerminusapp.model.CompletedExercise;
+import com.example.spielerminusapp.model.csvmodels.AthleteCsvRepresentation;
+import com.example.spielerminusapp.model.csvmodels.CompletedExerciseCsvRepresentation;
+import com.example.spielerminusapp.model.exercise.CompletedExercise;
 import com.example.spielerminusapp.repository.CompletedExerciseRepository;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CompletedExerciseService {
@@ -77,6 +91,44 @@ public class CompletedExerciseService {
     @Transactional
     public boolean saveCompletedExercise(CompletedExercise completedExercise) {
         return true;
+    }
+
+    public Integer uploadCompletedExercises(MultipartFile file) throws IOException {
+        Set<CompletedExercise> completedExercises = parseCsv(file);
+        completedExerciseRepository.saveAll(completedExercises);
+        return completedExercises.size();
+    }
+    private Set<CompletedExercise> parseCsv(MultipartFile file) throws IOException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        try(Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+            HeaderColumnNameMappingStrategy<CompletedExerciseCsvRepresentation> strategy =
+                    new HeaderColumnNameMappingStrategy<>();
+            CsvToBean<CompletedExerciseCsvRepresentation> csvToBean =
+                    new CsvToBeanBuilder<CompletedExerciseCsvRepresentation>(reader)
+                            .withMappingStrategy(strategy)
+                            .withIgnoreEmptyLine(true)
+                            .withSeparator(';')
+                            .withIgnoreLeadingWhiteSpace(true)
+                            .build();
+
+            return csvToBean.parse()
+                    .stream()
+                    .map(csvLine -> CompletedExercise.builder()
+                            // Name;
+                            // Vorname;
+                            // Geschlecht;
+                            // Geburtsjahr;
+                            // Geburtstag;
+                            // Übung;
+                            //.exerciseType
+                            .dateOfCompletion(csvLine.getAttemptDate())
+                            .result(csvLine.getResult())
+                            .pointsEarned(99999 /*Need to implement a method to count points*/)
+                            .DBS("NEIN")
+                            .build()
+                    )
+                    .collect(Collectors.toSet());
+        }
     }
 
 }

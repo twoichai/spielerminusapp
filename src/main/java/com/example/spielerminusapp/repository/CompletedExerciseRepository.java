@@ -1,6 +1,6 @@
 package com.example.spielerminusapp.repository;
 
-import com.example.spielerminusapp.model.CompletedExercise;
+import com.example.spielerminusapp.model.exercise.CompletedExercise;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
