@@ -26,11 +26,8 @@ public class Rule {
     @Column(name = "TO_AGE")
     private int toAge;
 
-    private long
-
     @Column(name = "LABELS")
-    @Convert(converter = HashMapConverter.class)
-    private Map<String, String> labels; // 200 m, 10kg - non-important stuff
+    private String labels; // 200 m, 10kg - non-important stuff
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EXERCISE_ID")
