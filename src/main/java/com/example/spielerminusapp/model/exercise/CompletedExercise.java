@@ -3,7 +3,6 @@ package com.example.spielerminusapp.model.exercise;
 import com.example.spielerminusapp.model.Athlete;
 import com.example.spielerminusapp.model.enums.ExerciseType;
 import com.example.spielerminusapp.model.enums.Medal;
-import com.example.spielerminusapp.model.exercise.Exercise;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
