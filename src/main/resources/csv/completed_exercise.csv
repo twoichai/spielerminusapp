@@ -1,10 +1,10 @@
-Name;Vorname;gender;yearofbirth;dob;exercisetitle;category;dateofcompletion;result;points;DBS
+Name;Vorname;Geschlecht;Geburtsjahr;Geburtstag;Übung;Kategorie;Datum;Ergebnis;Punkte;DBS
 H;Colin;M;2005;;800 m Lauf;Ausdauer;21.10.2020;03:00;3;Nein
 H;Colin;M;2005;;800 m Lauf;Ausdauer;21.10.2020;03:00;3;Nein
 H;Colin;M;2005;;Standweitsprung;Kraft;21.10.2020;2,40;3;Nein
 H;Colin;M;2005;;100 m Laufen;Schnelligkeit;21.10.2020;13,5;3;Nein
 Z;Marta;W;2008;;800 m Lauf;Ausdauer;21.10.2020;03:52;2;Nein
-Z;Marta;W;2008;;Standweitsprung;Kraft;21.10.2020;2,05;3;Nein
+Z;Marta;W;2008;;Standweitsprung;Kraft;21.10.2020;KRAFT2,05;3;Nein
 Z;Marta;W;2008;;50 m Laufen;Schnelligkeit;21.10.2020;8,8;2;Nein
 Maier;Lena;W;2009;;800 m Lauf;Ausdauer;21.10.2020;03:49;3;Nein
 Maier;Lena;W;2009;;Standweitsprung;Kraft;21.10.2020;2,00;3;Nein

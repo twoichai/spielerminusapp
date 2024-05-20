@@ -12,10 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -101,14 +98,22 @@ public class AthleteService {
     }
 
     public Integer uploadAthletes(MultipartFile file) throws IOException {
-        Set<Athlete> athletes = parseCsv(file);
+        Set<Athlete> athletes = parseCsv(file.getInputStream());
         athleteRepository.saveAll(athletes);
         return athletes.size();
     }
 
-    private Set<Athlete> parseCsv(MultipartFile file) throws IOException {
+    public Integer uploadAthletesFromResource(String resourceName) {// "classpath:/csv/compl..."
+        try (InputStream res = AthleteService.class.getResourceAsStream(resourceName)) {
+            return parseCsv(res).size();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Set<Athlete> parseCsv(InputStream inputStream) throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        try(Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+        try(Reader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             HeaderColumnNameMappingStrategy<AthleteCsvRepresentation> strategy =
                     new HeaderColumnNameMappingStrategy<>();
             strategy.setType(AthleteCsvRepresentation.class);
@@ -133,5 +138,6 @@ public class AthleteService {
                     )
                     .collect(Collectors.toSet());
         }
+
     }
 }

@@ -10,12 +10,14 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 // Name;Vorname;Geschlecht;Geburtsjahr;Geburtstag;Übung;Kategorie;Datum;Ergebnis;Punkte;DBS
 @Builder
 public class CompletedExerciseCsvRepresentation {
 
     @CsvBindByName(column="Name")
     private String lastName;
+
     @CsvBindByName(column="Vorname")
     private String firstName;
 
@@ -26,23 +28,23 @@ public class CompletedExerciseCsvRepresentation {
     private String yearOfBirth;
 
     @CsvBindByName(column="Geburtstag")
-    private LocalDate dob;
+    private String dob;
 
     @CsvBindByName(column="Übung")
-    private Exercise exercise;
+    private String exercise;
 
     @CsvBindByName(column="Kategorie")
-    private ExerciseType exerciseType;
+    private String exerciseType;
 
     @CsvBindByName(column="Datum")
-    private LocalDate attemptDate;
+    private String attemptDate;
 
     @CsvBindByName(column="Ergebnis")
     private String result;
 
     @CsvBindByName(column="Punkte")
-    private int points;
+    private String points;
 
     @CsvBindByName(column="DBS")
-    private boolean dbs;
+    private String dbs;
 }

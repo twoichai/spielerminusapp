@@ -1,7 +1,8 @@
 package com.example.spielerminusapp.model.exercise;
 
 import com.example.spielerminusapp.model.enums.Metric;
-import com.example.spielerminusapp.model.exercise.Exercise;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,8 +26,12 @@ public class Rule {
     @Column(name = "TO_AGE")
     private int toAge;
 
-    @Column(name = "VALUE")
-    private long value;
+    @Column(name = "VALUE_BRONZE")
+    private long valueBronze;
+    @Column(name = "VALUE_SILVER")
+    private long valueSilver;
+    @Column(name = "VALUE_GOLD")
+    private long valueGold;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "METRIC")
@@ -38,7 +43,12 @@ public class Rule {
     @Column(name = "POINTS")
     private String points;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EXERCISE_ID")
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "exercise_id")
     private Exercise exercise;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "RULE_GROUP_ID")
+    private RuleGroup ruleGroup;
 }

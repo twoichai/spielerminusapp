@@ -1,7 +1,6 @@
 package com.example.spielerminusapp.repository;
 
 import com.example.spielerminusapp.model.Admin;
-import com.example.spielerminusapp.model.Athlete;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
