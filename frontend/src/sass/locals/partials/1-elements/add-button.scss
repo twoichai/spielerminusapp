@@ -1,0 +1,11 @@
+@use "../../../config";
+
+.add-player__button-icon {
+  width: 30px;
+  height: 30px;
+  filter: invert(73%) sepia(29%) saturate(609%) hue-rotate(139deg) brightness(89%) contrast(94%);
+
+  &:hover {
+    cursor: pointer;
+  }
+}

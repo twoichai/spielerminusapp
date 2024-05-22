@@ -1,0 +1,21 @@
+{
+  "name": "spielerminus",
+  "version": "1.0.0",
+  "description": "This is the repo for the project management subject in WiSe2023/2024",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel src/index.html --port 8080",
+    "build-backend": "parcel build src/index.html --no-minify --no-content-hash --out-dir ../Backend/src/main/resources/static",
+    "build": "parcel build --no-minify src/index.html",
+    "dart": "dart compile-sass.dart src/sass/main.scss styles.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.12.0",
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.72.0"
+  }
+}

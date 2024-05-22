@@ -1,0 +1,50 @@
+@use "../../mixins.scss";
+@use "../../../config.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: #FFF;
+}
+body {
+  @include mixins.screen-md {
+    overflow-y: scroll;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  border: none;
+}
+
+.trainer-atlethe-theme {
+  background: config.$brandcolor-green;
+}
+
+#main {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: config.$neutral-color-100;
+}
+.content {
+  display: flex;
+  width: 100%;
+}
+.overall {
+  display: flex;
+  width: 100%;
+}
+
+.player-info__background {
+  margin-bottom: 40px;
+}
+
+#playerCard-detail[hidden="true"] {
+  display: none;
+}

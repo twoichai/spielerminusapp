@@ -1,0 +1,22 @@
+@use "../../../config";
+
+.change-option-popUp {
+  display: block;
+  padding: 5px;
+  position: absolute;
+  background: config.$neutral-color-100;
+  border-radius: 5px;
+  box-shadow: config.$neutral-color-200 0 0 2px, config.$neutral-color-200 0 2px 4px;
+  z-index: 3;
+
+  .change-button,
+  .delete-button{
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &__icon {
+      filter: brightness(0) saturate(100%) invert(17%) sepia(34%) saturate(436%) hue-rotate(137deg) brightness(96%) contrast(86%);
+    }
+  }
+}

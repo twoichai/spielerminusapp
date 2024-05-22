@@ -1,0 +1,11 @@
+@use "../../../config";
+
+.active-nav {
+  position: absolute;
+  width: 3px;
+  height: 48px;
+  margin-left: 1px;
+  border-radius: 5px;
+  background-color: config.$brandcolor-blue;
+  transition-duration: .3s;
+}

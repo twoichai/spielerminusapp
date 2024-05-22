@@ -1,0 +1,53 @@
+@use "../../mixins";
+@use "../../../config";
+
+.button--next {
+  display: flex;
+  color: white;
+  background-color: config.$brandcolor-green;
+  border: none;
+  padding: 18px 23px 18px 45px;
+  height: 24px;
+  transition: all .3s ease;
+  font-weight: bold;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.button--next > .button--next__arrow {
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid config.$brandcolor-green;
+  border-bottom: 2px solid config.$brandcolor-green;
+  position: relative;
+  transform: rotate(-45deg);
+  margin: 0 6px;
+  transition: all .3s ease;
+}
+
+.button--next > .button--next__arrow::before {
+  display: block;
+  background-color: white;
+  width: 7px;
+  transform-origin: bottom right;
+  height: 1.8px;
+  position: absolute;
+  opacity: 0;
+  bottom: calc(-2px / 2);
+  transform: rotate(45deg);
+  transition: all .3s ease;
+  content: "";
+  right: 0;
+}
+
+.button--next:hover > .button--next__arrow {
+  transform: rotate(-45deg) translate(4px, 4px);
+  border-color: white;
+}
+
+.button--next:hover > .button--next__arrow::before {
+  opacity: 1;
+  width: 8px;
+}

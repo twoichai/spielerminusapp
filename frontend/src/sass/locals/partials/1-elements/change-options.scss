@@ -1,0 +1,25 @@
+@use "../../../config";
+
+.change-option{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 10px;
+  margin-right: 10px;
+  height: 36px;
+  width: 36px;
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  &:hover {
+    .change-option__icon {
+      filter: invert(73%) sepia(29%) saturate(609%) hue-rotate(139deg) brightness(89%) contrast(94%);
+    }
+  }
+
+  &__icon {
+    width: 15px;
+  }
+}

@@ -1,0 +1,18 @@
+.delete-button {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  font-size: 15px;
+
+  &:hover {
+    cursor: pointer;
+
+    .delete-button__icon {
+      filter: brightness(0) saturate(100%) invert(34%) sepia(97%) saturate(693%) hue-rotate(319deg) brightness(95%) contrast(80%);
+    }
+  }
+
+  &__icon {
+    margin: 0 5px;
+  }
+}

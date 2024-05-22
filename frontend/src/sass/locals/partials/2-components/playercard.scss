@@ -1,0 +1,91 @@
+@use "../../mixins";
+@use "../../../config";
+
+.playerCard {
+  padding: 10px;
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(2, minmax(0, 2fr));
+  grid-row-gap: 3rem;
+  width: 480px;
+  height: 180px;
+  box-shadow: config.$neutral-color-200 0 0 2px, config.$neutral-color-200 0 2px 4px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  background-color: transparent;
+
+  &:hover:not([active="true"]) {
+    background-color: config.$neutral-color-200;
+    border: 1px solid config.$neutral-color-400;
+  }
+
+
+  &[active="true"] {
+    background-color: config.$brandcolor-blue;
+    color: white;
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__change-option {
+    display: flex;
+    justify-content: right;
+  }
+  &[active="true"]
+  &__change-option {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(1%) hue-rotate(284deg) brightness(103%) contrast(101%);
+  }
+}
+
+.user-info {
+  padding: 0.5rem;
+
+  &__specialty {
+    color: config.$neutral-color-400;
+    font-size: 12px;
+  }
+}
+
+.playerCard[active="true"] .user-info__specialty{
+  color: white;
+}
+
+.user-name-short {
+  width: 60px;
+  height: 60px;
+  border: 2px solid config.$neutral-color-300;
+  border-radius: 50%;
+  font-weight: 500;
+  font-size: 20px;
+  color: config.$neutral-color-400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playerCard[active="true"] .user-name-short{
+  color: white;
+  border: 1px solid white;
+}
+
+
+#user-name-long {
+  font-size: 14px;
+}
+
+.playerCard__swim-ability {
+  width: 35px;
+  margin-left: 5px;
+}
+
+.playerCard[active="true"] .playerCard__swim-ability {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(1%) hue-rotate(284deg) brightness(103%) contrast(101%);
+}

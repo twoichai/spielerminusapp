@@ -1,0 +1,10 @@
+@use "../../../config";
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: config.$neutral-color-100;
+  box-shadow: -3px 0px 10px config.$neutral-color-200;
+  width: 100%;
+}

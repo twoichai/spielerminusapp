@@ -1,0 +1,22 @@
+@use "../../../config";
+
+.filter-by-name {
+  height: 100%;
+  width: 80%;
+
+  &__input {
+    border: none;
+    background: none;
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    color: config.$neutral-color-600;
+
+    &::placeholder {
+      color: config.$neutral-color-300;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}

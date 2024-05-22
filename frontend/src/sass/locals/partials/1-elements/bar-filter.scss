@@ -1,0 +1,12 @@
+.filter-player {
+
+  &__button {
+    border: none;
+    background: none;
+
+    &:hover {
+      cursor: pointer;
+      filter: invert(73%) sepia(29%) saturate(609%) hue-rotate(139deg) brightness(89%) contrast(94%);
+    }
+  }
+}

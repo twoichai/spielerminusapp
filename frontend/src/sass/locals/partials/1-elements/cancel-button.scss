@@ -1,0 +1,54 @@
+@use "../../mixins";
+@use "../../../config";
+
+.button--cancel {
+  display: flex;
+  color: config.$neutral-color-700;
+  background-color: white;
+  border: none;
+  padding: 18px 23px 18px 45px;
+  margin-right: 15px;
+  height: 24px;
+  transition: all .3s ease;
+  font-weight: bold;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.button--cancel__arrow{
+  position: relative;
+  width: 15px;
+  margin-left: 7.5px;
+  cursor: pointer;
+}
+
+.button--cancel__arrow-left{
+  height: 2px;
+  width: 14px;
+  position: absolute;
+  background-color: white;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all .3s ease-in;
+}
+
+.button--cancel__arrow-right{
+  height: 2px;
+  width: 14px;
+  position: absolute;
+  background-color: white;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all .3s ease-in;
+}
+
+.button--cancel:hover .button--cancel__arrow-left{
+  transform: rotate(-45deg);
+  background-color: config.$neutral-color-700;
+}
+.button--cancel:hover .button--cancel__arrow-right{
+  transform: rotate(45deg);
+  background-color: config.$neutral-color-700;
+}

@@ -1,0 +1,43 @@
+@use "../../config/breakpoints" as b;
+
+// Extra small devices
+@mixin screen-xs {
+    @media (max-width: #{b.$screen-xs-max}) {
+        @content;
+    }
+}
+
+// Small devices
+@mixin screen-sm {
+    @media (min-width: #{b.$screen-sm-min}) {
+        @content;
+    }
+ }
+ 
+ // Medium devices
+ @mixin screen-md {
+    @media (min-width: #{b.$screen-md-min}) {
+        @content;
+    }
+ }
+ 
+ // Large devices
+ @mixin screen-lg {
+    @media (min-width: #{b.$screen-lg-min}) {
+        @content;
+    }
+ }
+ 
+ // Extra large devices
+ @mixin screen-xl {
+    @media (min-width: #{b.$screen-xl-min}) {
+        @content;
+    }
+ }
+
+ // Variable size
+ @mixin screen-unique($screen) {
+    @media (min-width: $screen + 'em') {
+        @content;
+    }
+ }
