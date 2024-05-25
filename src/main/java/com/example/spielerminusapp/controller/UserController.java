@@ -21,7 +21,7 @@ public class UserController {
             @RequestBody ChangePasswordRequest request,
             Principal connectedUser
     ) {
-        /*myUserService.changePassword(request, connectedUser);*/
+        myUserService.changePassword(request, connectedUser);
         return ResponseEntity.ok().build();
     }
 }

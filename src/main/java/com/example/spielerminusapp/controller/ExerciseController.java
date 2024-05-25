@@ -21,6 +21,7 @@ public class ExerciseController {
         List<Exercise> exercises = exerciseService.getPossibleExercises(athleteId, type);
         return ResponseEntity.ok(exercises);
     }
+
     @GetMapping("/exercises")
     public ResponseEntity<List<Exercise>> getAllExercises() {
         List<Exercise> exercises = exerciseService.getAllExercises();
@@ -28,8 +29,5 @@ public class ExerciseController {
     }
 
 }
-// TODO: Design of Exercises
-// TODO: Design of Completed Exercises
-// TODO: import with CSV of Athletes/(Exercises)/Completed Exercises
+// TODO: import with CSV of (Exercises)/Completed Exercises
 // TODO: Controller for Exercises
-// TODO:

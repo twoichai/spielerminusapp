@@ -56,7 +56,7 @@ public class MyUserService implements UserDetailsService {
 
     public void changePassword(ChangePasswordRequest request, Principal connectedUser){
 
-        /*var basicUser = (BasicUser) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+        var basicUser = (BasicUser) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
         String role = basicUser.getRole();
         // check if the current password is correct
         if (!passwordEncoder.matches(request.getCurrentPassword(), basicUser.getPassword())) {
@@ -74,6 +74,6 @@ public class MyUserService implements UserDetailsService {
         }
         if (basicUser instanceof Athlete athleteUser){
             athleteRepository.save(athleteUser);
-        }*/
+        }
     }
 }

@@ -62,10 +62,10 @@ public class CompletedExerciseController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PostMapping(value = "/upload", consumes = {"multipart/form-data"})
+    /*@PostMapping(value = "/upload", consumes = {"multipart/form-data"})
     public ResponseEntity<Integer> uploadStudents(
             @RequestPart("file") MultipartFile file
     ) throws IOException {
         return ResponseEntity.ok(completedExerciseService.uploadCompletedExercises(file));
-    }
+    }*/
 }

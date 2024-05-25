@@ -36,7 +36,6 @@ public class CompletedExerciseService {
     private final RuleGroupRepository ruleGroupRepository;
     private final AthleteRepository athleteRepository;
     private final RuleRepository ruleRepository;
-
     /**
      * Find all completed exercises.
      * @return a list of all completed exercises
@@ -66,8 +65,7 @@ public class CompletedExerciseService {
      * Update a completed exercise by ID.
      * @param id the ID of the completed exercise to update
      * @param completedExerciseDetails details to update
-     * @return the updated exercise, or an empty Optional if not found
-     */
+     * @return the updated exercise, or an empty Optional if not found*/
     public Optional<CompletedExercise> updateById(Long id, CompletedExercise completedExerciseDetails) {
         return completedExerciseRepository.findById(id)
                 .map(existingCompletedExercise -> {
@@ -98,20 +96,20 @@ public class CompletedExerciseService {
         return true;
     }
 
-    public Integer uploadCompletedExercises(MultipartFile file) throws IOException {
+    /*public Integer uploadCompletedExercises(MultipartFile file) throws IOException {
         Set<CompletedExercise> completedExercises = parseCsv(file);
         completedExerciseRepository.saveAll(completedExercises);
         return completedExercises.size();
-    }
+    }*/
 
-    private Set<CompletedExercise> parseCsv(MultipartFile file) throws IOException {
+   /* private Set<CompletedExercise> parseCsv(MultipartFile file) throws IOException {
        return readCsv(file)
                .map(this::convert)
                .flatMap(Optional::stream)
                .collect(Collectors.toSet());
-    }
+    }*/
 
-    private Optional<CompletedExercise> convert(CompletedExerciseCsvRepresentation csvRepresentation) {
+   /* private Optional<CompletedExercise> convert(CompletedExerciseCsvRepresentation csvRepresentation) {
         Optional<RuleGroup> ruleGroupMaybe = ruleGroupRepository.findByTitle(csvRepresentation.getExercise());
         Optional<Athlete> athleteMaybe = athleteRepository.findByFirstNameAndLastName(
                 csvRepresentation.getFirstName(),
@@ -125,7 +123,7 @@ public class CompletedExerciseService {
             // Find matching rules (for all medal types) for user (from what we fetched)
             return null;
         });
-    }
+    }*/
 
     private Stream<CompletedExerciseCsvRepresentation> readCsv(MultipartFile file) throws IOException{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
