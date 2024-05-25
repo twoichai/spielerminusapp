@@ -125,6 +125,12 @@ const popupCreated = (item) => {
         _currentActivePopup = null;
         _currentPopupOrigin = null;
     }, {once: true, capture: item.detail.capture});
+    document.addEventListener("wheel", (clickEvent)=> {
+        popup.remove();
+        _changeOptionPin = false;
+        _currentActivePopup = null;
+        _currentPopupOrigin = null;
+    }, {once: true, capture: item.detail.capture});
 }
 
 function checkAction(evt) {
