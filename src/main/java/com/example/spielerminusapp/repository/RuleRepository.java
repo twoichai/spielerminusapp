@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface RuleRepository extends JpaRepository<Rule, Long> {
-    List<Rule> findAllByRuleGroup(RuleGroup ruleGroup);
+    /*List<Rule> findAllByRuleGroup(RuleGroup ruleGroup);*/
 }

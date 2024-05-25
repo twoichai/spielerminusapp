@@ -15,7 +15,7 @@ public class RuleGroup {
     @OneToMany
     private Set<Rule> rules;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "exercise_id")
-    private Exercise exercise;
+    private Exercise exercise;*/
 }

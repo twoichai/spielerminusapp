@@ -48,7 +48,7 @@ public class Rule {
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RULE_GROUP_ID")
-    private RuleGroup ruleGroup;
+    private RuleGroup ruleGroup;*/
 }

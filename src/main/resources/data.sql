@@ -1,50 +1,30 @@
 INSERT INTO athleteapp.admin (email, username, password, role) VALUES
      ('admin.mail@mail.com', 'admin1', '$2a$12$kyaLfBHxYvGNtTJ.ezsaIOe4ibumbOFeAzl9MbFGhDNGI2x1s30xu', 'ADMIN');
 INSERT INTO athleteapp.athlete (first_name, last_name, dob, sex, email, username, password, role) VALUES
-    ('Markus', 'Siegert','2006-01-26', 'm', 'markus.siegert@mail.com', 'masi2006', 'pass4Masi', 'ATHLETE');
+    ('Markus', 'Siegert','2008-01-26', 'M', 'markus.siegert@mail.com', 'masi2006', 'pass4Masi', 'ATHLETE');
 
-INSERT INTO athleteapp.exercise (exercise_id, exercise_title)
-VALUES (1, '800m Lauf'),
-       (2, 'Dauer-/Geländelauf'),
-       (3, 'Schwimmen'),
-       (4, 'Radfahren'),
-       (5, 'Werfen'),
-       (6, 'Kugelstoßen'),
-       (7, 'Standweitsprung'),
-       (8, 'Geräteturnen Kraft'),
-       (9, 'Laufen'),
-       (10, '25 m Schwimmen'),
-       (11, '200 m Radfahren'),
-       (12, 'Geräteturnen Schnelligkeit'),
-       (13, 'Hochsprung'),
-       (14, 'Weitsprung'),
-       (15, 'Zonenweitsprung'),
-       (16, 'Drehwurf'),
-       (17, 'Schleuderball'),
-       (18, 'Seilspringen'),
-       (19, 'Gerätturnen Koordination');
-/*
- VALUES (1, '800m Lauf','Ausdauer'),
-       (2, 'Dauer-/Geländelauf','Ausdauer'),
-       (3, 'Schwimmen','Ausdauer'),
-       (4, 'Radfahren','Ausdauer'),
-       (5, 'Werfen','Kraft'),
-       (6, 'Kugelstoßen','Kraft'),
-       (7, 'Standweitsprung','Kraft'),
-       (8, 'Geräteturnen Kraft','Kraft'),
-       (9, 'Laufen','Schnelligkeit'),
-       (10, '25 m Schwimmen','Schnelligkeit'),
-       (11, '200 m Radfahren','Schnelligkeit'),
-       (12, 'Geräteturnen Schnelligkeit','Schnelligkeit'),
-       (13, 'Hochsprung','Koordination'),
-       (14, 'Weitsprung','Koordination'),
-       (15, 'Zonenweitsprung','Koordination'),
-       (16, 'Drehwurf','Koordination'),
-       (17, 'Schleuderball','Koordination'),
-       (18, 'Seilspringen','Koordination'),
-       (19, 'Gerätturnen Koordination','Koordination');
+INSERT INTO athleteapp.exercise (exercise_id, exercise_title, exercise_type)
+VALUES (1, '800m Lauf','AUSDAUER'),
+       (2, 'Dauer-/Geländelauf','AUSDAUER'),
+       (3, 'Schwimmen','AUSDAUER'),
+       (4, 'Radfahren','AUSDAUER'),
+       (5, 'Werfen','KRAFT'),
+       (6, 'Kugelstoßen','KRAFT'),
+       (7, 'Standweitsprung','KRAFT'),
+       (8, 'Geräteturnen Kraft','KRAFT'),
+       (9, 'Laufen','SCHNELLIGKEIT'),
+       (10, '25 m Schwimmen','SCHNELLIGKEIT'),
+       (11, '200 m Radfahren','SCHNELLIGKEIT'),
+       (12, 'Geräteturnen Schnelligkeit','SCHNELLIGKEIT'),
+       (13, 'Hochsprung','KOORDINATION'),
+       (14, 'Weitsprung','KOORDINATION'),
+       (15, 'Zonenweitsprung','KOORDINATION'),
+       (16, 'Drehwurf','KOORDINATION'),
+       (17, 'Schleuderball','KOORDINATION'),
+       (18, 'Seilspringen','KOORDINATION'),
+       (19, 'Gerätturnen Koordination','KOORDINATION');
 
- */
+
 
 
 INSERT INTO athleteapp.rule (gender, from_age, to_age, value_bronze, value_silver, value_gold, metric, label, exercise_id)
