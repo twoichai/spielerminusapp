@@ -20,7 +20,47 @@
     </div>
 </template>
 <template id="uebungskatalog-t">
-
+    <div class="player-section">
+        <div class="player-section__header">
+            <div class="section__title">
+                <h3>Übungskatalog</h3>
+            </div>
+        </div>
+            <div class="uebungskatalog-list">
+                <div class="uebungskatalog-list__ausdauer">
+                    <button class="uebungskatalog-list__button" id="uebungskatalog-ausdauer-button">
+                        <span class="uebungskatalog-list__text">Ausdauer</span>
+                        <svg class="uebungskatalog-list__icon">
+                            <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="uebungskatalog-list__kraft">
+                    <button class="uebungskatalog-list__button" id="uebungskatalog-kraft-button">
+                        <span class="uebungskatalog-list__text">Kraft</span>
+                        <svg class="uebungskatalog-list__icon">
+                            <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="uebungskatalog-list__schnelligkeit">
+                    <button class="uebungskatalog-list__button" id="uebungskatalog-schnelligkeit-button">
+                        <span class="uebungskatalog-list__text">Schnelligkeit</span>
+                        <svg class="uebungskatalog-list__icon">
+                            <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="uebungskatalog-list__koordination">
+                    <button class="uebungskatalog-list__button" id="uebungskatalog-koordination-button">
+                        <span class="uebungskatalog-list__text">Koordination</span>
+                        <svg class="uebungskatalog-list__icon">
+                            <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+    </div>
 </template>
 <template id="filter-player">
     <div class="filter-by-name section__title">
@@ -122,7 +162,7 @@
                         <h4>Ausdauer</h4>
                     </div>
                     <div class="attribute-call-for-action">
-                        <p>Tippe hier, um eine Leistung hinzuzufügen</p>
+                        <canvas id="ausdauer-chart" style="width: 400px; height: 400px" role="img"></canvas>
                     </div>
                 </div>
                 <div class="attribute attribute-kraft">
@@ -311,13 +351,13 @@
                 <div class="change-button__text">Hinzufügen</div>
             </div>
             <div id="csv-button" class="delete-button">
-                <input id="add-player-csv" type="file" id="athlete" name="athlete" accept=".csv">
+                <input style="display: none;" id="add-player-csv" type="file" id="athlete" name="athlete" accept=".csv">
                 <label for="add-player-csv" class="add-player-csv__label">
-                    <div class="delete-button__icon">
-                        <svg viewBox="0 0 24 24" width="24px">
-                            <use href="images/icons/csv-icon.svg#Layer_1"></use>
-                        </svg>
-                    </div>
+                        <div class="delete-button__icon">
+                            <svg viewBox="0 0 24 24" width="24px">
+                                <use href="images/icons/csv-icon.svg#Layer_1"></use>
+                            </svg>
+                        </div>
                     <div class="change-button__text">CSV Datei</div>
                 </label>
             </div>

@@ -25,6 +25,7 @@ changeButton.addEventListener("click", evt => {
     const main = document.getElementById("main");
     main.appendChild(popUp);
 });*/
+import Chart from 'chart.js/auto';
 
 let _currentActive = null;
 let _currentActiveNav = null;
@@ -34,6 +35,7 @@ let _popupPin = false;
 let _changeOptionPin = false;
 let _addPlayer = false;
 let tmp;
+let _sportlerDataTimestamp, _sportlerData;
 
 window.onload = (event) => {
     createMeineDSA();
@@ -387,7 +389,13 @@ function createMeineAthleten() {
     const playerAction = document.getElementById("player-section__header");
     playerAction.addEventListener("click", (evt) => {
         checkAction(evt);
-    })
+    });
+
+    createAusdauerGraph();
+}
+
+function createAusdauerGraph() {
+
 }
 
 function changeMeineAthleten(id) {
