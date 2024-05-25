@@ -35,26 +35,30 @@ let _changeOptionPin = false;
 let _addPlayer = false;
 let tmp;
 
+window.onload = (event) => {
+    createMeineDSA();
+};
+
 function getAllPlayer() {
     const playerList = document.getElementById("player-list");
 
     while(playerList.hasChildNodes()) {
         playerList.removeChild(playerList.firstChild);
-    }
-    axios.get('/sportler').then(response => {
-        for (let item of response.data) {
-            const playerCard = document.createElement("player-card");
+  }
+       axios.get('/athletes').then(response => {
+         for (let item of response.data) {
+             const playerCard = document.createElement("player-card");
 
-            playerCard.setAttribute("data-fname", item.vorname);
-            playerCard.setAttribute("data-lname", item.nachname);
-            playerCard.setAttribute("data-bd", item.geburtstag);
-            playerCard.setAttribute("data-gender", item.geschlecht);
-            playerCard.setAttribute("data-email", item.email);
-            playerCard.setAttribute("id", item.id);
+             playerCard.setAttribute("data-fname", item.firstName);
+             playerCard.setAttribute("data-lname", item.lastName);
+             playerCard.setAttribute("data-bd", item.dob);
+             playerCard.setAttribute("data-gender", item.sex);
+             playerCard.setAttribute("data-email", item.email);
+             playerCard.setAttribute("id", item.id);
 
-            playerList.appendChild(playerCard);
-        }
-    });
+             playerList.appendChild(playerCard);
+         }
+     });
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -110,7 +114,7 @@ const popupCreated = (item) => {
                 deleteMeineAthleten(item.detail.id);
             }
             else if (item.detail.popupTyp == "add-option") {
-
+                addPlayerWithCSV();
             }
             else if (item.detail.popupTyp == "filter-option") {
                 filterPlayerDescend();
@@ -218,6 +222,28 @@ function containsInOrder(mainString, subString) {
         return true;
     }
     return false;
+}
+
+function addPlayerWithCSV() {
+    let elem = document.getElementById("add-player-csv");
+    elem.type = "file";
+
+    elem.addEventListener("change", () => {
+        if (elem.files.length == 1) {
+            let formData = new FormData();
+            formData.append("file", elem.files[0]);
+            axios.post('/athletes/upload', formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            })
+            .then(function (response) {
+                if(response.status == 200) {
+                    getAllPlayer();
+                }
+            });
+        }
+    });
 }
 
 function createPopup(typ, evt, button, thisId) {
@@ -400,22 +426,30 @@ function createUebungskatalog() {
     selectActiveNav(uebungskatalog);
 }
 
-function selectActivePlayerCard(playerCard) {
+function selectActivePlayerCard(playerCardDom, playerCard) {
     const overview = document.getElementById("playerCard-detail");
 
     if(_currentActive != null) {
         _currentActive.setAttribute("active", false);
     }
-    if(_currentActive == playerCard){
-        playerCard.setAttribute("active", false);
+    if(_currentActive == playerCardDom){
+        playerCardDom.setAttribute("active", false);
         overview.setAttribute("hidden", "true");
         _currentActive = null;
     }
     else {
         overview.setAttribute("hidden", "false");
-        _currentActive = playerCard;
-        playerCard.setAttribute("active", true);
+        _currentActive = playerCardDom;
+        playerCardDom.setAttribute("active", true);
+        passOverviewPlayerInfos(overview, playerCard);
     }
+}
+
+function passOverviewPlayerInfos(overview, playerCard) {
+    document.getElementById("overview-player-name").textContent = playerCard.getAttribute("data-fname") + " " + playerCard.getAttribute("data-lname");
+    document.getElementById("overview-player-bd").textContent = playerCard.getAttribute("data-bd");
+    document.getElementById("overview-player-gender").textContent = playerCard.getAttribute("data-gender");
+    document.getElementById("overview-player-email").textContent = playerCard.getAttribute("data-email");
 }
 
 function createProfilePopUp() {
@@ -459,7 +493,7 @@ customElements.define(
 
             this.addEventListener("click", (evt) => {
                 if (!_popupPin) {
-                    selectActivePlayerCard(this.shadowRoot.getElementById("playerCardDom"));
+                    selectActivePlayerCard(this.shadowRoot.getElementById("playerCardDom"), this);
                 }
             });
 
@@ -624,7 +658,7 @@ customElements.define(
                 const thisId = inputfield.getAttribute("data-id");
 
                 try {
-                    axios.put('/sportler',
+                    axios.put('/athletes/update/',
                         {
                             vorname: thisVorname,
                             nachname: thisNachname,
