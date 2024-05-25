@@ -1,0 +1,108 @@
+@use "../../mixins";
+@use "../../../config";
+
+.change-section-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.change-section-holder {
+  transform: translateY(-20%);
+  max-width: 50vw;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.change-section {
+  margin: auto;
+  flex: 1;
+  background: config.$neutral-color-200;
+  padding: 1rem 3rem;
+  box-shadow: 0 0 10px config.$neutral-color-300;
+
+  &__header {
+    text-align: left;
+    text-transform: uppercase;
+    margin: 2rem 0;
+    font-weight: 900;
+  }
+
+  &__main-info {
+      margin: 1.5rem 0;
+      font-size: 12px;
+  }
+
+  &__main-content {
+    @include mixins.screen-lg {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-column-gap: 1rem;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    @include mixins.screen-lg {
+      display: flex;
+      grid-column: 2;
+      justify-content: right;
+    }
+  }
+
+  &__cancel-button {
+    margin-right: 16px;
+  }
+}
+
+.form-item {
+  position: relative;
+
+  &__micro {
+    position: absolute;
+    left: 7px;
+    top: 10px;
+    width: fit-content;
+    background: white;
+    padding: 5px;
+    font-weight: 400;
+    font-size: 12px;
+    z-index: 1;
+    transition: top 0.3s ease;
+  }
+
+  &__input {
+    width: 100%;
+    height: 48px;
+    padding: 15px;
+    outline: none;
+    font-size: 16px;
+    font-weight: 300;
+    border: 1px solid config.$neutral-color-200;
+    margin-bottom: 2rem;
+
+    &:focus {
+      outline: none;
+      border-color: config.$brandcolor-green;
+
+      ~ .form-item__micro {
+        color: config.$brandcolor-green;
+        top: -10px;
+      }
+    }
+
+    &:not(:placeholder-shown) {
+      ~ .form-item__micro {
+        top: -10px;
+      }
+    }
+  }
+}

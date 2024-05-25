@@ -1,0 +1,19 @@
+.change-button {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  font-size: 15px;
+
+  &:hover {
+    cursor: pointer;
+
+    .change-button__icon {
+      filter: invert(73%) sepia(29%) saturate(609%) hue-rotate(139deg) brightness(89%) contrast(94%);
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    margin: 0 5px;
+  }
+}

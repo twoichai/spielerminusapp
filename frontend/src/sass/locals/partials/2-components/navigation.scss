@@ -1,0 +1,40 @@
+@use "../../../config";
+
+.navigation {
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+
+    .nav-button__icon {
+      filter: invert(73%) sepia(29%) saturate(609%) hue-rotate(139deg) brightness(89%) contrast(94%);
+    }
+
+    .nav-button__text {
+      color: config.$brandcolor-blue;
+    }
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, .2);
+  }
+}
+
+.nav-button__text {
+  transition: 0.3s;
+}
+
+#nav-menu[aria-expanded="true"] {
+  .nav-button__text {
+    display: block;
+  }
+}
+
+#nav-menu[aria-expanded="false"] {
+  .nav-button__text {
+    display: none;
+  }
+}

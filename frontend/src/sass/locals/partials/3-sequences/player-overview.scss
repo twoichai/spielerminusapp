@@ -1,0 +1,34 @@
+@use "../../../config";
+
+.uebersicht-section {
+  position: relative;
+  /*border-top: solid 1px config.$neutral-color-200;*/
+  box-shadow: -3px 0px 10px config.$neutral-color-200;
+  z-index: 2;
+  background-color: white;
+  flex: 1;
+  height: calc(100vh - 61px);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 25px;
+    height: 58px;
+    border-bottom: solid 1px config.$neutral-color-200;
+
+    h3 {
+      margin: 2.5px;
+      font-size: 18px;
+    }
+  }
+
+  &__main {
+    display: block;
+    padding: 50px 25px 5px 20px;
+  }
+}
+
+.attribute-schwimmfaehigkeit {
+  grid-column: 2 span;
+}

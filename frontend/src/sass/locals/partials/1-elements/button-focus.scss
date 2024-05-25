@@ -1,0 +1,14 @@
+.button-focus {
+  width: 36px;
+  height: 36px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}

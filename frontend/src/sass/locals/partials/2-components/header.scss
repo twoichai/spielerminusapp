@@ -1,0 +1,15 @@
+@use "../../../config";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px 10px;
+  background-image: config.$brandgradient;
+  border-bottom: 2px solid config.$status-notification-300;
+}
+
+.logo h1{
+  font-size: 40px;
+  color: white;
+}

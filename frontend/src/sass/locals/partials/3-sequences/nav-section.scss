@@ -1,0 +1,15 @@
+@use "../../../config";
+
+.nav-menu {
+  position: relative;
+  /*border: solid 1px config.$neutral-color-200;*/
+  background-color: config.$neutral-color-100;
+  height: calc(100vh - 61px);
+  width: 72px;
+  transition-duration: 0.3s;
+
+  &[aria-expanded="true"] {
+    width: 300px;
+  }
+}
+
