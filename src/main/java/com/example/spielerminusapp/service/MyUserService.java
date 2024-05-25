@@ -1,4 +1,4 @@
-package com.example.spielerminusapp.securityconfig.service;
+package com.example.spielerminusapp.service;
 
 import com.example.spielerminusapp.model.Admin;
 import com.example.spielerminusapp.model.Athlete;
@@ -9,6 +9,7 @@ import com.example.spielerminusapp.securityconfig.ChangePasswordRequest;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,13 +24,17 @@ import java.util.Objects;
 @Service
 public class MyUserService implements UserDetailsService {
 
-    @Autowired
-    private AthleteRepository athleteRepository;
-    @Autowired
-    private AdminRepository adminRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final AthleteRepository athleteRepository;
+    private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
 
+    public MyUserService(AthleteRepository athleteRepository,
+                         AdminRepository adminRepository,
+                         @Lazy PasswordEncoder passwordEncoder) {
+        this.athleteRepository = athleteRepository;
+        this.adminRepository = adminRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return adminRepository.findByUsername(username)
@@ -51,7 +56,7 @@ public class MyUserService implements UserDetailsService {
 
     public void changePassword(ChangePasswordRequest request, Principal connectedUser){
 
-        var basicUser = (BasicUser) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+        /*var basicUser = (BasicUser) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
         String role = basicUser.getRole();
         // check if the current password is correct
         if (!passwordEncoder.matches(request.getCurrentPassword(), basicUser.getPassword())) {
@@ -69,6 +74,6 @@ public class MyUserService implements UserDetailsService {
         }
         if (basicUser instanceof Athlete athleteUser){
             athleteRepository.save(athleteUser);
-        }
+        }*/
     }
 }

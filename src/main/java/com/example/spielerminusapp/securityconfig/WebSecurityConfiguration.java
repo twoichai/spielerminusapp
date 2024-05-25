@@ -1,7 +1,7 @@
 package com.example.spielerminusapp.securityconfig;
 
 
-import com.example.spielerminusapp.securityconfig.service.MyUserService;
+import com.example.spielerminusapp.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

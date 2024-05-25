@@ -4,4 +4,5 @@ public interface BasicUser {
     String getUsername();
     String getPassword();
     String getRole();
+    void setPassword(String password);
 }

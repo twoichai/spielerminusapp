@@ -23,7 +23,7 @@ public class AdminController {
         return ResponseEntity.badRequest().body("Failed to update email. Incorrect password.");
     }
 
-    @PutMapping("/{adminId}/change-password")
+   /* @PutMapping("/{adminId}/change-password")
     public ResponseEntity<?> changePassword(@PathVariable Long adminId,
                                             @RequestParam String oldPassword,
                                             @RequestParam String newPassword,
@@ -37,5 +37,5 @@ public class AdminController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
+    }*/
 }

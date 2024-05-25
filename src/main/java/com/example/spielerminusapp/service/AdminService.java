@@ -29,20 +29,4 @@ public class AdminService {
         return false;
     }
 
-    @Transactional
-    public boolean changePassword(Long adminId, String oldPassword, String newPassword, String newPasswordRepeat) {
-        if (!newPassword.equals(newPasswordRepeat)) {
-            throw new IllegalArgumentException("New passwords do not match");
-        }
-
-        Admin admin = adminRepository.findById(adminId)
-                .orElseThrow(() -> new IllegalArgumentException("Admin not found"));
-
-        if (passwordEncoder.matches(oldPassword, admin.getPassword())) {
-            admin.setPassword(passwordEncoder.encode(newPassword));
-            adminRepository.save(admin);
-            return true;
-        }
-        return false;
-    }
 }
