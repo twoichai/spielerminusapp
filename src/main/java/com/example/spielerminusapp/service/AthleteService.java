@@ -74,6 +74,7 @@ public class AthleteService {
                     existingAthlete.setDob(athleteDetails.getDob());
                     existingAthlete.setSex(athleteDetails.getSex());
                     existingAthlete.setEmail(athleteDetails.getEmail());
+                    existingAthlete.setUsername(athleteDetails.getUsername());
                     existingAthlete.setPassword(athleteDetails.getPassword());
                     existingAthlete.setRole(athleteDetails.getRole());
                     return athleteRepository.save(existingAthlete);
