@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 
-
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -32,7 +31,8 @@ public class ExerciseTest {
                 .andReturn();
 
         String responseBody = result.getResponse().getContentAsString();
-        System.out.println("Response: " + responseBody);
+        //For Debugging
+        //System.out.println("Response: " + responseBody);
 
         mockMvc.perform(get("/athletes/exercises"))
                 .andExpect(status().isOk())
