@@ -6,7 +6,7 @@
     <title>Spielerminus</title>
     <link href="sass/main.scss" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="scripts/profile-change-popup.js"></script>
+    <script src="scripts/main.js"></script>
 
     <!--Zu entfernen bei Release!-->
     <link rel="shortcut icon" href="#">
@@ -15,10 +15,59 @@
 </head>
 <body>
 <template id="meine-DSA">
-
+    <div class="placeholder">
+        <img width="600px" src="images/imgs/Willkommen.jpg">
+    </div>
 </template>
 <template id="uebungskatalog-t">
-
+    <div class="player-section">
+        <div class="player-section__header">
+            <div class="section__title">
+                <h3>Übungskatalog</h3>
+            </div>
+        </div>
+        <div id="uebungskatalog-list" class="uebungskatalog-list">
+            <div class="uebungskatalog-list__ausdauer">
+                <button class="uebungskatalog-list__button" id="uebungskatalog-ausdauer-button">
+                    <span class="uebungskatalog-list__text">Ausdauer</span>
+                    <svg class="uebungskatalog-list__icon">
+                        <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="uebungskatalog-list__kraft">
+                <button class="uebungskatalog-list__button" id="uebungskatalog-kraft-button">
+                    <span class="uebungskatalog-list__text">Kraft</span>
+                    <svg class="uebungskatalog-list__icon">
+                        <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="uebungskatalog-list__schnelligkeit">
+                <button class="uebungskatalog-list__button" id="uebungskatalog-schnelligkeit-button">
+                    <span class="uebungskatalog-list__text">Schnelligkeit</span>
+                    <svg class="uebungskatalog-list__icon">
+                        <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="uebungskatalog-list__koordination">
+                <button class="uebungskatalog-list__button" id="uebungskatalog-koordination-button">
+                    <span class="uebungskatalog-list__text">Koordination</span>
+                    <svg class="uebungskatalog-list__icon">
+                        <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="uebungskatalog-ausdauer">
+    <div class="uebersicht-section">
+        <div class="uebersicht-section__header">
+            <h3>Ausdauer</h3>
+        </div>
+    </div>
 </template>
 <template id="filter-player">
     <div class="filter-by-name section__title">
@@ -68,7 +117,7 @@
 
         </div>
     </div>
-    <div class="uebersicht-section">
+    <div class="uebersicht-section flex-1">
         <div class="uebersicht-section__header">
             <h3>Übersicht</h3>
         </div>
@@ -76,15 +125,15 @@
             <div class="player-info__background">
                 <div class="player-top">
                     <div class="player-name">
-                        <h4>No Player</h4>
+                        <h4 id="overview-player-name">No Player</h4>
                     </div>
-                    <div class="player-change-button">
-                        <div class="change-button">
-                            <div class="change-button__icon">
-                                <img src="images/icons/change-icon.png">
-                            </div>
-                            <div class="change-button__text">ändern...</div>
-                        </div>
+                    <div id="overview__change-option" class="overview__change-option">
+                        <button id="overview-change-option-button" class="change-option">
+                            <svg class="change-option__icon" width="24" height="24" viewBox="0 0 24 24">
+                                <use href="images/icons/options-icon.svg#Capa_1"></use>
+                            </svg>
+                            <span class="button-focus"></span>
+                        </button>
                     </div>
                 </div>
                 <div class="player-bottom">
@@ -92,7 +141,7 @@
                         <div class="col-tag">
                             <p>Geburtstag</p>
                         </div>
-                        <div class="col-info">
+                        <div id="overview-player-bd" class="col-info">
                             DATA_ER
                         </div>
                     </div>
@@ -100,7 +149,7 @@
                         <div class="col-tag">
                             <p>Geschlecht</p>
                         </div>
-                        <div class="col-info">
+                        <div id="overview-player-gender" class="col-info">
                             DATA_ER
                         </div>
                     </div>
@@ -108,7 +157,7 @@
                         <div class="col-tag">
                             <p>E-Mail-Addresse</p>
                         </div>
-                        <div class="col-info">
+                        <div id="overview-player-email" class="col-info">
                             DATA_ER
                         </div>
                     </div>
@@ -120,7 +169,7 @@
                         <h4>Ausdauer</h4>
                     </div>
                     <div class="attribute-call-for-action">
-                        <p>Tippe hier, um eine Leistung hinzuzufügen</p>
+                        <canvas id="ausdauer-chart" style="width: 400px; height: 400px" role="img"></canvas>
                     </div>
                 </div>
                 <div class="attribute attribute-kraft">
@@ -309,12 +358,15 @@
                 <div class="change-button__text">Hinzufügen</div>
             </div>
             <div id="csv-button" class="delete-button">
-                <div class="delete-button__icon">
-                    <svg viewBox="0 0 24 24" width="24px">
-                        <use href="images/icons/csv-icon.svg#Layer_1"></use>
-                    </svg>
-                </div>
-                <div class="change-button__text">CSV Datei</div>
+                <input id="add-player-csv" type="file" id="athlete" name="athlete" accept=".csv">
+                <label for="add-player-csv" class="add-player-csv__label">
+                        <div class="delete-button__icon">
+                            <svg viewBox="0 0 24 24" width="24px">
+                                <use href="images/icons/csv-icon.svg#Layer_1"></use>
+                            </svg>
+                        </div>
+                    <div class="change-button__text">CSV Datei</div>
+                </label>
             </div>
         </div>
     </div>
@@ -390,9 +442,7 @@
                     </div>
                 </div>
                 <div class="overall" id="main-view">
-                    <div class="placeholder">
-                        <img width="600px" src="images/imgs/Willkommen.jpg">
-                    </div>
+
                 </div>
             </div>
         </main>

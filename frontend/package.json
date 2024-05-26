@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel src/index.html --port 8080",
-    "build-backend": "parcel build src/index.html --no-minify --no-content-hash --out-dir ../Backend/src/main/resources/static",
+    "build-backend": "parcel build src/index.html --no-minify --no-content-hash --out-dir ../src/main/resources/static",
     "build": "parcel build --no-minify src/index.html",
     "dart": "dart compile-sass.dart src/sass/main.scss styles.css"
   },
@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.12.0",
+    "chart.js": "^4.4.3",
     "parcel-bundler": "^1.12.5",
     "sass": "^1.72.0"
   }
