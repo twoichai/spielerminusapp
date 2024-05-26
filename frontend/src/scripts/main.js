@@ -438,6 +438,55 @@ function createUebungskatalog() {
 
     const uebungskatalog = document.querySelector("#nav-uebungskatalog");
     selectActiveNav(uebungskatalog);
+
+    const uebungskatalogList = document.getElementById("uebungskatalog-list");
+    uebungskatalogList.addEventListener("click", uebungskatalogAction);
+}
+
+function uebungskatalogAction(evt) {
+    const ausdauer = document.getElementById("uebungskatalog-ausdauer-button");
+    const kraft = document.getElementById("uebungskatalog-kraft-button");
+    const schnelligkeit = document.getElementById("uebungskatalog-schnelligkeit-button");
+    const koordination = document.getElementById("uebungskatalog-koordination-button");
+
+    if (ausdauer != null && ausdauer.contains(evt.target)) {
+        createUebungskatalogDetail("ausdauer");
+    }
+    if (kraft != null && kraft.contains(evt.target)) {
+        createUebungskatalogDetail("kraft");
+    }
+    if (schnelligkeit != null && schnelligkeit.contains(evt.target)) {
+        createUebungskatalogDetail("schnelligkeit");
+    }
+    if (koordination != null && koordination.contains(evt.target)) {
+        createUebungskatalogDetail("koordination");
+    }
+}
+
+function createUebungskatalogDetail(typ) {
+    const main = document.getElementById("main-view");
+    let ausdauer, kraft, schnelligkeit, koordination;
+
+    if(typ == "ausdauer") {
+        ausdauer = document.getElementById("uebungskatalog-ausdauer");
+    }
+    else if(typ == "kraft") {
+        kraft = document.getElementById("uebungskatalog-kraft");
+    }
+    else if(typ == "schnelligkeit") {
+        schnelligkeit = document.getElementById("uebungskatalog-schnelligkeit");
+    }
+    else if(typ == "koordination") {
+        koordination = document.getElementById("uebungskatalog-koordination");
+    }
+
+    let length = main.childNodes.length;
+    if(length > 3) {
+        for(let i = 0; i<length; i++) {
+            main.removeChild(main.childNodes[i]);
+        }
+    }
+    main.appendChild(ausdauer.content.cloneNode(true));
 }
 
 function selectActivePlayerCard(playerCardDom, playerCard) {

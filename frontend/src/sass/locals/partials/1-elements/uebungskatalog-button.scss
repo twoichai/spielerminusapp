@@ -1,6 +1,18 @@
 @use "../../../config";
 
+.uebungskatalog-list__text {
+  color: config.$neutral-color-300;
+  font-size: 20px;
+  overflow: hidden;
+  background-image: linear-gradient(config.$brandcolor-blue, config.$brandcolor-blue);
+  background-position:0 100%;
+  background-repeat: no-repeat;
+  transition: background-size .3s cubic-bezier(.39,.575,.565,1);
+  background-size: 0 1px;
+}
+
 .uebungskatalog-list__button {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,15 +21,23 @@
   padding: 14.4px 10px 16px 0;
   border: none;
   background: none;
+
+  &:hover,
+  &:focus {
+    .uebungskatalog-list__text {
+      color: config.$brandcolor-blue;
+    background-size: 100% 1px;
+    }
+
+    .uebungskatalog-list__icon {
+      opacity: 1;
+    }
+  }
 }
 
 .uebungskatalog-list__icon {
   width: 14px;
   height: 14px;
   transition: opacity .3s;
-}
-
-.uebungskatalog-list__text {
-  color: config.$neutral-color-600;
-  font-size: 20px;
+  opacity: 0;
 }

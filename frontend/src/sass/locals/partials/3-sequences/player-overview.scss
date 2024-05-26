@@ -6,7 +6,7 @@
   box-shadow: -3px 0px 10px config.$neutral-color-200;
   z-index: 2;
   background-color: white;
-  flex: 1;
+  min-width: 525px;
   height: calc(100vh - 61px);
 
   &__header {

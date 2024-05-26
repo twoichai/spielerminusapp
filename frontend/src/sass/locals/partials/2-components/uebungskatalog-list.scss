@@ -1,5 +1,10 @@
-
+@use "../../../config";
 
 .uebungskatalog-list {
-  padding: 28px;
+  padding: 0 28px;
+  width: 525px;
+
+  .uebungskatalog-list__text {
+    color: config.$neutral-color-300;
+  }
 }
