@@ -425,7 +425,20 @@ function changeMeineAthleten(id) {
 
 function deleteMeineAthleten(id) {
     const playerCard = document.getElementById(id);
-    playerCard.remove();
+
+    try {
+        axios.delete("/athletes/delete/" + id,
+            {
+
+            }).then(response => {
+            if(response.status == 200) {
+                playerCard.remove();
+            }
+        })
+    }
+    catch (e) {
+        console.log(e);
+    }
 }
 
 function createUebungskatalog() {
@@ -464,29 +477,23 @@ function uebungskatalogAction(evt) {
 }
 
 function createUebungskatalogDetail(typ) {
-    const main = document.getElementById("main-view");
-    let ausdauer, kraft, schnelligkeit, koordination;
+    const uebersicht = document.getElementById("uebersicht-section");
+    let detail;
 
     if(typ == "ausdauer") {
-        ausdauer = document.getElementById("uebungskatalog-ausdauer");
+        detail = document.getElementById("uebungskatalog-ausdauer");
     }
     else if(typ == "kraft") {
-        kraft = document.getElementById("uebungskatalog-kraft");
+        detail = document.getElementById("uebungskatalog-kraft");
     }
     else if(typ == "schnelligkeit") {
-        schnelligkeit = document.getElementById("uebungskatalog-schnelligkeit");
+        detail = document.getElementById("uebungskatalog-schnelligkeit");
     }
     else if(typ == "koordination") {
-        koordination = document.getElementById("uebungskatalog-koordination");
+        detail = document.getElementById("uebungskatalog-koordination");
     }
 
-    let length = main.childNodes.length;
-    if(length > 3) {
-        for(let i = 0; i<length; i++) {
-            main.removeChild(main.childNodes[i]);
-        }
-    }
-    main.appendChild(ausdauer.content.cloneNode(true));
+    uebersicht.innerHTML = detail.innerHTML;
 }
 
 function selectActivePlayerCard(playerCardDom, playerCard) {
@@ -625,16 +632,16 @@ customElements.define(
                 const thisPasswort = shadowRoot.querySelector('#change-section-password').value;
 
                 try {
-                    axios.post('/sportler',
+                    axios.post('/athletes/register/',
                         {
-                            vorname: thisVorname,
-                            nachname: thisNachname,
-                            geburtstag: thisGeburtstag,
-                            geschlecht: thisGeschlecht,
-                            passwort: thisPasswort,
+                            firstName: thisVorname,
+                            lastName: thisNachname,
+                            dob: thisGeburtstag,
+                            sex: thisGeschlecht,
+                            password: thisPasswort,
                             email: thisEmail
                         }).then(response => {
-                        if(response.status == 201) {
+                        if(response.status == 200) {
                             const playerCreated = new CustomEvent("playerCreated", {
                                 bubbles: true,
                                 composed: true,

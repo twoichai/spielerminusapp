@@ -24,6 +24,7 @@
   &__main {
     height: calc(100vh - 119px);
     max-height: calc(100vh - 119px);
+    min-width: 525px;
     overflow-y: scroll;
     padding: 20px 25px 5px 20px;
   }
