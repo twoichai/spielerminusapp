@@ -2,6 +2,7 @@ package com.example.spielerminusapp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.opencsv.bean.CsvBindByName;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,20 +26,25 @@ public class Athlete implements BasicUser{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @CsvBindByName(column="Vorname")
     @Column(name="FIRST_NAME")
     private String firstName;
 
+    @CsvBindByName(column="Nachname")
     @Column(name="LAST_NAME")
     private String lastName;
 
+    @CsvBindByName(column="E-Mail")
     @Column(name="EMAIL")
     private String email;
+
+    @CsvBindByName(column="Geburtsdatum")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    //@Temporal(TemporalType.DATE)
     @Column(name="DOB")
     private LocalDate dob;
 
+    @CsvBindByName(column="Geschlecht")
     @Column(name="SEX")
     private String sex;
 

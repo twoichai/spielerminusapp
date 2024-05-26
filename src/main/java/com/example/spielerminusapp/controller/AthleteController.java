@@ -2,7 +2,15 @@ package com.example.spielerminusapp.controller;
 
 import com.example.spielerminusapp.model.Athlete;
 import com.example.spielerminusapp.service.AthleteService;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -72,4 +80,18 @@ public class AthleteController {
     public List<Athlete> findByLastName(@RequestParam String lastName) {
         return athleteService.findByLastName(lastName);
     }
+
+    @GetMapping("/export")
+    public void exportAthletesCSV(HttpServletResponse httpServletResponse) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
+        String filename ="all-athletes-export.csv";
+        httpServletResponse.setContentType("text/csv");
+        httpServletResponse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "");
+
+        StatefulBeanToCsv<Athlete> writer = new StatefulBeanToCsvBuilder<Athlete>(httpServletResponse.getWriter())
+                .withSeparator(';')
+                .build();
+
+        writer.write(athleteService.findAll());
+
+   }
 }
