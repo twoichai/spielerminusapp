@@ -1,6 +1,7 @@
 package com.example.spielerminusapp.controller;
 
 import com.example.spielerminusapp.securityconfig.ChangePasswordRequest;
+import com.example.spielerminusapp.securityconfig.OTPRequest;
 import com.example.spielerminusapp.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,7 @@ import java.security.Principal;
 
 @RestController
 
-@RequestMapping("/user/details")
+@RequestMapping("/user/user-details")
 public class UserController {
 
     @Autowired
@@ -23,5 +24,15 @@ public class UserController {
     ) {
         myUserService.changePassword(request, connectedUser);
         return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/withotp")
+    public ResponseEntity<String> changeOTP(
+            @RequestBody OTPRequest request,
+            Principal connectedUser
+    ) {
+        myUserService.changeOTP(request, connectedUser);
+        // Return the index path as a plain string within the response body
+        return ResponseEntity.ok("/index");
     }
 }

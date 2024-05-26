@@ -1,14 +1,10 @@
 package com.example.spielerminusapp.service;
 
-import com.example.spielerminusapp.model.Admin;
-import com.example.spielerminusapp.model.Athlete;
 import com.example.spielerminusapp.model.BasicUser;
 import com.example.spielerminusapp.repository.AdminRepository;
 import com.example.spielerminusapp.repository.AthleteRepository;
 import com.example.spielerminusapp.securityconfig.ChangePasswordRequest;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.spielerminusapp.securityconfig.OTPRequest;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
@@ -85,4 +81,30 @@ public class MyUserService implements UserDetailsService {
             throw new IllegalStateException("Wrong password");
         }
     }
+
+    public void changeOTP(OTPRequest request, Principal connectedUser){
+        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
+
+
+        // check if the two new passwords are the same
+        if (!request.getNewPassword().equals(request.getConfirmationPassword())) {
+            throw new IllegalStateException("Passwords are not the same");
+        }
+
+        var updatedPassword = passwordEncoder.encode(request.getNewPassword());
+        adminRepository.findByUsername(user.getUsername())
+                .ifPresent(admin -> {
+
+                    admin.setPassword(updatedPassword);
+                    adminRepository.save(admin);
+                });
+
+        athleteRepository.findByUsername(user.getUsername())
+                .ifPresent(athlete -> {
+
+                    athlete.setPassword(updatedPassword);
+                    athleteRepository.save(athlete);
+                });
+    }
+
 }

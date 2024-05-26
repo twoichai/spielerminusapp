@@ -26,4 +26,9 @@ public class LoginController {
         return "athlete_home";
     }
 
+    @GetMapping("/changepass")
+    public String changePassword() {
+        return "change_password";
+    }
+
 }
