@@ -36,11 +36,6 @@ public class CompletedExerciseService {
     public List<CompletedExercise> getAllCompletedExercises() {
         return completedExerciseRepository.findAll();
     }
-    /**
-     * Save or update an exercise.
-     * @param completedExercise the exercise to save or update
-     * @return the saved or updated exercise
-     */
 
     /**
      * Find an exercise by ID.
