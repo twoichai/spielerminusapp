@@ -21,6 +21,12 @@ public class ExerciseController {
         return ResponseEntity.ok(exercises);
     }
 
+    @GetMapping("/exercisebytype/")
+    public ResponseEntity<List<Exercise>> getPossibleExercisesByType(@RequestParam ExerciseType type) {
+        List<Exercise> exercises = exerciseService.getPossibleExercisesByType(type);
+        return ResponseEntity.ok(exercises);
+    }
+
     @GetMapping("/exercises")
     public ResponseEntity<List<Exercise>> getAllExercises() {
         List<Exercise> exercises = exerciseService.getAllExercises();

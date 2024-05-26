@@ -12,4 +12,6 @@ import java.util.List;
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
     @Query("SELECT e FROM Exercise e JOIN Rule r ON e.id = r.exercise.id WHERE r.gender = :gender AND r.fromAge <= :age AND r.toAge >= :age AND e.exerciseType = :type")
     List<Exercise> findExercisesByAgeGenderAndType(String gender, int age, ExerciseType type);
+    @Query("SELECT e FROM Exercise e JOIN Rule r ON e.id = r.exercise.id WHERE e.exerciseType = :type")
+    List<Exercise> findExercisesByType( ExerciseType type);
 }

@@ -28,6 +28,11 @@ public class ExerciseService {
         exercises = filterExercisesByAgeAndGender(exercises, age, gender);
         return exercises;
     }
+    public List<Exercise> getPossibleExercisesByType(ExerciseType type) {
+        List<Exercise> exercises =  exerciseRepository.findExercisesByType(type);
+
+        return exercises;
+    }
 
     private List<Exercise> filterExercisesByAgeAndGender(List<Exercise> exercises, int age, String gender) {
         List<Exercise> filteredExercises = new ArrayList<>();
