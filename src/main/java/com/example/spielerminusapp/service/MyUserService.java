@@ -55,25 +55,34 @@ public class MyUserService implements UserDetailsService {
     }
 
     public void changePassword(ChangePasswordRequest request, Principal connectedUser){
+        var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
 
-        var basicUser = (BasicUser) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();
-        String role = basicUser.getRole();
-        // check if the current password is correct
-        if (!passwordEncoder.matches(request.getCurrentPassword(), basicUser.getPassword())) {
-            throw new IllegalStateException("Wrong password");
-        }
+
         // check if the two new passwords are the same
         if (!request.getNewPassword().equals(request.getConfirmationPassword())) {
             throw new IllegalStateException("Passwords are not the same");
         }
-        // update the password
-        basicUser.setPassword(passwordEncoder.encode(request.getNewPassword()));
 
-        if (basicUser instanceof Admin adminUser){
-            adminRepository.save(adminUser);
-        }
-        if (basicUser instanceof Athlete athleteUser){
-            athleteRepository.save(athleteUser);
+        var updatedPassword = passwordEncoder.encode(request.getNewPassword());
+        adminRepository.findByUsername(user.getUsername())
+                .ifPresent(admin -> {
+                    checkPassword(request, admin);
+                    admin.setPassword(updatedPassword);
+                    adminRepository.save(admin);
+                });
+
+        athleteRepository.findByUsername(user.getUsername())
+                .ifPresent(athlete -> {
+                    checkPassword(request, athlete);
+                    athlete.setPassword(updatedPassword);
+                    athleteRepository.save(athlete);
+                });
+    }
+
+    private void checkPassword(ChangePasswordRequest request, BasicUser user) {
+        // check if the current password is correct
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+            throw new IllegalStateException("Wrong password");
         }
     }
 }
