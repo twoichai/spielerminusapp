@@ -1,9 +1,12 @@
-INSERT INTO athleteapp.admin (email, username, password, role) VALUES
+INSERT INTO admin (email, username, password, role) VALUES
      ('admin.mail@mail.com', 'admin1', '$2a$12$kyaLfBHxYvGNtTJ.ezsaIOe4ibumbOFeAzl9MbFGhDNGI2x1s30xu', 'ADMIN');
-INSERT INTO athleteapp.athlete (first_name, last_name, dob, sex, email, username, password, role) VALUES
-    ('Markus', 'Siegert','2008-01-26', 'M', 'markus.siegert@mail.com', 'masi2006', 'pass4Masi', 'ATHLETE');
 
-INSERT INTO athleteapp.exercise (exercise_id, exercise_title, exercise_type)
+INSERT INTO athlete (first_name, last_name, dob, sex, email, username, password, role) VALUES
+    ('Markus', 'Siegert','2008-01-26 00:00:00.000', 'M', 'markus.siegert@mail.com', 'masi2006', 'pass4Masi', 'ATHLETE');
+
+
+
+INSERT INTO exercise (exercise_id, exercise_title, exercise_type)
 VALUES (1, '800m Lauf','AUSDAUER'),
        (2, 'Dauer-/Geländelauf','AUSDAUER'),
        (3, 'Schwimmen','AUSDAUER'),
@@ -26,8 +29,7 @@ VALUES (1, '800m Lauf','AUSDAUER'),
 
 
 
-
-INSERT INTO athleteapp.rule (gender, from_age, to_age, value_bronze, value_silver, value_gold, metric, label, exercise_id)
+INSERT INTO rule (gender, from_age, to_age, value_bronze, value_silver, value_gold, metric, label, exercise_id)
 VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('M', 8, 9, 525, 440, 355, 'MINUTES', NULL, 1),
        ('M', 10, 11, 505, 420, 335, 'MINUTES', NULL, 1),
@@ -293,3 +295,4 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('W', 12, 13, 1, 2, 3, 'POINTS', 'Boden', 19),
        ('W', 14, 15, 1, 2, 3, 'POINTS', 'Boden', 19),
        ('W', 16, 17, 1, 2, 3, 'POINTS', 'Boden', 19);
+
