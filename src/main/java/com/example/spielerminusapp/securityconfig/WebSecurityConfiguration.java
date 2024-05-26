@@ -37,7 +37,12 @@ public class WebSecurityConfiguration {
                             .loginPage("/login")
                             .successHandler(new AuthenticationSuccessHandler())
                             .permitAll();
-                })
+                }).logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()) // Ensure logout is permitted
                 .build();
     }
     @Bean

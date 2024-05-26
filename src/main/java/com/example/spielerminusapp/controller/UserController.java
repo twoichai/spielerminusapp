@@ -26,7 +26,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/withotp")
+    @PatchMapping("/changepass")
     public ResponseEntity<String> changeOTP(
             @RequestBody OTPRequest request,
             Principal connectedUser
