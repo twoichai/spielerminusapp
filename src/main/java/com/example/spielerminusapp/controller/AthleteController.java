@@ -32,7 +32,7 @@ public class AthleteController {
     }
 
     // Save a new athlete
-    @PostMapping("/register/")
+    @PostMapping("/register")
     public Athlete saveAthlete(@RequestBody Athlete athlete) {
         athlete.setPassword(passwordEncoder.encode(athlete.getPassword()));
         return athleteService.save(athlete);

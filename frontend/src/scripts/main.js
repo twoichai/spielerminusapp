@@ -625,16 +625,18 @@ customElements.define(
                 const thisPasswort = shadowRoot.querySelector('#change-section-password').value;
 
                 try {
-                    axios.post('/sportler',
+                    axios.post('/athletes/register',
                         {
-                            vorname: thisVorname,
-                            nachname: thisNachname,
-                            geburtstag: thisGeburtstag,
-                            geschlecht: thisGeschlecht,
-                            passwort: thisPasswort,
-                            email: thisEmail
+                            firstName: thisVorname,
+                            lastName: thisNachname,
+                            email: thisEmail,
+                            dob: thisGeburtstag,
+                            sex: thisGeschlecht,
+                            username: "STRING",
+                            password: thisPasswort,
+                            role: "ATHLETE"
                         }).then(response => {
-                        if(response.status == 201) {
+                        if(response.status == 200) {
                             const playerCreated = new CustomEvent("playerCreated", {
                                 bubbles: true,
                                 composed: true,
