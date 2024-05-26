@@ -1,6 +1,5 @@
 package com.example.spielerminusapp.controller;
 
-
 import com.example.spielerminusapp.model.enums.ExerciseType;
 import com.example.spielerminusapp.model.exercise.Exercise;
 import com.example.spielerminusapp.service.ExerciseService;

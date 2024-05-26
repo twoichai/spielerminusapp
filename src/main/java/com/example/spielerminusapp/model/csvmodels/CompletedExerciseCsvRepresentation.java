@@ -1,11 +1,8 @@
 package com.example.spielerminusapp.model.csvmodels;
 
-import com.example.spielerminusapp.model.exercise.Exercise;
-import com.example.spielerminusapp.model.enums.ExerciseType;
 import com.opencsv.bean.CsvBindByName;
 import lombok.*;
 
-import java.time.LocalDate;
 
 @Getter
 @Setter

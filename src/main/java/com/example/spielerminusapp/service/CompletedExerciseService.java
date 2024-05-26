@@ -1,18 +1,14 @@
 package com.example.spielerminusapp.service;
-import com.example.spielerminusapp.model.Athlete;
 import com.example.spielerminusapp.model.csvmodels.CompletedExerciseCsvRepresentation;
 import com.example.spielerminusapp.model.exercise.CompletedExercise;
-import com.example.spielerminusapp.model.exercise.Rule;
-import com.example.spielerminusapp.model.exercise.RuleGroup;
+
 import com.example.spielerminusapp.repository.AthleteRepository;
 import com.example.spielerminusapp.repository.CompletedExerciseRepository;
-import com.example.spielerminusapp.repository.RuleGroupRepository;
 import com.example.spielerminusapp.repository.RuleRepository;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.util.Optionals;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,8 +20,6 @@ import java.io.Reader;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -33,7 +27,6 @@ import java.util.stream.Stream;
 public class CompletedExerciseService {
 
     private final CompletedExerciseRepository completedExerciseRepository;
-    private final RuleGroupRepository ruleGroupRepository;
     private final AthleteRepository athleteRepository;
     private final RuleRepository ruleRepository;
     /**

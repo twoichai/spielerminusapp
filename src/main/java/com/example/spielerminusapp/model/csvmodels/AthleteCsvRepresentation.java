@@ -3,8 +3,6 @@ package com.example.spielerminusapp.model.csvmodels;
 import com.opencsv.bean.CsvBindByName;
 import lombok.*;
 
-import java.util.Date;
-
 @Getter
 @Setter
 @AllArgsConstructor

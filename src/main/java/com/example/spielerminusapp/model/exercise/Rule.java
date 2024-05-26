@@ -2,7 +2,6 @@ package com.example.spielerminusapp.model.exercise;
 
 import com.example.spielerminusapp.model.enums.Metric;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -48,7 +47,4 @@ public class Rule {
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RULE_GROUP_ID")
-    private RuleGroup ruleGroup;*/
 }
