@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -112,25 +114,29 @@ public class AthleteService {
     }
 
     private Set<Athlete> parseCsv(InputStream inputStream) throws IOException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        try(Reader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            HeaderColumnNameMappingStrategy<AthleteCsvRepresentation> strategy =
-                    new HeaderColumnNameMappingStrategy<>();
+        List<DateTimeFormatter> formatters = Arrays.asList(
+                DateTimeFormatter.ofPattern("dd.MM.yyyy"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        );
+
+        try (Reader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            HeaderColumnNameMappingStrategy<AthleteCsvRepresentation> strategy = new HeaderColumnNameMappingStrategy<>();
             strategy.setType(AthleteCsvRepresentation.class);
-            CsvToBean<AthleteCsvRepresentation> csvToBean =
-                    new CsvToBeanBuilder<AthleteCsvRepresentation>(reader)
-                            .withMappingStrategy(strategy)
-                            .withIgnoreEmptyLine(true)
-                            .withSeparator(';')
-                            .withIgnoreLeadingWhiteSpace(true)
-                            .build();
+
+            CsvToBean<AthleteCsvRepresentation> csvToBean = new CsvToBeanBuilder<AthleteCsvRepresentation>(reader)
+                    .withMappingStrategy(strategy)
+                    .withIgnoreEmptyLine(true)
+                    .withSeparator(';')
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
             return csvToBean.parse()
                     .stream()
                     .map(csvLine -> Athlete.builder()
                             .firstName(csvLine.getFirstname())
                             .lastName(csvLine.getLastname())
                             .email(csvLine.getEmail())
-                            .dob(LocalDate.parse(csvLine.getDob(), formatter))
+                            .dob(parseDate(csvLine.getDob(), formatters))
                             .sex(csvLine.getSex())
                             .role("ATHLETE")
                             .password(passwordEncoder.encode(randomPasswordGenerator.generateRandomPassword(12)))
@@ -138,6 +144,16 @@ public class AthleteService {
                     )
                     .collect(Collectors.toSet());
         }
+    }
 
+    private LocalDate parseDate(String dateStr, List<DateTimeFormatter> formatters) {
+        for (DateTimeFormatter formatter : formatters) {
+            try {
+                return LocalDate.parse(dateStr, formatter);
+            } catch (DateTimeParseException e) {
+                // Continue to next formatter
+            }
+        }
+        throw new IllegalArgumentException("Date format not supported: " + dateStr);
     }
 }
