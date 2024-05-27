@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <style>
@@ -60,7 +59,6 @@
       width: 100%;
     }
 
-
     .custom-button:hover {
       background-color: #45a049;
     }
@@ -69,7 +67,7 @@
 <body>
 <div class="login-container">
   <h2>Login</h2>
-  <form action="/login" method="post">
+  <form id="login-form" action="/login" method="post">
     <div>
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
@@ -81,5 +79,46 @@
     <button class="custom-button" type="submit">Login</button>
   </form>
 </div>
+
+<script>
+  // Function to check if the password is default
+  async function checkPasswordAndRedirect() {
+    try {
+      const response = await fetch('/user/details/isAdminPasswordDefault');
+      const data = await response.json();
+      if (data === true) {
+        window.location.href = '/changepass'; // Redirect to change password
+      } else {
+        window.location.href = '/';
+      }
+    } catch (error) {
+      console.error('Error checking password:', error);
+    }
+  }
+
+  // Add event listener for form submission
+  document.getElementById('login-form').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Process form data here if needed
+
+    // Manually submit the form using fetch
+    try {
+      const formData = new FormData(this);
+      const response = await fetch('/login', {
+        method: 'POST',
+        body: formData
+      });
+      if (response.ok) {
+        // Form submission successful, run redirection logic
+        checkPasswordAndRedirect();
+      } else {
+        console.error('Form submission failed:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  });
+</script>
 </body>
 </html>
