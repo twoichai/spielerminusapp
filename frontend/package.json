@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel src/home.html --port 8080",
-    "build-backend": "parcel build src/home.html --no-minify --no-content-hash --out-dir ../src/main/resources/static",
-    "build": "parcel build --no-minify src/home.html"
+    "dev": "parcel src/index.html --port 8080",
+    "build-backend": "parcel build src/index.html --no-minify --no-content-hash --out-dir ../src/main/resources/static",
+    "build": "parcel build --no-minify src/index.html"
   },
   "keywords": [],
   "author": "",
