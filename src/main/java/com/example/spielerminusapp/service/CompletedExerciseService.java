@@ -23,8 +23,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +39,6 @@ public class CompletedExerciseService {
 
     /**
      * Find all completed exercises.
-     *
      * @return a list of all completed exercises
      */
     public List<CompletedExercise> getAllCompletedExercises() {
@@ -50,14 +47,12 @@ public class CompletedExerciseService {
 
     /**
      * Find an exercise by ID.
-     *
      * @param id the ID of the exercise to find
      * @return an Optional containing the found exercise or an empty Optional if no exercise is found
      */
     public Optional<CompletedExercise> findById(Long id) {
         return completedExerciseRepository.findById(id);
     }
-
     public CompletedExercise save(CompletedExercise completedExercise) {
         return completedExerciseRepository.save(completedExercise);
     }
@@ -84,7 +79,6 @@ public class CompletedExerciseService {
 
     /**
      * Delete an exercise by ID.
-     *
      * @param id the ID of the exercise to be deleted
      */
     public void deleteById(Long id) {
