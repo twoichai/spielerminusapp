@@ -10,18 +10,18 @@ import lombok.*;
 @Builder
 public class AthleteCsvRepresentation {
 
-    @CsvBindByName(column="Vorname")
+    @CsvBindByName(column="VORNAME")
     private String firstname;
 
-    @CsvBindByName(column="Nachname")
+    @CsvBindByName(column="NACHNAME")
     private String lastname;
 
-    @CsvBindByName(column="E-Mail")
+    @CsvBindByName(column="E-MAIL")
     private String email;
 
-    @CsvBindByName(column="Geburtsdatum")
+    @CsvBindByName(column="GEBURTSDATUM")
     private String dob;
 
-    @CsvBindByName(column="Geschlecht")
+    @CsvBindByName(column="GESCHLECHT")
     private String sex;
 }
