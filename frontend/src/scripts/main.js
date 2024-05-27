@@ -84,6 +84,7 @@ const popupCreated = (item) => {
     let popup;
     let fButton;
     let sButton;
+    let eButton;
     if(item.detail.popupTyp == "change-option") {
         popup = document.getElementById("change-option__popup");
         fButton = document.getElementById("change-button");
@@ -93,6 +94,7 @@ const popupCreated = (item) => {
         popup = document.getElementById("add-option__popup");
         fButton = document.getElementById("add-button");
         sButton = document.getElementById("csv-button");
+        eButton = document.getElementById("export-csv-button");
     }
     else if(item.detail.popupTyp == "filter-option") {
         popup = document.getElementById("filter-option__popup");
@@ -122,6 +124,9 @@ const popupCreated = (item) => {
                 filterPlayerDescend();
             }
         }
+        else if (eButton && eButton.contains(clickEvent.target)) {
+            exportPlayersCSV();
+        }
         popup.remove();
         _changeOptionPin = false;
         _currentActivePopup = null;
@@ -133,6 +138,24 @@ const popupCreated = (item) => {
         _currentActivePopup = null;
         _currentPopupOrigin = null;
     }, {once: true, capture: item.detail.capture});
+}
+
+function exportPlayersCSV() {
+    axios.get('/athletes/export', {
+        responseType: 'blob'
+    })
+        .then(function (response) {
+            const url = window.URL.createObjectURL(new Blob([response.data], {type: 'text/csv'}));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'all-athletes-export.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        })
+        .catch(function (error) {
+            console.error('There was an error exporting the CSV:', error);
+        });
 }
 
 function checkAction(evt) {

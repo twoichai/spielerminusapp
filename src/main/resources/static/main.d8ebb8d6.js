@@ -15855,6 +15855,7 @@ var popupCreated = function popupCreated(item) {
   var popup;
   var fButton;
   var sButton;
+  var eButton;
   if (item.detail.popupTyp == "change-option") {
     popup = document.getElementById("change-option__popup");
     fButton = document.getElementById("change-button");
@@ -15863,6 +15864,7 @@ var popupCreated = function popupCreated(item) {
     popup = document.getElementById("add-option__popup");
     fButton = document.getElementById("add-button");
     sButton = document.getElementById("csv-button");
+    eButton = document.getElementById("export-csv-button");
   } else if (item.detail.popupTyp == "filter-option") {
     popup = document.getElementById("filter-option__popup");
     fButton = document.getElementById("filter-aufsteigend-button");
@@ -15885,6 +15887,8 @@ var popupCreated = function popupCreated(item) {
       } else if (item.detail.popupTyp == "filter-option") {
         filterPlayerDescend();
       }
+    } else if (eButton && eButton.contains(clickEvent.target)) {
+      exportPlayersCSV();
     }
     popup.remove();
     _changeOptionPin = false;
@@ -15904,6 +15908,23 @@ var popupCreated = function popupCreated(item) {
     capture: item.detail.capture
   });
 };
+function exportPlayersCSV() {
+  axios.get('/athletes/export', {
+    responseType: 'blob'
+  }).then(function (response) {
+    var url = window.URL.createObjectURL(new Blob([response.data], {
+      type: 'text/csv'
+    }));
+    var link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'all-athletes-export.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }).catch(function (error) {
+    console.error('There was an error exporting the CSV:', error);
+  });
+}
 function checkAction(evt) {
   var activeFilter = document.getElementById("active-filter-player");
   var closeFilter = document.getElementById("close-filter");
