@@ -25,6 +25,11 @@
             <div class="section__title">
                 <h3>Übungskatalog</h3>
             </div>
+            <div class="player-section__action">
+                <button class="player-section__button" id="choose-age">
+                    <span class="player-section__button-text">Kinder</span>
+                </button>
+            </div>
         </div>
         <div id="uebungskatalog-list" class="uebungskatalog-list">
             <div class="uebungskatalog-list__ausdauer">
@@ -61,11 +66,182 @@
             </div>
         </div>
     </div>
+    <div style="visibility: hidden" id="uebersicht-section" class="uebungskatalog-detail">
+        <div class="uebungskatalog-detail__header">
+            <div class="uebungskatalog-detail__title">
+                <h3 id="uebungskatalog-detail__title">Error</h3>
+            </div>
+        </div>
+        <div id="uebersicht-section-main" class="uebungskatalog-detail__main">
+
+        </div>
+    </div>
 </template>
-<template id="uebungskatalog-ausdauer">
-    <div class="uebersicht-section">
-        <div class="uebersicht-section__header">
-            <h3>Ausdauer</h3>
+<template id="uebungskatalog-ausdauer-kinder">
+    <div  class="uebungskatalog-list">
+        <div class="uebungskatalog-list__ausdauer">
+            <button class="uebungskatalog-list__button" id="ausdauer-800-meter">
+                <span class="uebungskatalog-list__text">800 Meter Lauf</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__kraft">
+            <button class="uebungskatalog-list__button" id="ausdauer-dauerlauf">
+                <span class="uebungskatalog-list__text">Dauer-/Geländerlauf</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__schnelligkeit">
+            <button class="uebungskatalog-list__button" id="ausdauer-schwimmen">
+                <span class="uebungskatalog-list__text">Schwimmen</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__koordination">
+            <button class="uebungskatalog-list__button" id="ausdauer-radfahren">
+                <span class="uebungskatalog-list__text">Radfahren</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+</template>
+<template id="uebungskatalog-kraft-kinder">
+    <div  class="uebungskatalog-list">
+        <div class="uebungskatalog-list__ausdauer">
+            <button class="uebungskatalog-list__button" id="kraft-werfer">
+                <span class="uebungskatalog-list__text">Werfer</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__kraft">
+            <button class="uebungskatalog-list__button" id="kraft-kugelstoßen">
+                <span class="uebungskatalog-list__text">Kugelstoßen</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__schnelligkeit">
+            <button class="uebungskatalog-list__button" id="kraft-standweitsprung">
+                <span class="uebungskatalog-list__text">Schwimmen</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__koordination">
+            <button class="uebungskatalog-list__button" id="kraft-geräteturnen">
+                <span class="uebungskatalog-list__text">Geräteturnen</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+</template>
+<template id="uebungskatalog-schnelligkeit-kinder">
+    <div  class="uebungskatalog-list">
+        <div class="uebungskatalog-list__ausdauer">
+            <button class="uebungskatalog-list__button" id="schnelligkeit-laufen">
+                <span class="uebungskatalog-list__text">Laufen</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__kraft">
+            <button class="uebungskatalog-list__button" id="schnelligkeit-25m-schwimmen">
+                <span class="uebungskatalog-list__text">25 Meter Schwimmen</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__schnelligkeit">
+            <button class="uebungskatalog-list__button" id="schnelligkeit-200m-radfahren">
+                <span class="uebungskatalog-list__text">200 Meter Radfahren</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__koordination">
+            <button class="uebungskatalog-list__button" id="schnelligkeit-geräteturnen">
+                <span class="uebungskatalog-list__text">Geräteturnen</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+</template>
+<template id="uebungskatalog-koordination-kinder">
+    <div  class="uebungskatalog-list">
+        <div class="uebungskatalog-list__ausdauer">
+            <button class="uebungskatalog-list__button" id="koordination-hochsprung">
+                <span class="uebungskatalog-list__text">Hochsprung</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__kraft">
+            <button class="uebungskatalog-list__button" id="koordination-Weitsprung">
+                <span class="uebungskatalog-list__text">Weitsprung</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__schnelligkeit">
+            <button class="uebungskatalog-list__button" id="koordination-Zonenweitsprung">
+                <span class="uebungskatalog-list__text">Zonenweitsprung</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__koordination">
+            <button class="uebungskatalog-list__button" id="koordination-Drehwurf">
+                <span class="uebungskatalog-list__text">Drehwurf</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__koordination">
+            <button class="uebungskatalog-list__button" id="koordination-Schleuderball">
+                <span class="uebungskatalog-list__text">Schleuderball</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__koordination">
+            <button class="uebungskatalog-list__button" id="koordination-Seilspringen">
+                <span class="uebungskatalog-list__text">Seilspringen</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
+        </div>
+        <div class="uebungskatalog-list__koordination">
+            <button class="uebungskatalog-list__button" id="koordination-Geräteturnen">
+                <span class="uebungskatalog-list__text">Geräteturnen</span>
+                <svg class="uebungskatalog-list__icon">
+                    <use href="images/icons/pointer-icon.svg#Layer_1"></use>
+                </svg>
+            </button>
         </div>
     </div>
 </template>
@@ -90,6 +266,7 @@
         </div>
     </div>
 </template>
+
 <template id="meine-Athleten">
     <div class="player-section">
         <div id="player-section__header" class="player-section__header">
@@ -365,8 +542,16 @@
                                 <use href="images/icons/csv-icon.svg#Layer_1"></use>
                             </svg>
                         </div>
-                    <div class="change-button__text">CSV Datei</div>
+                    <div class="change-button__text">Athleten expotieren</div>
                 </label>
+            </div>
+            <div id="export-csv-button" class="delete-button">
+                <div class="delete-button__icon">
+                    <svg viewBox="0 0 24 24" width="24px">
+                        <use href="images/icons/csv-icon.svg#Layer_1"></use>
+                    </svg>
+                </div>
+                <div class="delete-button__text">Athleten exportieren</div>
             </div>
         </div>
     </div>

@@ -35,7 +35,7 @@ let _popupPin = false;
 let _changeOptionPin = false;
 let _addPlayer = false;
 let tmp;
-let _sportlerDataTimestamp, _sportlerData;
+let _uebungskatalogCurrentActiv = null;
 
 window.onload = (event) => {
     createMeineDSA();
@@ -84,6 +84,7 @@ const popupCreated = (item) => {
     let popup;
     let fButton;
     let sButton;
+    let eButton;
     if(item.detail.popupTyp == "change-option") {
         popup = document.getElementById("change-option__popup");
         fButton = document.getElementById("change-button");
@@ -93,6 +94,7 @@ const popupCreated = (item) => {
         popup = document.getElementById("add-option__popup");
         fButton = document.getElementById("add-button");
         sButton = document.getElementById("csv-button");
+        eButton = document.getElementById("export-csv-button");
     }
     else if(item.detail.popupTyp == "filter-option") {
         popup = document.getElementById("filter-option__popup");
@@ -122,6 +124,9 @@ const popupCreated = (item) => {
                 filterPlayerDescend();
             }
         }
+        else if (eButton && eButton.contains(clickEvent.target)) {
+            exportPlayersCSV();
+        }
         popup.remove();
         _changeOptionPin = false;
         _currentActivePopup = null;
@@ -133,6 +138,24 @@ const popupCreated = (item) => {
         _currentActivePopup = null;
         _currentPopupOrigin = null;
     }, {once: true, capture: item.detail.capture});
+}
+
+function exportPlayersCSV() {
+    axios.get('/athletes/export', {
+        responseType: 'blob'
+    })
+        .then(function (response) {
+            const url = window.URL.createObjectURL(new Blob([response.data], {type: 'text/csv'}));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'all-athletes-export.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        })
+        .catch(function (error) {
+            console.error('There was an error exporting the CSV:', error);
+        });
 }
 
 function checkAction(evt) {
@@ -425,7 +448,20 @@ function changeMeineAthleten(id) {
 
 function deleteMeineAthleten(id) {
     const playerCard = document.getElementById(id);
-    playerCard.remove();
+
+    try {
+        axios.delete("/athletes/delete/" + id,
+            {
+
+            }).then(response => {
+            if(response.status == 200) {
+                playerCard.remove();
+            }
+        })
+    }
+    catch (e) {
+        console.log(e);
+    }
 }
 
 function createUebungskatalog() {
@@ -448,45 +484,71 @@ function uebungskatalogAction(evt) {
     const kraft = document.getElementById("uebungskatalog-kraft-button");
     const schnelligkeit = document.getElementById("uebungskatalog-schnelligkeit-button");
     const koordination = document.getElementById("uebungskatalog-koordination-button");
+    const uebersicht = document.getElementById("uebersicht-section-main");
 
     if (ausdauer != null && ausdauer.contains(evt.target)) {
-        createUebungskatalogDetail("ausdauer");
+        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == ausdauer) {
+            document.getElementById("uebersicht-section").style.visibility = "hidden";
+            _uebungskatalogCurrentActiv = null;
+        }
+        else {
+            createUebungskatalogDetail("ausdauer", uebersicht);
+            _uebungskatalogCurrentActiv = ausdauer;
+        }
     }
     if (kraft != null && kraft.contains(evt.target)) {
-        createUebungskatalogDetail("kraft");
+        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == kraft) {
+            document.getElementById("uebersicht-section").style.visibility = "hidden";
+            _uebungskatalogCurrentActiv = null;
+        }
+        else {
+            createUebungskatalogDetail("kraft", uebersicht);
+            _uebungskatalogCurrentActiv = kraft;
+        }
     }
     if (schnelligkeit != null && schnelligkeit.contains(evt.target)) {
-        createUebungskatalogDetail("schnelligkeit");
+        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == schnelligkeit) {
+            document.getElementById("uebersicht-section").style.visibility = "hidden";
+            _uebungskatalogCurrentActiv = null;
+        }
+        else {
+            createUebungskatalogDetail("schnelligkeit", uebersicht);
+            _uebungskatalogCurrentActiv = schnelligkeit;
+        }
     }
     if (koordination != null && koordination.contains(evt.target)) {
-        createUebungskatalogDetail("koordination");
+        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == koordination) {
+            document.getElementById("uebersicht-section").style.visibility = "hidden";
+            _uebungskatalogCurrentActiv = null;
+        }
+        else {
+            createUebungskatalogDetail("koordination", uebersicht);
+            _uebungskatalogCurrentActiv = koordination;
+        }
     }
 }
 
-function createUebungskatalogDetail(typ) {
-    const main = document.getElementById("main-view");
-    let ausdauer, kraft, schnelligkeit, koordination;
-
+function createUebungskatalogDetail(typ, uebersicht) {
+    let detail;
+    document.getElementById("uebersicht-section").style.visibility = "visible";
     if(typ == "ausdauer") {
-        ausdauer = document.getElementById("uebungskatalog-ausdauer");
+        detail = document.getElementById("uebungskatalog-ausdauer-kinder");
+        document.getElementById("uebungskatalog-detail__title").textContent = "Ausdauer";
     }
     else if(typ == "kraft") {
-        kraft = document.getElementById("uebungskatalog-kraft");
+        detail = document.getElementById("uebungskatalog-kraft-kinder");
+        document.getElementById("uebungskatalog-detail__title").textContent = "Kraft";
     }
     else if(typ == "schnelligkeit") {
-        schnelligkeit = document.getElementById("uebungskatalog-schnelligkeit");
+        detail = document.getElementById("uebungskatalog-schnelligkeit-kinder");
+        document.getElementById("uebungskatalog-detail__title").textContent = "Schnelligkeit";
     }
     else if(typ == "koordination") {
-        koordination = document.getElementById("uebungskatalog-koordination");
+        detail = document.getElementById("uebungskatalog-koordination-kinder");
+        document.getElementById("uebungskatalog-detail__title").textContent = "Koordination";
     }
 
-    let length = main.childNodes.length;
-    if(length > 3) {
-        for(let i = 0; i<length; i++) {
-            main.removeChild(main.childNodes[i]);
-        }
-    }
-    main.appendChild(ausdauer.content.cloneNode(true));
+    uebersicht.innerHTML = detail.innerHTML;
 }
 
 function selectActivePlayerCard(playerCardDom, playerCard) {
@@ -625,16 +687,14 @@ customElements.define(
                 const thisPasswort = shadowRoot.querySelector('#change-section-password').value;
 
                 try {
-                    axios.post('/athletes/register',
+                    axios.post('/athletes/register/',
                         {
                             firstName: thisVorname,
                             lastName: thisNachname,
-                            email: thisEmail,
                             dob: thisGeburtstag,
                             sex: thisGeschlecht,
-                            username: "STRING",
                             password: thisPasswort,
-                            role: "ATHLETE"
+                            email: thisEmail
                         }).then(response => {
                         if(response.status == 200) {
                             const playerCreated = new CustomEvent("playerCreated", {
