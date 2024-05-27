@@ -84,7 +84,7 @@
   // Function to check if the password is default
   async function checkPasswordAndRedirect() {
     try {
-      const response = await fetch('/user/details/isAdminPasswordDefault');
+      const response = await fetch('/user/user-details/isAdminPasswordDefault');
       const data = await response.json();
       if (data === true) {
         window.location.href = '/changepass'; // Redirect to change password

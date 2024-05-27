@@ -36,9 +36,4 @@ public class UserController {
         return ResponseEntity.ok("/index");
     }
 
-
-    @GetMapping("isAdminPasswordDefault")
-    public boolean isAdminPasswordDefault(){
-        return myUserService.isAdminPasswordDefault();
-    }
 }

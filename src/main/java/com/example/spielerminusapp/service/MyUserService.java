@@ -107,8 +107,4 @@ public class MyUserService implements UserDetailsService {
                 });
     }
 
-
-    public boolean isAdminPasswordDefault(){
-        return adminRepository.findAll().get(0).getPassword().equals("$2a$12$kyaLfBHxYvGNtTJ.ezsaIOe4ibumbOFeAzl9MbFGhDNGI2x1s30xu");
-    }
 }
