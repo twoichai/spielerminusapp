@@ -100,16 +100,16 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 2000, 2400, 2700, 'METERS', 'Wurfball (200 g)', 5),
        ('W', 16, 17, 2400, 2700, 3100, 'METERS', 'Wurfball (200 g)', 5),
 
-       ('M', 6, 7, 0, 0, 0, 'METERS', 'Nicht für das Alter 6-7 möglich', 6), -- Kugelstoßen --
-       ('M', 8, 9, 0, 0, 0, 'METERS', 'Nicht für das Alter 8-9 möglich', 6),
-       ('M', 10, 11, 0, 0, 0, 'METERS', 'Nicht für das Alter 10-11 möglich', 6),
+       ('M', 6, 7, -1, -1, -1, 'METERS', 'Nicht für das Alter 6-7 möglich', 6), -- Kugelstoßen --
+       ('M', 8, 9, -1, -1, -1, 'METERS', 'Nicht für das Alter 8-9 möglich', 6),
+       ('M', 10, 11, -1, -1, -1, 'METERS', 'Nicht für das Alter 10-11 möglich', 6),
        ('M', 12, 13, 625, 675, 725, 'METERS', '3 kg', 6),
        ('M', 14, 15, 700, 750, 800, 'METERS', '4 kg', 6),
        ('M', 16, 17, 750, 800, 850, 'METERS', '5 kg', 6),
 
-       ('W', 6, 7, 0, 0, 0, 'METERS', 'Nicht für das Alter 6-7 möglich', 6),
-       ('W', 8, 9, 0, 0, 0, 'METERS', 'Nicht für das Alter 8-9 möglich', 6),
-       ('W', 10, 11, 0, 0, 0, 'METERS', 'Nicht für das Alter 10-11 möglich', 6),
+       ('W', 6, 7, -1, -1, -1, 'METERS', 'Nicht für das Alter 6-7 möglich', 6),
+       ('W', 8, 9, -1, -1, -1, 'METERS', 'Nicht für das Alter 8-9 möglich', 6),
+       ('W', 10, 11, -1, -1, -1, 'METERS', 'Nicht für das Alter 10-11 möglich', 6),
        ('W', 12, 13, 475, 525, 575, 'METERS', '3 kg', 6),
        ('W', 14, 15, 550, 600, 650, 'METERS', '3 kg', 6),
        ('W', 16, 17, 575, 625, 675, 'METERS', '3 kg', 6),
@@ -170,14 +170,14 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 330, 275, 215, 'SECONDS', NULL, 10),
        ('W', 16, 17, 305, 255, 200, 'SECONDS', NULL, 10),
 
-       ('M', 6, 7, 0, 0, 0, 'SECONDS', 'Nicht für das Alter 6-7 möglich', 11), -- 200 m Radfahren --
+       ('M', 6, 7, -1, -1, -1, 'SECONDS', 'Nicht für das Alter 6-7 möglich', 11), -- 200 m Radfahren --
        ('M', 8, 9, 380, 330, 280, 'SECONDS', NULL, 11),
        ('M', 10, 11, 350, 305, 260, 'SECONDS', NULL, 11),
        ('M', 12, 13, 295, 260, 225, 'SECONDS', NULL, 11),
        ('M', 14, 15, 240, 215, 190, 'SECONDS', NULL, 11),
        ('M', 16, 17, 220, 195, 170, 'SECONDS', NULL, 11),
 
-       ('W', 6, 7, 0, 0, 0, 'SECONDS', 'Nicht für das Alter 6-7 möglich', 11),
+       ('W', 6, 7, -1, -1, -1, 'SECONDS', 'Nicht für das Alter 6-7 möglich', 11),
        ('W', 8, 9, 410, 360, 310, 'SECONDS', NULL, 11),
        ('W', 10, 11, 370, 320, 270, 'SECONDS', NULL, 11),
        ('W', 12, 13, 310, 270, 235, 'SECONDS', NULL, 11),
@@ -198,29 +198,29 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 1, 2, 3, 'POINTS', 'Sprung', 12),
        ('W', 16, 17, 1, 2, 3, 'POINTS', 'Sprung', 12),
 
-       ('M', 6, 7, 0, 0, 0, 'METERS', 'Nicht für das Alter 6-7 möglich', 13), -- Hochsprung  -- starts with 0, what to do?
-       ('M', 8, 9, 0, 0, 0, 'METERS', 'Nicht für das Alter 8-9 möglich', 13),
-       ('M', 10, 11, 0, 0, 0, 'METERS', NULL, 13),
-       ('M', 12, 13, 0, 0, 0, 'METERS', NULL, 13),
-       ('M', 14, 15, 0, 0, 0, 'METERS', NULL, 13),
-       ('M', 16, 17, 0, 0, 0, 'METERS', NULL, 13),
+       ('M', 6, 7, -1, -1, -1, 'METERS', 'Nicht für das Alter 6-7 möglich', 13), -- Hochsprung  -- starts with 0, what to do?
+       ('M', 8, 9, -1, -1, -1, 'METERS', 'Nicht für das Alter 8-9 möglich', 13),
+       ('M', 10, 11, 0.85, 0.95, 1.05, 'METERS', NULL, 13),
+       ('M', 12, 13, 0.95, 1.05, 1.15, 'METERS', NULL, 13),
+       ('M', 14, 15, 1.10, 1.20, 1.30, 'METERS', NULL, 13),
+       ('M', 16, 17, 1.20, 1.30, 1.40, 'METERS', NULL, 13),
 
-       ('W', 6, 7, 0, 0, 0, 'METERS', 'Nicht für das Alter 6-7 möglich', 13),
-       ('W', 8, 9, 0, 0, 0, 'METERS', 'Nicht für das Alter 8-9 möglich', 13),
-       ('W', 10, 11, 0, 0, 0, 'METERS', NULL, 13),
-       ('W', 12, 13, 0, 0, 0, 'METERS', NULL, 13),
-       ('W', 14, 15, 0, 0, 0, 'METERS', NULL, 13),
-       ('W', 16, 17, 0, 0, 0, 'METERS', NULL, 13),
+       ('W', 6, 7, -1, -1, -1, 'METERS', 'Nicht für das Alter 6-7 möglich', 13),
+       ('W', 8, 9, -1, -1, -1, 'METERS', 'Nicht für das Alter 8-9 möglich', 13),
+       ('W', 10, 11, 0.8, 0.9, 1.0, 'METERS', NULL, 13),
+       ('W', 12, 13, 0.9, 1.0, 1.10, 'METERS', NULL, 13),
+       ('W', 14, 15, 0.95, 1.05, 1.15, 'METERS', NULL, 13),
+       ('W', 16, 17, 1.05, 1.15, 1.25,  'METERS', NULL, 13),
 
-       ('M', 6, 7, 0, 0, 0, 'METERS', 'Nicht für das Alter 6-7 möglich', 14), -- Weitsprung
-       ('M', 8, 9, 0, 0, 0, 'METERS', 'Nicht für das Alter 8-9 möglich', 14),
+       ('M', 6, 7, -1, -1, -1, 'METERS', 'Nicht für das Alter 6-7 möglich', 14), -- Weitsprung
+       ('M', 8, 9, -1, -1, -1, 'METERS', 'Nicht für das Alter 8-9 möglich', 14),
        ('M', 10, 11, 260, 290, 320, 'METERS', NULL, 14),
        ('M', 12, 13, 320, 350, 380, 'METERS', NULL, 14),
        ('M', 14, 15, 380, 410, 440, 'METERS', NULL, 14),
        ('M', 16, 17, 430, 460, 490, 'METERS', NULL, 14),
 
-       ('W', 6, 7, 0, 0, 0, 'METERS', 'Nicht für das Alter 6-7 möglich', 14),
-       ('W', 8, 9, 0, 0, 0, 'METERS', 'Nicht für das Alter 8-9 möglich', 14),
+       ('W', 6, 7, -1, -1, -1, 'METERS', 'Nicht für das Alter 6-7 möglich', 14),
+       ('W', 8, 9, -1, -1, -1, 'METERS', 'Nicht für das Alter 8-9 möglich', 14),
        ('W', 10, 11, 230, 260, 290, 'METERS', NULL, 14),
        ('W', 12, 13, 280, 310, 340, 'METERS', NULL, 14),
        ('W', 14, 15, 320, 350, 380, 'METERS', NULL, 14),
@@ -228,42 +228,42 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
 
        ('M', 6, 7, 18, 21, 24, 'CUSTOM', 'Zonenweitsprung', 15), -- Zonenweitsprung
        ('M', 8, 9, 27, 30, 33, 'CUSTOM', 'Zonenweitsprung', 15),
-       ('M', 10, 11, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 10-11 möglich', 15),
-       ('M', 12, 13, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 12-13 möglich', 15),
-       ('M', 14, 15, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 14-15 möglich', 15),
-       ('M', 16, 17, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 16-17 möglich', 15),
+       ('M', 10, 11, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 10-11 möglich', 15),
+       ('M', 12, 13, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 12-13 möglich', 15),
+       ('M', 14, 15, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 14-15 möglich', 15),
+       ('M', 16, 17, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 16-17 möglich', 15),
 
        ('W', 6, 7, 18, 21, 24, 'CUSTOM', 'Zonenweitsprung', 15),
        ('W', 8, 9, 24, 27, 30, 'CUSTOM', 'Zonenweitsprung', 15),
-       ('W', 10, 11, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 10-11 möglich', 15),
-       ('W', 12, 13, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 12-13 möglich', 15),
-       ('W', 14, 15, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 14-15 möglich', 15),
-       ('W', 16, 17, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 16-17 möglich', 15),
+       ('W', 10, 11, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 10-11 möglich', 15),
+       ('W', 12, 13, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 12-13 möglich', 15),
+       ('W', 14, 15, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 14-15 möglich', 15),
+       ('W', 16, 17, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 16-17 möglich', 15),
 
        ('M', 6, 7, 15, 18, 24, 'CUSTOM', 'Drehwurf', 16), -- Drehwurf
        ('M', 8, 9, 21, 27, 33, 'CUSTOM', 'Drehwurf', 16),
        ('M', 10, 11, 33, 39, 45, 'CUSTOM', 'Drehwurf', 16),
-       ('M', 12, 13, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 12-13 möglich', 16),
-       ('M', 14, 15, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 14-15 möglich', 16),
-       ('M', 16, 17, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 16-17 möglich', 16),
+       ('M', 12, 13, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 12-13 möglich', 16),
+       ('M', 14, 15, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 14-15 möglich', 16),
+       ('M', 16, 17, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 16-17 möglich', 16),
 
        ('W', 6, 7, 12, 15, 21, 'CUSTOM', 'Drehwurf', 16),
        ('W', 8, 9, 18, 21, 27, 'CUSTOM', 'Drehwurf', 16),
        ('W', 10, 11, 27, 30, 36, 'CUSTOM', 'Drehwurf', 16),
-       ('W', 12, 13, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 12-13 möglich', 16),
-       ('W', 14, 15, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 14-15 möglich', 16),
-       ('W', 16, 17, 0, 0, 0, 'CUSTOM', 'Nicht für das Alter 16-17 möglich', 16),
+       ('W', 12, 13, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 12-13 möglich', 16),
+       ('W', 14, 15, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 14-15 möglich', 16),
+       ('W', 16, 17, -1, -1, -1, 'CUSTOM', 'Nicht für das Alter 16-17 möglich', 16),
 
-       ('M', 6, 7, 0, 0, 0, 'METERS', 'Nicht für das Alter 6-7 möglich', 17), -- Schleuderball
-       ('M', 8, 9, 0, 0, 0, 'METERS', 'Nicht für das Alter 8-9 möglich', 17),
-       ('M', 10, 11, 0, 0, 0, 'METERS', 'Nicht für das Alter 10-11 möglich', 17),
+       ('M', 6, 7, -1, -1, -1, 'METERS', 'Nicht für das Alter 6-7 möglich', 17), -- Schleuderball
+       ('M', 8, 9, -1, -1, -1, 'METERS', 'Nicht für das Alter 8-9 möglich', 17),
+       ('M', 10, 11, -1, -1, -1, 'METERS', 'Nicht für das Alter 10-11 möglich', 17),
        ('M', 12, 13, 1950, 2400, 2750, 'METERS', 'Schleuderball', 17),
        ('M', 14, 15, 2350, 2800, 3200, 'METERS', 'Schleuderball', 17),
        ('M', 16, 17, 2750, 3200, 3650, 'METERS', 'Schleuderball', 17),
 
-       ('W', 6, 7, 0, 0, 0, 'METERS', 'Nicht für das Alter 6-7 möglich', 17),
-       ('W', 8, 9, 0, 0, 0, 'METERS', 'Nicht für das Alter 8-9 möglich', 17),
-       ('W', 10, 11, 0, 0, 0, 'METERS', 'Nicht für das Alter 10-11 möglich', 17),
+       ('W', 6, 7, -1, -1, -1, 'METERS', 'Nicht für das Alter 6-7 möglich', 17),
+       ('W', 8, 9, -1, -1, -1, 'METERS', 'Nicht für das Alter 8-9 möglich', 17),
+       ('W', 10, 11, -1, -1, -1, 'METERS', 'Nicht für das Alter 10-11 möglich', 17),
        ('W', 12, 13, 1700, 1950, 2200, 'METERS', 'Schleuderball', 17),
        ('W', 14, 15, 1950, 2250, 2550, 'METERS', 'Schleuderball', 17),
        ('W', 16, 17, 2200, 2500, 2800, 'METERS', 'Schleuderball', 17),
