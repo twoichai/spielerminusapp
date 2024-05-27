@@ -44,26 +44,26 @@ window.onload = (event) => {
 function getAllPlayer() {
     const playerList = document.getElementById("player-list");
 
-    while(playerList.hasChildNodes()) {
+    while (playerList.hasChildNodes()) {
         playerList.removeChild(playerList.firstChild);
-  }
-       axios.get('/athletes').then(response => {
-         for (let item of response.data) {
-             const playerCard = document.createElement("player-card");
+    }
+    axios.get('/athletes').then(response => {
+        for (let item of response.data) {
+            const playerCard = document.createElement("player-card");
 
-             playerCard.setAttribute("data-fname", item.firstName);
-             playerCard.setAttribute("data-lname", item.lastName);
-             playerCard.setAttribute("data-bd", item.dob);
-             playerCard.setAttribute("data-gender", item.sex);
-             playerCard.setAttribute("data-email", item.email);
-             playerCard.setAttribute("id", item.id);
+            playerCard.setAttribute("data-fname", item.firstName);
+            playerCard.setAttribute("data-lname", item.lastName);
+            playerCard.setAttribute("data-bd", item.dob);
+            playerCard.setAttribute("data-gender", item.sex);
+            playerCard.setAttribute("data-email", item.email);
+            playerCard.setAttribute("id", item.id);
 
-             playerList.appendChild(playerCard);
-         }
-     });
+            playerList.appendChild(playerCard);
+        }
+    });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const meineDSA = document.querySelector("#nav-meine-dsa");
     meineDSA.addEventListener("click", createMeineDSA);
 
@@ -85,46 +85,62 @@ const popupCreated = (item) => {
     let fButton;
     let sButton;
     let eButton;
-    if(item.detail.popupTyp == "change-option") {
+    let thirdButton;
+    let forthButton;
+    let fithtButton;
+    let sixthButton;
+    if (item.detail.popupTyp == "change-option") {
         popup = document.getElementById("change-option__popup");
         fButton = document.getElementById("change-button");
         sButton = document.getElementById("delete-button");
-    }
-    else if(item.detail.popupTyp == "add-option") {
+    } else if (item.detail.popupTyp == "add-option") {
         popup = document.getElementById("add-option__popup");
         fButton = document.getElementById("add-button");
         sButton = document.getElementById("csv-button");
         eButton = document.getElementById("export-csv-button");
-    }
-    else if(item.detail.popupTyp == "filter-option") {
+    } else if (item.detail.popupTyp == "filter-option") {
         popup = document.getElementById("filter-option__popup");
         fButton = document.getElementById("filter-aufsteigend-button");
         sButton = document.getElementById("filter-absteigend-button");
+        thirdButton = document.getElementById("filter-aufsteigend-lastname-button");
+        forthButton = document.getElementById("filter-absteigend-lastname-button");
+        fithtButton = document.getElementById("filter-aufsteigend-birthday-button");
+        sixthButton = document.getElementById("filter-absteigend-birthday-button");
     }
-    document.addEventListener("click", (clickEvent)=> {
+    document.addEventListener("click", (clickEvent) => {
         if (fButton && fButton.contains(clickEvent.target)) {
-            if(item.detail.popupTyp == "change-option") {
+            if (item.detail.popupTyp == "change-option") {
                 changeMeineAthleten(item.detail.id);
-            }
-            else if(item.detail.popupTyp == "add-option") {
+            } else if (item.detail.popupTyp == "add-option") {
                 createProfilePopUp();
-            }
-            else if(item.detail.popupTyp == "filter-option") {
+            } else if (item.detail.popupTyp == "filter-option") {
                 filterPlayerUpscend();
             }
-        }
-        else if (sButton && sButton.contains(clickEvent.target)) {
+        } else if (sButton && sButton.contains(clickEvent.target)) {
             if (item.detail.popupTyp == "change-option") {
                 deleteMeineAthleten(item.detail.id);
-            }
-            else if (item.detail.popupTyp == "add-option") {
+            } else if (item.detail.popupTyp == "add-option") {
                 addPlayerWithCSV();
-            }
-            else if (item.detail.popupTyp == "filter-option") {
+            } else if (item.detail.popupTyp == "filter-option") {
                 filterPlayerDescend();
             }
-        }
-        else if (eButton && eButton.contains(clickEvent.target)) {
+        } else if (thirdButton && thirdButton.contains(clickEvent.target)) {
+            if (item.detail.popupTyp == "filter-option") {
+                filterPlayerLastNameAscend();
+            }
+        } else if (forthButton && forthButton.contains(clickEvent.target)) {
+            if (item.detail.popupTyp == "filter-option") {
+                filterPlayerLastNameDescend();
+            }
+        } else if (fithtButton && fithtButton.contains(clickEvent.target)) {
+            if (item.detail.popupTyp == "filter-option") {
+                filterPlayerBirthdayAscend();
+            }
+        } else if (sixthButton && sixthButton.contains(clickEvent.target)) {
+            if (item.detail.popupTyp == "filter-option") {
+                filterPlayerBirthdayDescend();
+            }
+        } else if (eButton && eButton.contains(clickEvent.target)) {
             exportPlayersCSV();
         }
         popup.remove();
@@ -132,7 +148,7 @@ const popupCreated = (item) => {
         _currentActivePopup = null;
         _currentPopupOrigin = null;
     }, {once: true, capture: item.detail.capture});
-    document.addEventListener("wheel", (clickEvent)=> {
+    document.addEventListener("wheel", (clickEvent) => {
         popup.remove();
         _changeOptionPin = false;
         _currentActivePopup = null;
@@ -179,7 +195,7 @@ function checkAction(evt) {
     if (addPlayer != null && addPlayer.contains(evt.target)) {
         createPopup("add-option", evt, addPlayer);
     }
-    if(inputFilter != null && inputFilter.contains(evt.target)) {
+    if (inputFilter != null && inputFilter.contains(evt.target)) {
         filterPlayerByName(inputFilter);
     }
 }
@@ -202,17 +218,16 @@ function filterPlayerByName(input) {
 
 function updatePlayerList(evt) {
     let currentPlayerList = document.getElementById("player-list").childNodes;
-    for(let i = 0; i < currentPlayerList.length; i++) {
+    for (let i = 0; i < currentPlayerList.length; i++) {
         filterByName(currentPlayerList[i], evt);
     }
 }
 
 function filterByName(playerCard, evt) {
     let fullName = playerCard.getAttributeNode("data-fname").value + " " + playerCard.getAttributeNode("data-lname").value;
-    if(containsInOrder(fullName.toLowerCase(), (evt.target.value).toLowerCase())) {
+    if (containsInOrder(fullName.toLowerCase(), (evt.target.value).toLowerCase())) {
         playerCard.style.display = "block";
-    }
-    else {
+    } else {
         playerCard.style.display = "none";
     }
 }
@@ -241,6 +256,57 @@ function filterPlayerDescend() {
     document.getElementById("player-list").replaceChildren(...updatedPlayerList);
 }
 
+function filterPlayerLastNameAscend() {
+    let currentPlayerList = document.getElementById("player-list").childNodes;
+    let updatedPlayerList = Array.from(currentPlayerList).sort((firstElement, lastElement) => {
+        const nameComparison = firstElement.dataset.lname.localeCompare(lastElement.dataset.lname);
+        if (nameComparison !== 0) {
+            return nameComparison;
+        }
+        return firstElement.dataset.fname?.localeCompare(lastElement.dataset.fname) || -1;
+    });
+    document.getElementById("player-list").replaceChildren(...updatedPlayerList);
+}
+
+function filterPlayerLastNameDescend() {
+    let currentPlayerList = document.getElementById("player-list").childNodes;
+    let updatedPlayerList = Array.from(currentPlayerList).sort((firstElement, lastElement) => {
+        const nameComparison = lastElement.dataset.lname.localeCompare(firstElement.dataset.lname);
+        if (nameComparison !== 0) {
+            return nameComparison;
+        }
+        return lastElement.dataset.fname?.localeCompare(firstElement.dataset.fname) || 1;
+    });
+    document.getElementById("player-list").replaceChildren(...updatedPlayerList);
+}
+
+function filterPlayerBirthdayAscend() {
+    let currentPlayerList = document.getElementById("player-list").childNodes;
+    let updatedPlayerList = Array.from(currentPlayerList).sort((firstElement, lastElement) => {
+        const dateComparison = firstElement.dataset.bd.localeCompare(lastElement.dataset.bd);
+        if (dateComparison !== 0) {
+            return dateComparison;
+        }
+        return firstElement.dataset.fname?.localeCompare(lastElement.dataset.fname) || -1;
+    });
+    document.getElementById("player-list").replaceChildren(...updatedPlayerList);
+}
+
+
+function filterPlayerBirthdayDescend() {
+    let currentPlayerList = document.getElementById("player-list").children;
+    let updatedPlayerList = Array.from(currentPlayerList).sort((firstElement, lastElement) => {
+        const dateComparison = lastElement.dataset.bd.localeCompare(firstElement.dataset.bd);
+        if (dateComparison !== 0) {
+            return dateComparison;
+        }
+        return lastElement.dataset.fname.localeCompare(firstElement.dataset.fname);
+    });
+    document.getElementById("player-list").replaceChildren(...updatedPlayerList);
+}
+
+
+
 
 function containsInOrder(mainString, subString) {
     let startIndex = 0;
@@ -268,33 +334,31 @@ function addPlayerWithCSV() {
                     "Content-Type": "multipart/form-data",
                 }
             })
-            .then(function (response) {
-                if(response.status == 200) {
-                    getAllPlayer();
-                }
-            });
+                .then(function (response) {
+                    if (response.status == 200) {
+                        getAllPlayer();
+                    }
+                });
         }
     });
 }
 
 function createPopup(typ, evt, button, thisId) {
     let popUp;
-    if(_changeOptionPin) {
+    if (_changeOptionPin) {
         _currentActivePopup.remove();
         _currentActivePopup = null;
         _changeOptionPin = false;
     }
-    if(typ == "change-option") {
+    if (typ == "change-option") {
         popUp = document.getElementById("change-option-popup").content;
-    }
-    else if(typ == "add-option") {
+    } else if (typ == "add-option") {
         popUp = document.getElementById("add-option-popup").content;
-    }
-    else if(typ == "filter-option") {
+    } else if (typ == "filter-option") {
         popUp = document.getElementById("filter-option-popup").content;
     }
 
-    if(_currentPopupOrigin != evt.target) {
+    if (_currentPopupOrigin != evt.target) {
         const buttonRect = button.getBoundingClientRect();
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
@@ -312,20 +376,18 @@ function createPopup(typ, evt, button, thisId) {
         const main = document.getElementById("main");
         main.appendChild(popUp.cloneNode(true));
 
-        if(typ == "change-option") {
+        if (typ == "change-option") {
             popUp = document.getElementById("change-option__popup");
-        }
-        else if(typ == "add-option") {
+        } else if (typ == "add-option") {
             popUp = document.getElementById("add-option__popup");
-        }
-        else if(typ == "filter-option") {
+        } else if (typ == "filter-option") {
             popUp = document.getElementById("filter-option__popup");
         }
 
         popUp.style.left = `${left}px`;
         popUp.style.top = `${top}px`;
 
-        if(thisId != null) {
+        if (thisId != null) {
             const popupCreated = new CustomEvent("popupCreated", {
                 detail: {
                     id: thisId,
@@ -334,8 +396,7 @@ function createPopup(typ, evt, button, thisId) {
                 }
             });
             document.dispatchEvent(popupCreated);
-        }
-        else if(typ == "add-option"){
+        } else if (typ == "add-option") {
             const popupCreated = new CustomEvent("popupCreated", {
                 detail: {
                     popupTyp: typ,
@@ -343,8 +404,7 @@ function createPopup(typ, evt, button, thisId) {
                 }
             });
             document.dispatchEvent(popupCreated);
-        }
-        else if(typ == "filter-option"){
+        } else if (typ == "filter-option") {
             const popupCreated = new CustomEvent("popupCreated", {
                 detail: {
                     popupTyp: typ,
@@ -356,18 +416,16 @@ function createPopup(typ, evt, button, thisId) {
         _changeOptionPin = true;
         _currentPopupOrigin = evt.target;
         _currentActivePopup = popUp;
-    }
-    else {
+    } else {
         _currentPopupOrigin = null;
     }
 }
 
 function selectActiveNav(selectedNav) {
-    if(_currentActiveNav == null) {
+    if (_currentActiveNav == null) {
         _currentActiveNav = selectedNav;
         selectedNav.setAttribute("aria-pressed", true);
-    }
-    else {
+    } else {
         _currentActiveNav.setAttribute("aria-pressed", false);
         _currentActiveNav = selectedNav;
         selectedNav.setAttribute("aria-pressed", true);
@@ -376,10 +434,9 @@ function selectActiveNav(selectedNav) {
 
 function expandNav() {
     const nav = document.getElementById("nav-menu");
-    if(nav.getAttribute("aria-expanded") === "true") {
+    if (nav.getAttribute("aria-expanded") === "true") {
         nav.setAttribute("aria-expanded", "false")
-    }
-    else {
+    } else {
         nav.setAttribute("aria-expanded", "true")
     }
 }
@@ -451,15 +508,12 @@ function deleteMeineAthleten(id) {
 
     try {
         axios.delete("/athletes/delete/" + id,
-            {
-
-            }).then(response => {
-            if(response.status == 200) {
+            {}).then(response => {
+            if (response.status == 200) {
                 playerCard.remove();
             }
         })
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e);
     }
 }
@@ -487,41 +541,37 @@ function uebungskatalogAction(evt) {
     const uebersicht = document.getElementById("uebersicht-section-main");
 
     if (ausdauer != null && ausdauer.contains(evt.target)) {
-        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == ausdauer) {
+        if (_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == ausdauer) {
             document.getElementById("uebersicht-section").style.visibility = "hidden";
             _uebungskatalogCurrentActiv = null;
-        }
-        else {
+        } else {
             createUebungskatalogDetail("ausdauer", uebersicht);
             _uebungskatalogCurrentActiv = ausdauer;
         }
     }
     if (kraft != null && kraft.contains(evt.target)) {
-        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == kraft) {
+        if (_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == kraft) {
             document.getElementById("uebersicht-section").style.visibility = "hidden";
             _uebungskatalogCurrentActiv = null;
-        }
-        else {
+        } else {
             createUebungskatalogDetail("kraft", uebersicht);
             _uebungskatalogCurrentActiv = kraft;
         }
     }
     if (schnelligkeit != null && schnelligkeit.contains(evt.target)) {
-        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == schnelligkeit) {
+        if (_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == schnelligkeit) {
             document.getElementById("uebersicht-section").style.visibility = "hidden";
             _uebungskatalogCurrentActiv = null;
-        }
-        else {
+        } else {
             createUebungskatalogDetail("schnelligkeit", uebersicht);
             _uebungskatalogCurrentActiv = schnelligkeit;
         }
     }
     if (koordination != null && koordination.contains(evt.target)) {
-        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == koordination) {
+        if (_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == koordination) {
             document.getElementById("uebersicht-section").style.visibility = "hidden";
             _uebungskatalogCurrentActiv = null;
-        }
-        else {
+        } else {
             createUebungskatalogDetail("koordination", uebersicht);
             _uebungskatalogCurrentActiv = koordination;
         }
@@ -531,19 +581,16 @@ function uebungskatalogAction(evt) {
 function createUebungskatalogDetail(typ, uebersicht) {
     let detail;
     document.getElementById("uebersicht-section").style.visibility = "visible";
-    if(typ == "ausdauer") {
+    if (typ == "ausdauer") {
         detail = document.getElementById("uebungskatalog-ausdauer-kinder");
         document.getElementById("uebungskatalog-detail__title").textContent = "Ausdauer";
-    }
-    else if(typ == "kraft") {
+    } else if (typ == "kraft") {
         detail = document.getElementById("uebungskatalog-kraft-kinder");
         document.getElementById("uebungskatalog-detail__title").textContent = "Kraft";
-    }
-    else if(typ == "schnelligkeit") {
+    } else if (typ == "schnelligkeit") {
         detail = document.getElementById("uebungskatalog-schnelligkeit-kinder");
         document.getElementById("uebungskatalog-detail__title").textContent = "Schnelligkeit";
-    }
-    else if(typ == "koordination") {
+    } else if (typ == "koordination") {
         detail = document.getElementById("uebungskatalog-koordination-kinder");
         document.getElementById("uebungskatalog-detail__title").textContent = "Koordination";
     }
@@ -554,15 +601,14 @@ function createUebungskatalogDetail(typ, uebersicht) {
 function selectActivePlayerCard(playerCardDom, playerCard) {
     const overview = document.getElementById("playerCard-detail");
 
-    if(_currentActive != null) {
+    if (_currentActive != null) {
         _currentActive.setAttribute("active", false);
     }
-    if(_currentActive == playerCardDom){
+    if (_currentActive == playerCardDom) {
         playerCardDom.setAttribute("active", false);
         overview.setAttribute("hidden", "true");
         _currentActive = null;
-    }
-    else {
+    } else {
         overview.setAttribute("hidden", "false");
         _currentActive = playerCardDom;
         playerCardDom.setAttribute("active", true);
@@ -596,7 +642,7 @@ customElements.define(
             const template = document.getElementById(
                 "playerCard",
             ).content;
-            const shadowRoot = this.attachShadow({ mode: "open" });
+            const shadowRoot = this.attachShadow({mode: "open"});
             shadowRoot.appendChild(template.cloneNode(true));
         }
 
@@ -658,6 +704,7 @@ customElements.define(
             const shadowRoot = this.attachShadow({mode: "open"});
             shadowRoot.appendChild(template.cloneNode(true));
         }
+
         connectedCallback() {
             const shadowRoot = this.shadowRoot;
 
@@ -698,7 +745,7 @@ customElements.define(
                             email: thisEmail,
                             role: "ATHLETE"
                         }).then(response => {
-                        if(response.status == 200) {
+                        if (response.status == 200) {
                             const playerCreated = new CustomEvent("playerCreated", {
                                 bubbles: true,
                                 composed: true,
@@ -713,8 +760,7 @@ customElements.define(
                             document.dispatchEvent(playerCreated);
                         }
                     })
-                }
-                catch (e) {
+                } catch (e) {
                     console.log(e);
                 }
                 _popupPin = false;
@@ -733,9 +779,10 @@ customElements.define(
             const template = document.getElementById(
                 "change-section-popup",
             ).content;
-            const shadowRoot = this.attachShadow({ mode: "open" });
+            const shadowRoot = this.attachShadow({mode: "open"});
             shadowRoot.appendChild(template.cloneNode(true));
         }
+
         connectedCallback() {
             const linkElem = document.createElement("link");
             linkElem.setAttribute("rel", "stylesheet");
@@ -763,7 +810,7 @@ customElements.define(
             inputfield.setAttribute("value", this.getAttribute("data-email"));
             inputfield.setAttribute("data-id", this.getAttribute("data-id"));
 
-            if(!_addPlayer) {
+            if (!_addPlayer) {
                 const passwordField = shadowRoot.querySelector("#add-player-password");
                 passwordField.setAttribute("hidden", "true");
 
@@ -795,25 +842,24 @@ customElements.define(
                             email: thisEmail
 
                         }).then(response => {
-                            if(response.status == 200) {
-                                const playerCard = document.getElementById(thisId);
-                                const playerChanged = new CustomEvent("playerChanged", {
-                                    bubbles: true,
-                                    composed: true,
-                                    detail: {
-                                        vorname: thisVorname,
-                                        nachname: thisNachname,
-                                        geburtstag: thisGeburtstag,
-                                        geschlecht: thisGeschlecht,
-                                        email: thisEmail,
-                                        id: thisId
-                                    }
-                                });
-                                playerCard.dispatchEvent(playerChanged);
-                            }
+                        if (response.status == 200) {
+                            const playerCard = document.getElementById(thisId);
+                            const playerChanged = new CustomEvent("playerChanged", {
+                                bubbles: true,
+                                composed: true,
+                                detail: {
+                                    vorname: thisVorname,
+                                    nachname: thisNachname,
+                                    geburtstag: thisGeburtstag,
+                                    geschlecht: thisGeschlecht,
+                                    email: thisEmail,
+                                    id: thisId
+                                }
+                            });
+                            playerCard.dispatchEvent(playerChanged);
+                        }
                     })
-                }
-                catch (e) {
+                } catch (e) {
                     console.log(e);
                 }
                 _popupPin = false;
