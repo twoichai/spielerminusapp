@@ -37,7 +37,7 @@ You will be guided to the link after using your otp
 --- 
 The user will then see the login window. 
 **One Time Credentials:**  
-**Username:** admin1 
+**Username:** admin 
 **Password:** admin 
 
 --- 
