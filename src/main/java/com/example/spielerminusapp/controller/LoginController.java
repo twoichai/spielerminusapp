@@ -13,7 +13,7 @@ public class LoginController {
 
     @GetMapping("/home")
     public String handleWelcome() {
-        return "home";
+        return "static/index.html";
     }
 
     @GetMapping("/admin/home")

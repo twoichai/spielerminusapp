@@ -24,6 +24,9 @@ public class Admin implements BasicUser{
 
     @Column(name = "ROLE")
     private String role;
+
+    /*@Column(name = "NEED_OTP")
+    private boolean needOtp;*/
 }
 // Default log in data;
 // password: admin

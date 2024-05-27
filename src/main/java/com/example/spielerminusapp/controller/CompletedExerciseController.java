@@ -75,3 +75,5 @@ public class CompletedExerciseController {
         return ResponseEntity.ok(completedExerciseService.uploadCompletedExercises(file));
     }*/
 }
+//TODO Generate nickname
+//TODO Completed exercise

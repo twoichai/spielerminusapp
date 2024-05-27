@@ -35,4 +35,5 @@ public class UserController {
         // Return the index path as a plain string within the response body
         return ResponseEntity.ok("/index");
     }
+
 }
