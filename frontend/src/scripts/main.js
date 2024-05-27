@@ -35,7 +35,7 @@ let _popupPin = false;
 let _changeOptionPin = false;
 let _addPlayer = false;
 let tmp;
-let _sportlerDataTimestamp, _sportlerData;
+let _uebungskatalogCurrentActiv = null;
 
 window.onload = (event) => {
     createMeineDSA();
@@ -461,36 +461,68 @@ function uebungskatalogAction(evt) {
     const kraft = document.getElementById("uebungskatalog-kraft-button");
     const schnelligkeit = document.getElementById("uebungskatalog-schnelligkeit-button");
     const koordination = document.getElementById("uebungskatalog-koordination-button");
+    const uebersicht = document.getElementById("uebersicht-section-main");
 
     if (ausdauer != null && ausdauer.contains(evt.target)) {
-        createUebungskatalogDetail("ausdauer");
+        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == ausdauer) {
+            document.getElementById("uebersicht-section").style.visibility = "hidden";
+            _uebungskatalogCurrentActiv = null;
+        }
+        else {
+            createUebungskatalogDetail("ausdauer", uebersicht);
+            _uebungskatalogCurrentActiv = ausdauer;
+        }
     }
     if (kraft != null && kraft.contains(evt.target)) {
-        createUebungskatalogDetail("kraft");
+        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == kraft) {
+            document.getElementById("uebersicht-section").style.visibility = "hidden";
+            _uebungskatalogCurrentActiv = null;
+        }
+        else {
+            createUebungskatalogDetail("kraft", uebersicht);
+            _uebungskatalogCurrentActiv = kraft;
+        }
     }
     if (schnelligkeit != null && schnelligkeit.contains(evt.target)) {
-        createUebungskatalogDetail("schnelligkeit");
+        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == schnelligkeit) {
+            document.getElementById("uebersicht-section").style.visibility = "hidden";
+            _uebungskatalogCurrentActiv = null;
+        }
+        else {
+            createUebungskatalogDetail("schnelligkeit", uebersicht);
+            _uebungskatalogCurrentActiv = schnelligkeit;
+        }
     }
     if (koordination != null && koordination.contains(evt.target)) {
-        createUebungskatalogDetail("koordination");
+        if(_uebungskatalogCurrentActiv != null && _uebungskatalogCurrentActiv == koordination) {
+            document.getElementById("uebersicht-section").style.visibility = "hidden";
+            _uebungskatalogCurrentActiv = null;
+        }
+        else {
+            createUebungskatalogDetail("koordination", uebersicht);
+            _uebungskatalogCurrentActiv = koordination;
+        }
     }
 }
 
-function createUebungskatalogDetail(typ) {
-    const uebersicht = document.getElementById("uebersicht-section");
+function createUebungskatalogDetail(typ, uebersicht) {
     let detail;
-
+    document.getElementById("uebersicht-section").style.visibility = "visible";
     if(typ == "ausdauer") {
-        detail = document.getElementById("uebungskatalog-ausdauer");
+        detail = document.getElementById("uebungskatalog-ausdauer-kinder");
+        document.getElementById("uebungskatalog-detail__title").textContent = "Ausdauer";
     }
     else if(typ == "kraft") {
-        detail = document.getElementById("uebungskatalog-kraft");
+        detail = document.getElementById("uebungskatalog-kraft-kinder");
+        document.getElementById("uebungskatalog-detail__title").textContent = "Kraft";
     }
     else if(typ == "schnelligkeit") {
-        detail = document.getElementById("uebungskatalog-schnelligkeit");
+        detail = document.getElementById("uebungskatalog-schnelligkeit-kinder");
+        document.getElementById("uebungskatalog-detail__title").textContent = "Schnelligkeit";
     }
     else if(typ == "koordination") {
-        detail = document.getElementById("uebungskatalog-koordination");
+        detail = document.getElementById("uebungskatalog-koordination-kinder");
+        document.getElementById("uebungskatalog-detail__title").textContent = "Koordination";
     }
 
     uebersicht.innerHTML = detail.innerHTML;

@@ -28,6 +28,20 @@
     overflow-y: scroll;
     padding: 20px 25px 5px 20px;
   }
+
+  &__button {
+    display: flex;
+    color: white;
+    background-color: config.$brandcolor-blue;
+    border: none;
+    padding: 15px 20px 15px 20px;
+    height: 24px;
+    transition: all .3s ease;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+  }
 }
 
 .section {
