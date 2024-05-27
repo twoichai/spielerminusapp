@@ -1,14 +1,9 @@
 package com.example.spielerminusapp.service;
 
-import com.example.spielerminusapp.model.Admin;
-import com.example.spielerminusapp.model.Athlete;
 import com.example.spielerminusapp.model.BasicUser;
 import com.example.spielerminusapp.repository.AdminRepository;
 import com.example.spielerminusapp.repository.AthleteRepository;
 import com.example.spielerminusapp.securityconfig.ChangePasswordRequest;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
@@ -84,5 +79,9 @@ public class MyUserService implements UserDetailsService {
         if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
             throw new IllegalStateException("Wrong password");
         }
+    }
+
+    public boolean isAdminPasswordDefault(){
+        return adminRepository.findAll().get(0).getPassword().equals("$2a$12$kyaLfBHxYvGNtTJ.ezsaIOe4ibumbOFeAzl9MbFGhDNGI2x1s30xu");
     }
 }

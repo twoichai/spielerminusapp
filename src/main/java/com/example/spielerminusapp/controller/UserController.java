@@ -24,4 +24,9 @@ public class UserController {
         myUserService.changePassword(request, connectedUser);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("isAdminPasswordDefault")
+    public boolean isAdminPasswordDefault(){
+        return myUserService.isAdminPasswordDefault();
+    }
 }
