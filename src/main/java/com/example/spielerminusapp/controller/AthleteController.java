@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
@@ -27,6 +30,7 @@ public class AthleteController {
     private final AthleteService athleteService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     @Autowired
     public AthleteController(AthleteService athleteService) {
@@ -43,6 +47,7 @@ public class AthleteController {
     @PostMapping("/register")
     public Athlete saveAthlete(@RequestBody Athlete athlete) {
         athlete.setPassword(passwordEncoder.encode(athlete.getPassword()));
+        athlete.setRole("ATHLETE");
         return athleteService.save(athlete);
     }
 
@@ -61,7 +66,7 @@ public class AthleteController {
     }
 
     // Update an existing athlete
-    @PutMapping("/update/{id}")
+   @PutMapping("/update/{id}")
     public ResponseEntity<Athlete> updateAthlete(@PathVariable Long id, @RequestBody Athlete athleteDetails) {
         return athleteService.updateById(id, athleteDetails)
                 .map(updatedAthlete -> ResponseEntity.ok().body(updatedAthlete))

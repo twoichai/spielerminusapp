@@ -77,11 +77,10 @@ public class AthleteService {
                     existingAthlete.setSex(athleteDetails.getSex());
                     existingAthlete.setEmail(athleteDetails.getEmail());
                     existingAthlete.setPassword(athleteDetails.getPassword());
-                    existingAthlete.setRole(athleteDetails.getRole());
+                    existingAthlete.setRole("ATHLETE");
                     return athleteRepository.save(existingAthlete);
                 });
     }
-
     /**
      * Delete an athlete by ID.
      * @param id the ID of the athlete to be deleted

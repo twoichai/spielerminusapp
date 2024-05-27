@@ -686,15 +686,17 @@ customElements.define(
                 const thisEmail = shadowRoot.querySelector('#change-section-username').value;
                 const thisPasswort = shadowRoot.querySelector('#change-section-password').value;
 
+
                 try {
-                    axios.post('/athletes/register/',
+                    axios.post('/athletes/register',
                         {
                             firstName: thisVorname,
                             lastName: thisNachname,
                             dob: thisGeburtstag,
                             sex: thisGeschlecht,
                             password: thisPasswort,
-                            email: thisEmail
+                            email: thisEmail,
+                            role: "ATHLETE"
                         }).then(response => {
                         if(response.status == 200) {
                             const playerCreated = new CustomEvent("playerCreated", {
@@ -783,14 +785,15 @@ customElements.define(
                 const thisId = inputfield.getAttribute("data-id");
 
                 try {
-                    axios.put('/athletes/update/',
+                    axios.put('/athletes/update/' + thisId,
                         {
-                            vorname: thisVorname,
-                            nachname: thisNachname,
-                            geburtstag: thisGeburtstag,
-                            geschlecht: thisGeschlecht,
-                            email: thisEmail,
-                            id: thisId
+                            id: thisId,
+                            firstName: thisVorname,
+                            lastName: thisNachname,
+                            dob: thisGeburtstag,
+                            sex: thisGeschlecht,
+                            email: thisEmail
+
                         }).then(response => {
                             if(response.status == 200) {
                                 const playerCard = document.getElementById(thisId);
