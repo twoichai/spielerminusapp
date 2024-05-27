@@ -1,9 +1,15 @@
 package com.example.spielerminusapp.service;
+
+import com.example.spielerminusapp.model.Athlete;
 import com.example.spielerminusapp.model.csvmodels.CompletedExerciseCsvRepresentation;
+import com.example.spielerminusapp.model.enums.Medal;
 import com.example.spielerminusapp.model.exercise.CompletedExercise;
 
+import com.example.spielerminusapp.model.exercise.Exercise;
+import com.example.spielerminusapp.model.exercise.Rule;
 import com.example.spielerminusapp.repository.AthleteRepository;
 import com.example.spielerminusapp.repository.CompletedExerciseRepository;
+import com.example.spielerminusapp.repository.ExerciseRepository;
 import com.example.spielerminusapp.repository.RuleRepository;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -29,6 +35,8 @@ public class CompletedExerciseService {
     private final CompletedExerciseRepository completedExerciseRepository;
     private final AthleteRepository athleteRepository;
     private final RuleRepository ruleRepository;
+    private final ExerciseRepository exerciseRepository;
+
     /**
      * Find all completed exercises.
      * @return a list of all completed exercises
@@ -51,9 +59,11 @@ public class CompletedExerciseService {
 
     /**
      * Update a completed exercise by ID.
-     * @param id the ID of the completed exercise to update
+     *
+     * @param id                       the ID of the completed exercise to update
      * @param completedExerciseDetails details to update
-     * @return the updated exercise, or an empty Optional if not found*/
+     * @return the updated exercise, or an empty Optional if not found
+     */
     public Optional<CompletedExercise> updateById(Long id, CompletedExercise completedExerciseDetails) {
         return completedExerciseRepository.findById(id)
                 .map(existingCompletedExercise -> {
@@ -81,7 +91,74 @@ public class CompletedExerciseService {
 
     @Transactional
     public boolean saveCompletedExercise(CompletedExercise completedExercise) {
-        return true;
+        CompletedExercise ex = new CompletedExercise();
+
+        //getting rule for Exercise
+        Exercise exerc = completedExercise.getExercise();
+        Rule rule = exerc.getRule().get(0);
+
+        //getting Medal values
+        long gold = rule.getValueGold();
+        long silver = rule.getValueSilver();
+        long bronze = rule.getValueBronze();
+        long result = Long.valueOf(completedExercise.getResult()).longValue();
+
+        ex.setAthlete(completedExercise.getAthlete());
+        ex.setDateOfCompletion(completedExercise.getDateOfCompletion());
+        ex.setDBS(completedExercise.getDBS());
+        ex.setResult(completedExercise.getResult());
+        ex.setExerciseType(completedExercise.getExerciseType());
+        ex.setExercise(completedExercise.getExercise());
+
+
+        if (bronze > gold) {
+            if (result > bronze) {
+                ex.setMedal(Medal.NO_MEDAL);
+                ex.setPointsEarned(0);
+                completedExerciseRepository.save(ex);
+                return true;
+            } else if (result <= bronze && result > silver) {
+                ex.setMedal(Medal.BRONZE);
+                ex.setPointsEarned(1);
+                completedExerciseRepository.save(ex);
+                return true;
+            } else if (result <= silver && result > gold) {
+                ex.setMedal(Medal.SILBER);
+                ex.setPointsEarned(2);
+                completedExerciseRepository.save(ex);
+                return true;
+            } else if (result <= gold) {
+                ex.setMedal(Medal.GOLD);
+                ex.setPointsEarned(3);
+                completedExerciseRepository.save(ex);
+                return true;
+            }
+
+        } else {
+            if (result < bronze) {
+                ex.setMedal(Medal.NO_MEDAL);
+                ex.setPointsEarned(0);
+                completedExerciseRepository.save(ex);
+                return true;
+            } else if (result >= bronze && result < silver) {
+                ex.setMedal(Medal.BRONZE);
+                ex.setPointsEarned(1);
+                completedExerciseRepository.save(ex);
+                return true;
+            } else if (result >= silver && result < gold) {
+                ex.setMedal(Medal.SILBER);
+                ex.setPointsEarned(2);
+                completedExerciseRepository.save(ex);
+                return true;
+
+            } else if (result >= gold) {
+                ex.setMedal(Medal.GOLD);
+                ex.setPointsEarned(3);
+                completedExerciseRepository.save(ex);
+                return true;
+            }
+        }
+        return false;
     }
 
     /*public Integer uploadCompletedExercises(MultipartFile file) throws IOException {
@@ -113,9 +190,9 @@ public class CompletedExerciseService {
         });
     }*/
 
-    private Stream<CompletedExerciseCsvRepresentation> readCsv(MultipartFile file) throws IOException{
+    private Stream<CompletedExerciseCsvRepresentation> readCsv(MultipartFile file) throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        try(Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+        try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
             HeaderColumnNameMappingStrategy<CompletedExerciseCsvRepresentation> strategy =
                     new HeaderColumnNameMappingStrategy<>();
             strategy.setType(CompletedExerciseCsvRepresentation.class);

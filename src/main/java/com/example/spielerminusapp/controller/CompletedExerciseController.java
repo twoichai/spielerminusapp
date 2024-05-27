@@ -2,6 +2,7 @@ package com.example.spielerminusapp.controller;
 
 import com.example.spielerminusapp.model.exercise.CompletedExercise;
 import com.example.spielerminusapp.service.CompletedExerciseService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +39,16 @@ public class CompletedExerciseController {
     // POST endpoint to create a new completed exercise
     @PostMapping
     public ResponseEntity<CompletedExercise> createCompletedExercise(@RequestBody CompletedExercise completedExercise) {
-        CompletedExercise savedExercise = completedExerciseService.save(completedExercise);
-        return ResponseEntity.ok(savedExercise);
+        Boolean val = completedExerciseService.saveCompletedExercise(completedExercise);
+        if (val) {
+            return ResponseEntity.ok(completedExercise);
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
+
 
     // PATCH endpoint to update a completed exercise by ID
     @PatchMapping("/{id}")
