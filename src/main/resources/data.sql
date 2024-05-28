@@ -1,10 +1,31 @@
-INSERT INTO admin (email, username, password, role) VALUES
-     ('admin.mail@mail.com', 'admin', '$2a$12$kyaLfBHxYvGNtTJ.ezsaIOe4ibumbOFeAzl9MbFGhDNGI2x1s30xu', 'ADMIN');
+INSERT INTO admin (email, username, password, role)
+VALUES ('admin.mail@mail.com', 'admin', '$2a$12$kyaLfBHxYvGNtTJ.ezsaIOe4ibumbOFeAzl9MbFGhDNGI2x1s30xu', 'ADMIN');
 
-INSERT INTO athlete (first_name, last_name, dob, sex, email, username, password, role, schwimmnachweis) VALUES
-    ('Markus', 'Schmidt','2012-01-26 00:00:00.000', 'M', 'markus.siegert@mail.com', 'masi2006', '$2a$12$EV3sZWrj5yPLP4aswTmSMesBDDSkMdTshpNdQpq6rTYSKPgOLLTmS', 'ATHLETE', false);
+INSERT INTO athlete (first_name, last_name, dob, sex, email, username, password, role, schwimmnachweis)
+VALUES ('Markus', 'Schmidt', '2012-01-26 00:00:00.000', 'M', 'markus.schmidt@mail.com', 'masi2006',
+        '$2a$12$EV3sZWrj5yPLP4aswTmSMesBDDSkMdTshpNdQpq6rTYSKPgOLLTmS', 'ATHLETE', false);
 
-
+INSERT INTO completed_exercises (date_completed, earned_points, athlete_id, exercise_id, id, dbs, exercise_type, medal,
+                                 result)
+VALUES ('2024-05-26 00:00:00.000', 1, 1, 1, 1, "test", 'AUSDAUER', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 2, 2, "test", 'AUSDAUER', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 3, 3, "test", 'AUSDAUER', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 4, 4, "test", 'AUSDAUER', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 5, 5, "test", 'KRAFT', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 6, 6, "test", 'KRAFT', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 7, 7, "test", 'KRAFT', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 8, 8, "test", 'KRAFT', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 9, 9, "test", 'SCHNELLIGKEIT', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 10, 10, "test", 'SCHNELLIGKEIT', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 11, 11, "test", 'SCHNELLIGKEIT', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 12, 12, "test", 'SCHNELLIGKEIT', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 13, 13, "test", 'KOORDINATION', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 14, 14, "test", 'KOORDINATION', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 15, 15, "test", 'KOORDINATION', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 16, 16, "test", 'KOORDINATION', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 17, 17, "test", 'KOORDINATION', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 18, 18, "test", 'KOORDINATION', "GOLD", 69),
+       ('2024-05-26 00:00:00.000', 1, 1, 19, 19, "test", 'KOORDINATION', "GOLD", 69);
 
 INSERT INTO exercise (exercise_id, exercise_title, exercise_type)
 VALUES (1, '800m Lauf','AUSDAUER'),
@@ -26,6 +47,25 @@ VALUES (1, '800m Lauf','AUSDAUER'),
        (17, 'Schleuderball','KOORDINATION'),
        (18, 'Seilspringen','KOORDINATION'),
        (19, 'Geraetturnen Koordination','KOORDINATION');
+VALUES (1, '800m Lauf', 'AUSDAUER'),
+       (2, 'Dauer-/Geländelauf', 'AUSDAUER'),
+       (3, 'Schwimmen', 'AUSDAUER'),
+       (4, 'Radfahren', 'AUSDAUER'),
+       (5, 'Werfen', 'KRAFT'),
+       (6, 'Kugelstoßen', 'KRAFT'),
+       (7, 'Standweitsprung', 'KRAFT'),
+       (8, 'Geräteturnen Kraft', 'KRAFT'),
+       (9, 'Laufen', 'SCHNELLIGKEIT'),
+       (10, '25 m Schwimmen', 'SCHNELLIGKEIT'),
+       (11, '200 m Radfahren', 'SCHNELLIGKEIT'),
+       (12, 'Geräteturnen Schnelligkeit', 'SCHNELLIGKEIT'),
+       (13, 'Hochsprung', 'KOORDINATION'),
+       (14, 'Weitsprung', 'KOORDINATION'),
+       (15, 'Zonenweitsprung', 'KOORDINATION'),
+       (16, 'Drehwurf', 'KOORDINATION'),
+       (17, 'Schleuderball', 'KOORDINATION'),
+       (18, 'Seilspringen', 'KOORDINATION'),
+       (19, 'Gerätturnen Koordination', 'KOORDINATION');
 
 
 
@@ -114,7 +154,7 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 550, 600, 650, 'METERS', '3 kg', 6),
        ('W', 16, 17, 575, 625, 675, 'METERS', '3 kg', 6),
 
-       ('M', 6, 7, 115, 135, 150, 'METERS', NULL, 7), -- Standweitsprung --
+       ('M', 6, 7, 115, 135, 150, 'METERS', NULL, 7),                             -- Standweitsprung --
        ('M', 8, 9, 130, 150, 165, 'METERS', NULL, 7),
        ('M', 10, 11, 150, 170, 185, 'METERS', NULL, 7),
        ('M', 12, 13, 170, 190, 205, 'METERS', NULL, 7),
@@ -128,7 +168,7 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 155, 170, 190, 'METERS', NULL, 7),
        ('W', 16, 17, 165, 180, 200, 'METERS', NULL, 7),
 
-       ('M', 6, 7, 1, 2, 3, 'POINTS', 'Boden', 8), -- Geräteturnen Kraft --
+       ('M', 6, 7, 1, 2, 3, 'POINTS', 'Boden', 8),                                -- Geräteturnen Kraft --
        ('M', 8, 9, 1, 2, 3, 'POINTS', 'Boden', 8),
        ('M', 10, 11, 1, 2, 3, 'POINTS', 'Barren', 8),
        ('M', 12, 13, 1, 2, 3, 'POINTS', 'Reck', 8),
@@ -142,7 +182,7 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 1, 2, 3, 'POINTS', 'Boden', 8),
        ('W', 16, 17, 1, 2, 3, 'POINTS', 'Reck', 8),
 
-       ('M', 6, 7, 77, 68, 60, 'SECONDS', '30 m', 9), -- Laufen: Sprint --
+       ('M', 6, 7, 77, 68, 60, 'SECONDS', '30 m', 9),                             -- Laufen: Sprint --
        ('M', 8, 9, 72, 64, 57, 'SECONDS', '30 m', 9),
        ('M', 10, 11, 103, 93, 84, 'SECONDS', '50 m', 9),
        ('M', 12, 13, 97, 89, 81, 'SECONDS', '50 m', 9),
@@ -156,7 +196,7 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 186, 170, 155, 'SECONDS', '100 m', 9),
        ('W', 16, 17, 176, 163, 150, 'SECONDS', '100 m', 9),
 
-       ('M', 6, 7, 460, 380, 300, 'SECONDS', NULL, 10), -- 25 m Schwimmen --
+       ('M', 6, 7, 460, 380, 300, 'SECONDS', NULL, 10),                           -- 25 m Schwimmen --
        ('M', 8, 9, 410, 330, 260, 'SECONDS', NULL, 10),
        ('M', 10, 11, 360, 290, 225, 'SECONDS', NULL, 10),
        ('M', 12, 13, 330, 270, 210, 'SECONDS', NULL, 10),
@@ -184,7 +224,7 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTES', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 270, 245, 215, 'SECONDS', NULL, 11),
        ('W', 16, 17, 250, 225, 200, 'SECONDS', NULL, 11),
 
-       ('M', 6, 7, 1, 2, 3, 'POINTS', 'Sprung', 12), -- Geräteturnen Schnelligkeit --
+       ('M', 6, 7, 1, 2, 3, 'POINTS', 'Sprung', 12),                              -- Geräteturnen Schnelligkeit --
        ('M', 8, 9, 1, 2, 3, 'POINTS', 'Boden', 12),
        ('M', 10, 11, 1, 2, 3, 'POINTS', 'Sprung', 12),
        ('M', 12, 13, 1, 2, 3, 'POINTS', 'Sprung', 12),

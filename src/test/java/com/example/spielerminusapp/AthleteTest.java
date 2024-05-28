@@ -47,9 +47,9 @@ public class AthleteTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("Markus"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Siegert"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("markus.siegert@mail.com"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.dob").value("2008-01-26"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Schmidt"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("markus.schmidt@mail.com"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.dob").value("2012-01-26"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.sex").value("M"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("masi2006"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("pass4Masi"))
@@ -63,9 +63,9 @@ public class AthleteTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName").value("Markus"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].lastName").value("Siegert"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].email").value("markus.siegert@mail.com"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].dob").value("2008-01-26"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].lastName").value("Schmidt"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].email").value("markus.schmidt@mail.com"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].dob").value("2012-01-26"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].sex").value("M"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].username").value("masi2006"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].password").value("pass4Masi"))
@@ -74,7 +74,7 @@ public class AthleteTest {
 
     @Test
     public void testGetAthleteByLastName() throws Exception {
-        String lastName="Siegert";
+        String lastName="Schmidt";
         MvcResult result = mockMvc.perform(get("/athletes/search").param("lastName",lastName))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -90,12 +90,12 @@ public class AthleteTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName").value("Markus"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].lastName").value("Siegert"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].email").value("markus.siegert@mail.com"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].dob").value("2008-01-26"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].lastName").value("Schmidt"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].email").value("markus.schmidt@mail.com"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].dob").value("2012-01-26"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].sex").value("M"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].username").value("masi2006"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].password").value("pass4Masi"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].password").value("$2a$12$EV3sZWrj5yPLP4aswTmSMesBDDSkMdTshpNdQpq6rTYSKPgOLLTmS"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].role").value("ATHLETE"));
     }
     @Test
@@ -104,9 +104,9 @@ public class AthleteTest {
         Athlete updatedAthlete = new Athlete();
         updatedAthlete.setId(1L);
         updatedAthlete.setFirstName("Markus");
-        updatedAthlete.setLastName("Siegert");
-        updatedAthlete.setEmail("markus.siegert@mail.com");
-        updatedAthlete.setDob(LocalDate.of(2008, 1, 26));
+        updatedAthlete.setLastName("Schmidt");
+        updatedAthlete.setEmail("markus.schmidt@mail.com");
+        updatedAthlete.setDob(LocalDate.of(2012, 1, 26));
         updatedAthlete.setSex("M");
         updatedAthlete.setUsername("masi2006");
         updatedAthlete.setPassword("pass4Masi");
@@ -123,9 +123,9 @@ public class AthleteTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("Markus"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Siegert"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("markus.siegert@mail.com"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.dob").value("2008-01-26"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Schmidt"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("markus.schmidt@mail.com"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.dob").value("2012-01-26"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.sex").value("M"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("masi2006"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("pass4Masi"))
