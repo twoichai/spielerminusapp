@@ -1,6 +1,5 @@
 package com.example.spielerminusapp.service;
 
-import com.example.spielerminusapp.model.Athlete;
 import com.example.spielerminusapp.model.csvmodels.CompletedExerciseCsvRepresentation;
 import com.example.spielerminusapp.model.enums.Medal;
 import com.example.spielerminusapp.model.exercise.CompletedExercise;
@@ -87,6 +86,10 @@ public class CompletedExerciseService {
 
     public Optional getCompletedExercise(Long id) {
         return completedExerciseRepository.findById(id);
+    }
+
+    public List<CompletedExercise> getCompletedExercisesByAthleteIdAndExerciseId(Long athleteId, Long exerciseId) {
+        return completedExerciseRepository.findByAthleteIdAndExerciseIdOrderByDateOfCompletionDesc(athleteId, exerciseId);
     }
 
     @Transactional

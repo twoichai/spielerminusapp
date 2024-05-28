@@ -2,7 +2,6 @@ package com.example.spielerminusapp.controller;
 
 import com.example.spielerminusapp.model.Athlete;
 import com.example.spielerminusapp.service.AthleteService;
-import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
@@ -10,16 +9,16 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.io.OutputStream;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
@@ -30,7 +29,6 @@ public class AthleteController {
     private final AthleteService athleteService;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     @Autowired
     public AthleteController(AthleteService athleteService) {
@@ -99,4 +97,30 @@ public class AthleteController {
         writer.write(athleteService.findAll());
 
    }
+
+    @GetMapping("/einzelpruefkarte/{id}")
+    public void exportEinzelpruefkarte(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        // Generate the PDF file
+        athleteService.createPruefkartePDF(id);
+
+        // Specify the path to the generated PDF file
+        String filename = "src/main/resources/pdf/pruefkarte.pdf";
+        File file = new File(filename);
+
+        // Set response headers
+        response.setContentType("application/pdf");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"pruefkarte.pdf\"");
+        response.setContentLength((int) file.length());
+
+        // Write the PDF file to the response output stream
+        try (FileInputStream fis = new FileInputStream(file);
+             OutputStream os = response.getOutputStream()) {
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.flush();
+        }
+    }
 }

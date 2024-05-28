@@ -16,16 +16,22 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import com.itextpdf.forms.PdfAcroForm;
+import com.itextpdf.forms.fields.PdfFormField;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.kernel.pdf.PdfWriter;
 
 @Service
 public class AthleteService {
 
     private final AthleteRepository athleteRepository;
+
+    @Autowired
+    private  CompletedExerciseService completedExerciseService;
     private final PasswordEncoder passwordEncoder;
     private final RandomPasswordGenerator randomPasswordGenerator;
 
@@ -156,5 +162,78 @@ public class AthleteService {
             }
         }
         throw new IllegalArgumentException("Date format not supported: " + dateStr);
+    }
+
+    public void createPruefkartePDF(Long athleteId) throws IOException {
+        Athlete athlete = athleteRepository.getReferenceById(athleteId);
+        String src = "src/main/resources/pdf/DSA_Einzelpruefkarte_2024_FORMULAR_neu.pdf";
+        String dest = "src/main/resources/pdf/pruefkarte.pdf";
+
+        String atlerDasErreichtWird = Integer.toString(LocalDate.now().getYear() - athlete.getDob().getYear());
+
+        PdfDocument pdfDoc = new PdfDocument(new PdfReader(src), new PdfWriter(dest));
+        PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
+        Map<String, PdfFormField> fields = form.getFormFields();
+        System.out.println(fields.toString());
+
+        fields.get("Nachname").setValue(athlete.getLastName());
+        fields.get("Vorname").setValue(athlete.getFirstName());
+        fields.get("TTMMJJJJ").setValue(athlete.getDob().format(DateTimeFormatter.BASIC_ISO_DATE).toString());
+        fields.get("Telefon / E-Mail").setValue(athlete.getEmail());
+        fields.get("Geschlecht w  m").setValue(athlete.getSex().toLowerCase());
+        fields.get("Alter das im Kalenderjahr erreicht wird").setValue(atlerDasErreichtWird);
+        fields.get("0").setValue(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE).substring(2,4));//jahr der prüfung
+        fields.get("Wert").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 1L).get(0).getResult());//Laufen
+        fields.get("Wert_2").setValue("");//10 km Lauf
+        fields.get("Wert_3").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 2L).get(0).getResult());//Dauergeländelauf
+        fields.get("Wert_4").setValue("");//Nordicwalking
+        fields.get("Punkte Ausdauer").setValue("");
+        fields.get("Wert_5").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 3L).get(0).getResult());//Schwimmen
+        fields.get("Wert_6").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 4L).get(0).getResult());//Radfahren
+
+        fields.get("Wert_7").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 5L).get(0).getResult());//Schlagball
+        fields.get("Wert_8").setValue("");//Medizinball
+        fields.get("Wert_9").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 6L).get(0).getResult());//Kugelstossen
+        fields.get("Wert_10").setValue("");//Steinstossen
+        fields.get("Punkte Kraft").setValue("");
+        fields.get("Wert_11").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 7L).get(0).getResult());//standweitsprung
+        fields.get("Übung 627").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 8L).get(0).getResult());//Gerätturnen 6.2.7
+
+
+        fields.get("Wert_12").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 9L).get(0).getResult()); //laufen
+        fields.get("Wert_13").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 10L).get(0).getResult()); //schwimmen
+        fields.get("Wert_14").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 11L).get(0).getResult()); //radfahren
+        fields.get("Punkte Schnelligkeit").setValue("");
+        fields.get("Übung 634").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 12L).get(0).getResult());//Gerätturnen 6.3.4
+
+
+        fields.get("Wert_15").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 13L).get(0).getResult()); //hochsprung
+        fields.get("Wert_16").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 14L).get(0).getResult()); //weitsprung
+        fields.get("Wert_17").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 15L).get(0).getResult()); //zonenweitsprung
+        fields.get("Wert_18").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 16L).get(0).getResult()); //drehwurf
+        fields.get("Wert_19").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 17L).get(0).getResult()); //schleuderball
+        fields.get("Punkte Koordination").setValue("");
+        fields.get("Ergänzung").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 19L).get(0).getResult());//Gerätturnen 6.4.7 for some reason called ergänzung :D
+
+        fields.get("Anzahl 2").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 18L).get(0).getResult()); //seilspringen
+
+
+        if(athlete.isSchwimmnachweis()) {
+            fields.get("Nachweis der Schwimmfertigkeit liegt vor").setValue("Yes");
+        } else {
+            fields.get("Nachweis der Schwimmfertigkeit liegt vor").setValue("Off");
+        }
+
+        fields.get("Ausstellungsdatum").setValue(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE).toString());
+        fields.get("Kinder und Jugendliche").setValue("Yes");
+
+        fields.get("GESAMTPUNKTZAHL").setValue("");
+
+        fields.get("Bronze").setValue("Yes");
+        fields.get("Silber").setValue("Yes");
+        fields.get("Gold").setValue("Yes");
+
+        form.flattenFields();
+        pdfDoc.close();
     }
 }
