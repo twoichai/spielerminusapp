@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-
 @RequestMapping("/user/user-details")
 public class UserController {
 

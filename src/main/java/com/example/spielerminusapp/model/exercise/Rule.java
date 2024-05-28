@@ -46,5 +46,4 @@ public class Rule {
     @JsonBackReference
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
-
 }
