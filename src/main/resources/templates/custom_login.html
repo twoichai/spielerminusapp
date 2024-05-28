@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="static/logo_round.png">
+  <link rel="shortcut icon" href="pictures/logo_round.png">
   #<title>Login</title>
   <style>
     body {
       font-family: Montserrat, sans-serif;
-      background-color: deepskyblue;
+      background-color: rgba(95, 194, 206, 0.87);
       margin: 0;
       padding: 0;
       display: flex;
@@ -26,7 +26,6 @@
       width: 400px;
       padding: 40px;
       transform: translate(-50%, -50%);
-      background: white;
       box-sizing: border-box;
       box-shadow: 0 15px 25px rgba(0,0,0,.6);
       border-radius: 10px;
@@ -48,36 +47,76 @@
       padding: 10px;
       margin-bottom: 16px;
       box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
+    input:focus {
+      border-color: #55608f;
+      box-shadow: 0 0 5px rgba(85, 96, 143, 0.5);
+      outline: none;
+    }
+
+
     .custom-button {
-      background-color: #4caf50;
+      background-color: #55608f;
       color: #fff;
-      padding: 10px;
+      padding: 13px;
+      font-size: 15px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       width: 100%;
+      position: relative;
+      overflow: hidden; /* Ensure the ripple effect stays within the button bounds */
+      transition: background-color 0.4s ease, transform 0.2s ease;
     }
 
+    /* Hover effect */
     .custom-button:hover {
-      background-color: #45a049;
+      background-color: #FF4500;
+      transform: scale(1.02); /* Slightly enlarge the button on hover */
     }
-  </style>
+
+    /* Click effect with ripple */
+    .custom-button:active::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Ripple animation */
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+</style>
 </head>
 <body>
 <div class="login-container">
-  <h2>Login</h2>
+  <h2>Anmeldung</h2>
   <form id="login-form" action="/login" method="post">
     <div>
-      <label for="username">Username:</label>
+      <label for="username">Zugangsname:</label>
       <input type="text" id="username" name="username" required>
     </div>
     <div>
-      <label for="password">Password:</label>
+      <label for="password">Passwort:</label>
       <input type="password" id="password" name="password" required>
     </div>
-    <button class="custom-button" type="submit">Login</button>
+    <button class="custom-button" type="submit">Weiter</button>
   </form>
 </div>
 

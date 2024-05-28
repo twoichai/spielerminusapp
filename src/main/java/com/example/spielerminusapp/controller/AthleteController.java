@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/athletes")
@@ -96,6 +97,29 @@ public class AthleteController {
         writer.write(athleteService.findAll());
 
    }
+    @GetMapping("/export/{id}")
+    public ResponseEntity<Void> exportAthleteCSVById(@PathVariable Long id, HttpServletResponse httpServletResponse) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
+        Optional<Athlete> optionalAthlete = athleteService.findById(id);
+
+        if (optionalAthlete.isPresent()) {
+            Athlete athlete = optionalAthlete.get();
+            String firstName = athlete.getFirstName();
+            String lastName = athlete.getLastName();
+            String filename = firstName + "-"+ lastName + "-export.csv";
+            httpServletResponse.setContentType("text/csv");
+            httpServletResponse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"");
+
+            StatefulBeanToCsv<Athlete> writer = new StatefulBeanToCsvBuilder<Athlete>(httpServletResponse.getWriter())
+                    .withSeparator(';')
+                    .build();
+
+            writer.write(athlete);
+
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @GetMapping("/einzelpruefkarte/{id}")
     public void exportEinzelpruefkarte(@PathVariable Long id, HttpServletResponse response) throws IOException {
