@@ -76,6 +76,48 @@
 
         </div>
     </div>
+    <div style="visibility: hidden; width: 100%" id="uebungskatalog-detail-values" class="uebungskatalog-detail-values uebungskatalog-detail">
+        <div class="uebungskatalog-detail-values__header uebungskatalog-detail__header">
+            <div class="uebungskatalog-detail-values__title uebungskatalog-detail__title">
+                <h3 id="uebungskatalog-detail-values__title">Error</h3>
+            </div>
+        </div>
+        <div style="overflow-y: scroll; direction: ltr; max-height: calc(100vh - 119px); min-width: 100%; padding: 20px" id="uebungskatalog-detail-values__main" class="uebungskatalog-detail-values__main">
+
+        </div>
+    </div>
+</template>
+<template id="uebungskatalog-table-value">
+    <div class="uebungskatalog-table__header">
+        <h3 id="uebungskatalog-table__header"></h3>
+    </div>
+    <div id="main-table-section" class="uebbungskatalog-table__main">
+        <table id="uebungskatalog-table__main">
+            <thead>
+            <tr>
+                <th class="tableHeader">Alter</th>
+                <th class="tableHeader">Geschlecht</th>
+                <th class="tableHeader">Einheit</th>
+                <th class="tableHeader">Bronze</th>
+                <th class="tableHeader">Silber</th>
+                <th class="tableHeader">Gold</th>
+            </tr>
+            </thead>
+            <tbody id="uebungskatalog-table__body">
+
+            </tbody>
+        </table>
+    </div>
+</template>
+<template id="tableRow">
+    <tr>
+        <td contenteditable="true" id="age"></td>
+        <td contenteditable="true" id="gender"></td>
+        <td contenteditable="true" id="metric"></td>
+        <td contenteditable="true" id="bronze"></td>
+        <td contenteditable="true" id="silver"></td>
+        <td contenteditable="true" id="gold"></td>
+    </tr>
 </template>
 <template id="uebungskatalog-ausdauer-kinder">
     <div  class="uebungskatalog-list">
@@ -116,8 +158,8 @@
 <template id="uebungskatalog-kraft-kinder">
     <div  class="uebungskatalog-list">
         <div class="uebungskatalog-list__ausdauer">
-            <button class="uebungskatalog-list__button" id="kraft-werfer">
-                <span class="uebungskatalog-list__text">Werfer</span>
+            <button class="uebungskatalog-list__button" id="kraft-werfen">
+                <span class="uebungskatalog-list__text">Werfen</span>
                 <svg class="uebungskatalog-list__icon">
                     <use href="images/icons/pointer-icon.svg#Layer_1"></use>
                 </svg>

@@ -25,7 +25,6 @@ changeButton.addEventListener("click", evt => {
     const main = document.getElementById("main");
     main.appendChild(popUp);
 });*/
-import Chart from 'chart.js/auto';
 
 let _currentActive = null;
 let _currentActiveNav = null;
@@ -596,7 +595,221 @@ function createUebungskatalogDetail(typ, uebersicht) {
     }
 
     uebersicht.innerHTML = detail.innerHTML;
+    uebersicht.addEventListener("click", showUebungskatalogTable);
 }
+
+function showUebungskatalogTable(evt) {
+    const ausdauerLaufen = document.getElementById("ausdauer-800-meter");
+    const ausdauerDauerlaufen = document.getElementById("ausdauer-dauerlauf");
+    const ausdauerSchwimmen = document.getElementById("ausdauer-schwimmen");
+    const ausdauerRadfahren = document.getElementById("ausdauer-radfahren");
+    const kraftWerfen = document.getElementById("kraft-werfen");
+    const kraftKugelstoßen = document.getElementById("kraft-kugelstoßen");
+    const kraftStandweitsprung = document.getElementById("kraft-standweitsprung");
+    const kraftGeräteturnen = document.getElementById("kraft-geräteturnen");
+    const schnelligkeitLaufen = document.getElementById("schnelligkeit-laufen");
+    const schnelligkeitSchwimmen = document.getElementById("schnelligkeit-25m-schwimmen");
+    const schnelligkeitRadfahren = document.getElementById("schnelligkeit-200m-radfahren");
+    const schnelligkeitGeräteturnen = document.getElementById("schnelligkeit-geräteturnen");
+    const koordinationHochsprung = document.getElementById("koordination-hochsprung");
+    const koordinationWeitsprung = document.getElementById("koordination-Weitsprung");
+    const koordinationZonenweitsprung = document.getElementById("koordination-Zonenweitsprung");
+    const koordinationDrehwurf = document.getElementById("koordination-Drehwurf");
+    const koordinationSchleuderball = document.getElementById("koordination-Schleuderball");
+    const koordinationSeilsprigen = document.getElementById("koordination-Seilspringen");
+    const koordinationGeräteturnen = document.getElementById("koordination-Geräteturnen");
+    const detailsTitle= document.getElementById("uebungskatalog-detail-values__title");
+
+    let typ, id;
+
+    if (ausdauerLaufen != null && ausdauerLaufen.contains(evt.target)) {
+        typ = "AUSDAUER"
+        id = 1;
+        detailsTitle.textContent = "Laufen";
+    }
+    if (ausdauerDauerlaufen != null && ausdauerDauerlaufen.contains(evt.target)) {
+        typ = "AUSDAUER"
+        id = 2;
+        detailsTitle.textContent = "Dauerlaufen";
+    }
+    if (ausdauerSchwimmen != null && ausdauerSchwimmen.contains(evt.target)) {
+        typ = "AUSDAUER"
+        id = 3;
+        detailsTitle.textContent = "Schwimmen";
+    }
+    if (ausdauerRadfahren != null && ausdauerRadfahren.contains(evt.target)) {
+        typ = "AUSDAUER"
+        id = 4;
+        detailsTitle.textContent = "Radfahren";
+    }
+    if (kraftWerfen != null && kraftWerfen.contains(evt.target)) {
+        typ = "KRAFT"
+        id = 5;
+        detailsTitle.textContent = "Werfen";
+    }
+    if (kraftKugelstoßen != null && kraftKugelstoßen.contains(evt.target)) {
+        typ = "KRAFT"
+        id = 6;
+        detailsTitle.textContent = "Kugelstoßen";
+    }
+    if (kraftStandweitsprung != null && kraftStandweitsprung.contains(evt.target)) {
+        typ = "KRAFT"
+        id = 7;
+        detailsTitle.textContent = "Standweitsprung";
+    }
+    if (kraftGeräteturnen != null && kraftGeräteturnen.contains(evt.target)) {
+        typ = "KRAFT"
+        id = 8;
+        detailsTitle.textContent = "Geräteturnen";
+    }
+    if (schnelligkeitLaufen != null && schnelligkeitLaufen.contains(evt.target)) {
+        typ = "SCHNELLIGKEIT"
+        id = 9;
+        detailsTitle.textContent = "Laufen";
+    }
+    if (schnelligkeitSchwimmen != null && schnelligkeitSchwimmen.contains(evt.target)) {
+        typ = "SCHNELLIGKEIT"
+        id = 10;
+        detailsTitle.textContent = "Schwimmen";
+    }
+    if (schnelligkeitRadfahren != null && schnelligkeitRadfahren.contains(evt.target)) {
+        typ = "SCHNELLIGKEIT"
+        id = 11;
+        detailsTitle.textContent = "Radfahren";
+    }
+    if (schnelligkeitGeräteturnen != null && schnelligkeitGeräteturnen.contains(evt.target)) {
+        typ = "SCHNELLIGKEIT"
+        id = 12;
+        detailsTitle.textContent = "Geräteturnen";
+    }
+    if (koordinationHochsprung != null && koordinationHochsprung.contains(evt.target)) {
+        typ = "KOORDINATION"
+        id = 13;
+        detailsTitle.textContent = "Hochsprung";
+    }
+    if (koordinationWeitsprung != null && koordinationWeitsprung.contains(evt.target)) {
+        typ = "KOORDINATION"
+        id = 14;
+        detailsTitle.textContent = "Weitsprung";
+    }
+    if (koordinationZonenweitsprung != null && koordinationZonenweitsprung.contains(evt.target)) {
+        typ = "KOORDINATION"
+        id = 15;
+        detailsTitle.textContent = "Zonenweitsprung";
+    }
+    if (koordinationDrehwurf != null && koordinationDrehwurf.contains(evt.target)) {
+        typ = "KOORDINATION"
+        id = 16;
+        detailsTitle.textContent = "Drehwurf";
+    }
+    if (koordinationSchleuderball != null && koordinationSchleuderball.contains(evt.target)) {
+        typ = "KOORDINATION"
+        id = 17;
+        detailsTitle.textContent = "Schleuderball";
+    }
+    if (koordinationSeilsprigen != null && koordinationSeilsprigen.contains(evt.target)) {
+        typ = "KOORDINATION"
+        id = 18;
+        detailsTitle.textContent = "Seilspringen";
+    }
+    if (koordinationGeräteturnen != null && koordinationGeräteturnen.contains(evt.target)) {
+        typ = "KOORDINATION"
+        id = 19;
+        detailsTitle.textContent = "Geräteturnen";
+    }
+
+    axios.get("/athletes/exercises",
+        {
+
+        }).then(response => {
+        if(response.status == 200)
+        {
+            for (let item of response.data) {
+                if(item.id == id) {
+                    createUebungskatalogDetailTable(item);
+                }
+            }
+        }
+    });
+}
+
+function createUebungskatalogDetailTable(typ) {
+    let mainTable, table, helperTable, tableRow;
+    let label = null;
+
+    const detailedSection = document.getElementById("uebungskatalog-detail-values__main");
+    document.getElementById("uebungskatalog-detail-values").style.visibility = "visible";
+
+    let tableTemplate = document.getElementById("uebungskatalog-table-value");
+    helperTable = document.importNode(tableTemplate.content, true);
+
+    mainTable = helperTable.getElementById("uebungskatalog-table__main");
+    table = helperTable.getElementById("uebungskatalog-table__body");
+
+    const details = document.getElementById("uebungskatalog-table__header");
+
+    for (let item of typ.rule) {
+        if(item.label == label) {
+            let tableRowTemplate = document.getElementById("tableRow");
+            tableRow = document.importNode(tableRowTemplate.content, true);
+            if(item.valueBronze != 0) {
+                createTableRow(tableRow, item);
+            }
+        }
+        else if(item.label != label) {
+            item.label = label;
+            details.textContent = "Details: " +label;
+
+            let tableTemplate = document.getElementById("uebungskatalog-table-value");
+            helperTable = document.importNode(tableTemplate.content, true);
+
+            mainTable = helperTable.getElementById("uebungskatalog-table__main");
+            table = helperTable.getElementById("uebungskatalog-table__body");
+
+            let tableRowTemplate = document.getElementById("tableRow");
+            tableRow = document.importNode(tableRowTemplate.content, true);
+            createTableRow(tableRow, item)
+        }
+        table.appendChild(tableRow);
+        mainTable.appendChild(table);
+        console.log(mainTable);
+        helperTable.getElementById("main-table-section").replaceChildren(mainTable);
+    }
+    detailedSection.innerHTML = "";
+    detailedSection.appendChild(helperTable);
+}
+function convertTime(input) {
+    let finalTime
+    if(input.length % 2 == 0) {
+        finalTime = input[0] + input[1] + ":" + input[2] + input[3];
+    }
+    else {
+        finalTime = input[0] + ":" + input[1] + input[2];
+    }
+    return finalTime;
+}
+
+function createTableRow(tableRow, item) {
+    let convert;
+
+    tableRow.getElementById("age").textContent = String(item.fromAge) + " - " + String(item.toAge);
+    tableRow.getElementById("gender").textContent = item.gender;
+    tableRow.getElementById("metric").textContent = item.metric;
+    if (item.metric == "MINUTES") {
+        converter = convertTime(item.valueBronze.toString());
+        tableRow.getElementById("bronze").textContent = converter;
+        converter = convertTime(item.valueSilver.toString());
+        tableRow.getElementById("silver").textContent = converter;
+        converter = convertTime(item.valueGold.toString());
+        tableRow.getElementById("gold").textContent = converter;
+    } else {
+        tableRow.getElementById("bronze").textContent = item.valueBronze;
+        tableRow.getElementById("silver").textContent = item.valueSilver;
+        tableRow.getElementById("gold").textContent = item.valueGold;
+    }
+
+}
+
 
 function selectActivePlayerCard(playerCardDom, playerCard) {
     const overview = document.getElementById("playerCard-detail");
