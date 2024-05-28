@@ -774,7 +774,7 @@ function createUebungskatalogDetailTable(typ) {
         }
       } else if (item.label != label) {
         item.label = label;
-        details.textContent += label;
+        details.textContent = "Details: " + label;
         var _tableTemplate = document.getElementById("uebungskatalog-table-value");
         helperTable = document.importNode(_tableTemplate.content, true);
         mainTable = helperTable.getElementById("uebungskatalog-table__main");
