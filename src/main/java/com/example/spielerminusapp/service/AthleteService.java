@@ -178,7 +178,7 @@ public class AthleteService {
 
         fields.get("Nachname").setValue(athlete.getLastName());
         fields.get("Vorname").setValue(athlete.getFirstName());
-        fields.get("TTMMJJJJ").setValue(athlete.getDob().format(DateTimeFormatter.BASIC_ISO_DATE).toString());
+        fields.get("TTMMJJJJ").setValue(new StringBuilder(athlete.getDob().format(DateTimeFormatter.BASIC_ISO_DATE).toString()).reverse().toString());
         fields.get("Telefon / E-Mail").setValue(athlete.getEmail());
         fields.get("Geschlecht w  m").setValue(athlete.getSex().toLowerCase());
         fields.get("Alter das im Kalenderjahr erreicht wird").setValue(atlerDasErreichtWird);
