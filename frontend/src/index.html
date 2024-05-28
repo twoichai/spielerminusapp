@@ -9,7 +9,7 @@
     <script src="scripts/main.js"></script>
 
     <!--Zu entfernen bei Release!-->
-    <link rel="shortcut icon" href="images/icons/pointer-icon.svg#Layer_1">
+    <link rel="shortcut icon" href="images/icons/logo_round.png">
     <!--Zu entfernen bei Release!-->
 
 </head>
@@ -94,14 +94,14 @@
     <div id="main-table-section" class="uebbungskatalog-table__main">
         <table id="uebungskatalog-table__main">
             <thead>
-                <tr>
-                    <th class="tableHeader">Alter</th>
-                    <th class="tableHeader">Geschlecht</th>
-                    <th class="tableHeader">Einheit</th>
-                    <th class="tableHeader">Bronze</th>
-                    <th class="tableHeader">Silber</th>
-                    <th class="tableHeader">Gold</th>
-                </tr>
+            <tr>
+                <th class="tableHeader">Alter</th>
+                <th class="tableHeader">Geschlecht</th>
+                <th class="tableHeader">Einheit</th>
+                <th class="tableHeader">Bronze</th>
+                <th class="tableHeader">Silber</th>
+                <th class="tableHeader">Gold</th>
+            </tr>
             </thead>
             <tbody id="uebungskatalog-table__body">
 
@@ -166,7 +166,7 @@
             </button>
         </div>
         <div class="uebungskatalog-list__kraft">
-            <button class="uebungskatalog-list__button" id="kraft-kugelstoßen">
+            <button class="uebungskatalog-list__button" id="kraft-kugelstossen">
                 <span class="uebungskatalog-list__text">Kugelstoßen</span>
                 <svg class="uebungskatalog-list__icon">
                     <use href="images/icons/pointer-icon.svg#Layer_1"></use>
@@ -182,7 +182,7 @@
             </button>
         </div>
         <div class="uebungskatalog-list__koordination">
-            <button class="uebungskatalog-list__button" id="kraft-geräteturnen">
+            <button class="uebungskatalog-list__button" id="kraft-geraeteturnen">
                 <span class="uebungskatalog-list__text">Geräteturnen</span>
                 <svg class="uebungskatalog-list__icon">
                     <use href="images/icons/pointer-icon.svg#Layer_1"></use>
@@ -218,7 +218,7 @@
             </button>
         </div>
         <div class="uebungskatalog-list__koordination">
-            <button class="uebungskatalog-list__button" id="schnelligkeit-geräteturnen">
+            <button class="uebungskatalog-list__button" id="schnelligkeit-geraeteturnen">
                 <span class="uebungskatalog-list__text">Geräteturnen</span>
                 <svg class="uebungskatalog-list__icon">
                     <use href="images/icons/pointer-icon.svg#Layer_1"></use>
@@ -278,7 +278,7 @@
             </button>
         </div>
         <div class="uebungskatalog-list__koordination">
-            <button class="uebungskatalog-list__button" id="koordination-Geräteturnen">
+            <button class="uebungskatalog-list__button" id="koordination-Geraeteturnen">
                 <span class="uebungskatalog-list__text">Geräteturnen</span>
                 <svg class="uebungskatalog-list__icon">
                     <use href="images/icons/pointer-icon.svg#Layer_1"></use>
@@ -388,7 +388,7 @@
                         <h4>Ausdauer</h4>
                     </div>
                     <div class="attribute-call-for-action">
-                        <canvas id="ausdauer-chart" style="width: 400px; height: 400px" role="img"></canvas>
+                        <p>Tippe hier, um eine Leistung hinzuzufügen</p>
                     </div>
                 </div>
                 <div class="attribute attribute-kraft">
@@ -484,9 +484,8 @@
                         </div>
                         <div class="form-item form-gender">
                             <select id="change-section-gender" class="form-item__input" name="gender" aria-required="true">
-                                <option value="männlich">Männlich</option>
-                                <option value="weiblich">Weiblich</option>
-                                <option value="divers">Divers</option>
+                                <option value="M">Männlich</option>
+                                <option value="W">Weiblich</option>
                             </select>
                             <label for="change-section-gender" class="form-item__micro">Geschlecht</label>
                         </div>
@@ -530,7 +529,7 @@
                         <use href="images/icons/upscend-icon.svg#Layer_1"></use>
                     </svg>
                 </div>
-                <div class="change-button__text">Aufsteigend</div>
+                <div class="change-button__text">Vorname</div>
             </div>
             <div id="filter-absteigend-button" class="delete-button">
                 <div class="delete-button__icon">
@@ -538,7 +537,39 @@
                         <use href="images/icons/descend-icon.svg#Layer_1"></use>
                     </svg>
                 </div>
-                <div class="delete-button__text">Absteigend</div>
+                <div class="delete-button__text">Vorname</div>
+            </div>
+            <div id="filter-aufsteigend-lastname-button" class="change-button">
+                <div class="change-button__icon">
+                    <svg viewBox="0 0 24 24" width="24px">
+                        <use href="images/icons/upscend-icon.svg#Layer_1"></use>
+                    </svg>
+                </div>
+                <div class="change-button__text">Nachname</div>
+            </div>
+            <div id="filter-absteigend-lastname-button" class="delete-button">
+                <div class="delete-button__icon">
+                    <svg viewBox="0 0 24 24" width="24px">
+                        <use href="images/icons/descend-icon.svg#Layer_1"></use>
+                    </svg>
+                </div>
+                <div class="delete-button__text">Nachname</div>
+            </div>
+            <div id="filter-aufsteigend-birthday-button" class="change-button">
+                <div class="change-button__icon">
+                    <svg viewBox="0 0 24 24" width="24px">
+                        <use href="images/icons/upscend-icon.svg#Layer_1"></use>
+                    </svg>
+                </div>
+                <div class="change-button__text">Geburtstag</div>
+            </div>
+            <div id="filter-absteigend-birthday-button" class="delete-button">
+                <div class="delete-button__icon">
+                    <svg viewBox="0 0 24 24" width="24px">
+                        <use href="images/icons/descend-icon.svg#Layer_1"></use>
+                    </svg>
+                </div>
+                <div class="delete-button__text">Geburtstag</div>
             </div>
         </div>
     </div>
@@ -579,12 +610,12 @@
             <div id="csv-button" class="delete-button">
                 <input id="add-player-csv" type="file" id="athlete" name="athlete" accept=".csv">
                 <label for="add-player-csv" class="add-player-csv__label">
-                        <div class="delete-button__icon">
-                            <svg viewBox="0 0 24 24" width="24px">
-                                <use href="images/icons/csv-icon.svg#Layer_1"></use>
-                            </svg>
-                        </div>
-                    <div class="change-button__text">Athleten expotieren</div>
+                    <div class="delete-button__icon">
+                        <svg viewBox="0 0 24 24" width="24px">
+                            <use href="images/icons/csv-icon.svg#Layer_1"></use>
+                        </svg>
+                    </div>
+                    <div class="change-button__text">Athleten importieren</div>
                 </label>
             </div>
             <div id="export-csv-button" class="delete-button">
@@ -607,18 +638,21 @@
                 </div>
                 <div class="header-nav">
                     <div class="header-nav__button">
-                        <button class="call-us header-nav__button" role="button" type="button">
-                            <span class="button__text">
-                                Call Us
-                            </span>
-                        </button>
+                        <a class="call-us header-nav__button" role="button">
+                        <span class="button__text">
+                             Unsere Informationen
+                        </span>
+                        </a>
+                    </div>
+                    <div class="nav-button__text">
+                        /
                     </div>
                     <div class="header-nav__button">
-                        <button class="my-profile header-nav__button" role="button" type="button">
-                            <span class="button__text">
-                                My Profile
-                            </span>
-                        </button>
+                        <a class="my-profile header-nav__button" role="button" href="/logout">
+                        <span class="button__text">
+                             Abmelden
+                        </span>
+                        </a>
                     </div>
                 </div>
             </div>
