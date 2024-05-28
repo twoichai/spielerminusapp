@@ -1,4 +1,4 @@
-Name;Vorname;Geschlecht;Geburtsjahr;Geburtstag;Übung;Kategorie;Datum;Ergebnis;Punkte;DBS
+Name;Vorname;Geschlecht;Geburtsjahr;Geburtstag;Uebung;Kategorie;Datum;Ergebnis;Punkte;DBS
 H;Colin;M;2005;;800 m Lauf;Ausdauer;21.10.2020;03:00;3;Nein
 H;Colin;M;2005;;800 m Lauf;Ausdauer;21.10.2020;03:00;3;Nein
 H;Colin;M;2005;;Standweitsprung;Kraft;21.10.2020;2,40;3;Nein
@@ -30,28 +30,28 @@ Gr;Mya;W;2014;;30 m Laufen;Schnelligkeit;21.10.2020;7,7;1;Nein
 P;Marlene;W;2014;;800 m Lauf;Ausdauer;21.10.2020;05:19;1;Nein
 P;Marlene;W;2014;;Standweitsprung;Kraft;21.10.2020;1,49;3;Nein
 P;Marlene;W;2014;;30 m Laufen;Schnelligkeit;21.10.2020;7,2;1;Nein
-R;Emma;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;28.10.2020;22;2;Nein
-R;Emma;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;28.10.2020;5;0;Nein
-R;Emma;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;28.10.2020;3;0;Nein
-G;Fayola;W;2009;;Seilspringen (Grundsprung Vorwärts);Koordination;30.10.2020;59;3;Nein
-K;Anna;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;30.10.2020;20;2;Nein
-Z;Marta;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;30.10.2020;47;3;Nein
-K;Anna;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;30.10.2020;20;2;Nein
-Z;Marta;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;30.10.2020;1;0;Nein
-Z;Marta;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;30.10.2020;32;3;Nein
-K;Anna;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;30.10.2020;14;1;Nein
-Go;Thea;W;2012;;Seilspringen (Grundsprung Vorwärts mit oder ohne Zwischensprung);Koordination;30.10.2020;60;3;Nein
-Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwärts mit oder ohne Zwischensprung);Koordination;30.10.2020;9;0;Nein
-Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwärts mit oder ohne Zwischensprung);Koordination;30.10.2020;19;2;Nein
-Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwärts mit oder ohne Zwischensprung);Koordination;30.10.2020;30;3;Nein
-R;Emma;W;2008;;Seilspringen (Grundsprung Rückwärts);Koordination;30.10.2020;31;3;Nein
-Ra;Julia;W;2010;;Seilspringen (Grundsprung Vorwärts);Koordination;30.10.2020;70;3;Nein
+R;Emma;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;28.10.2020;22;2;Nein
+R;Emma;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;28.10.2020;5;0;Nein
+R;Emma;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;28.10.2020;3;0;Nein
+G;Fayola;W;2009;;Seilspringen (Grundsprung Vorwaerts);Koordination;30.10.2020;59;3;Nein
+K;Anna;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;30.10.2020;20;2;Nein
+Z;Marta;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;30.10.2020;47;3;Nein
+K;Anna;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;30.10.2020;20;2;Nein
+Z;Marta;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;30.10.2020;1;0;Nein
+Z;Marta;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;30.10.2020;32;3;Nein
+K;Anna;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;30.10.2020;14;1;Nein
+Go;Thea;W;2012;;Seilspringen (Grundsprung Vorwaerts mit oder ohne Zwischensprung);Koordination;30.10.2020;60;3;Nein
+Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwaerts mit oder ohne Zwischensprung);Koordination;30.10.2020;9;0;Nein
+Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwaerts mit oder ohne Zwischensprung);Koordination;30.10.2020;19;2;Nein
+Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwaerts mit oder ohne Zwischensprung);Koordination;30.10.2020;30;3;Nein
+R;Emma;W;2008;;Seilspringen (Grundsprung Rückwaerts);Koordination;30.10.2020;31;3;Nein
+Ra;Julia;W;2010;;Seilspringen (Grundsprung Vorwaerts);Koordination;30.10.2020;70;3;Nein
 Ro;Charlize;W;2013;;800 m Lauf;Ausdauer;31.10.2020;04:24;2;Nein
 Ro;Charlize;W;2013;;Werfen (Schlagball 80g);Kraft;31.10.2020;13,60;3;Nein
 Ro;Charlize;W;2013;;30 m Laufen;Schnelligkeit;31.10.2020;6,8;2;Nein
-Mo;Amelie;W;2010;;Seilspringen (Grundsprung Vorwärts);Koordination;05.11.2020;20;1;Nein
+Mo;Amelie;W;2010;;Seilspringen (Grundsprung Vorwaerts);Koordination;05.11.2020;20;1;Nein
 H;Colin;M;2005;;Weitsprung;Koordination;10.11.2020;5,50;3;Nein
-Maier;Lena;W;2009;;Seilspringen (Grundsprung Vorwärts);Koordination;17.11.2020;50;3;Nein
+Maier;Lena;W;2009;;Seilspringen (Grundsprung Vorwaerts);Koordination;17.11.2020;50;3;Nein
 Maier;Lena;W;2009;;50 m Laufen;Schnelligkeit;03.09.2022;7,04;3;Nein
 G;Fayola;W;2009;;50 m Laufen;Schnelligkeit;03.09.2022;7,42;3;Nein
 Ri;Carla;M;2010;;50 m Laufen;Schnelligkeit;03.09.2022;8,67;2;Nein
@@ -99,13 +99,13 @@ Db;Enrik;M;2009;;100 m Laufen;Schnelligkeit;13.10.2022;14,68;2;Nein
 Ra;Julia;W;2010;;Werfen (Schlagball 80g);Kraft;13.10.2022;20,05;2;Nein
 Ra;Julia;W;2010;;Weitsprung;Koordination;13.10.2022;3,35;2;Nein
 Ra;Julia;W;2010;;50 m Laufen;Schnelligkeit;13.10.2022;8,07;3;Nein
-Ri;Carla;M;2010;;Seilspringen (Grundsprung Rückwärts);Koordination;19.10.2022;30;3;Nein
-Sö;Sonja;M;2010;;Seilspringen (Grundsprung Rückwärts);Koordination;19.10.2022;30;3;Nein
-Fg;Lotte;W;2012;;Seilspringen (Grundsprung Vorwärts);Koordination;19.10.2022;12;0;Nein
-Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwärts mit oder ohne Zwischensprung);Koordination;19.10.2022;10;1;Nein
-Fg;Lotte;W;2012;;Seilspringen (Grundsprung Vorwärts);Koordination;19.10.2022;36;2;Nein
-Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwärts mit oder ohne Zwischensprung);Koordination;19.10.2022;25;3;Nein
-Fg;Lotte;W;2012;;Seilspringen (Grundsprung Vorwärts);Koordination;19.10.2022;21;1;Nein
+Ri;Carla;M;2010;;Seilspringen (Grundsprung Rückwaerts);Koordination;19.10.2022;30;3;Nein
+Sö;Sonja;M;2010;;Seilspringen (Grundsprung Rückwaerts);Koordination;19.10.2022;30;3;Nein
+Fg;Lotte;W;2012;;Seilspringen (Grundsprung Vorwaerts);Koordination;19.10.2022;12;0;Nein
+Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwaerts mit oder ohne Zwischensprung);Koordination;19.10.2022;10;1;Nein
+Fg;Lotte;W;2012;;Seilspringen (Grundsprung Vorwaerts);Koordination;19.10.2022;36;2;Nein
+Ro;Charlize;W;2013;;Seilspringen (Grundsprung Vorwaerts mit oder ohne Zwischensprung);Koordination;19.10.2022;25;3;Nein
+Fg;Lotte;W;2012;;Seilspringen (Grundsprung Vorwaerts);Koordination;19.10.2022;21;1;Nein
 R;Emma;W;2008;;Seilspringen (Kreuzdurchschlag);Koordination;19.10.2022;16;2;Nein
 R;Emma;W;2008;;Seilspringen (Kreuzdurchschlag);Koordination;19.10.2022;9;0;Nein
 Sö;Sonja;M;2010;;800 m Lauf;Ausdauer;19.10.2022;03:30;2;Nein
@@ -119,11 +119,11 @@ G;Fayola;W;2009;;800 m Lauf;Ausdauer;19.10.2022;03:36;3;Nein
 Fg;Lotte;W;2012;;800 m Lauf;Ausdauer;19.10.2022;03:48;3;Nein
 Z;Marta;W;2008;;800 m Lauf;Ausdauer;19.10.2022;04:14;2;Nein
 Ro;Charlize;W;2013;;800 m Lauf;Ausdauer;19.10.2022;04:29;2;Nein
-Kn;Isabell;W;2009;;Seilspringen (Grundsprung Rückwärts);Koordination;19.10.2022;30;3;Nein
+Kn;Isabell;W;2009;;Seilspringen (Grundsprung Rückwaerts);Koordination;19.10.2022;30;3;Nein
 Db;Enrik;M;2009;;Werfen (Schlagball 80g);Kraft;20.10.2022;21,60;0;Nein
 Db;Enrik;M;2009;;Weitsprung;Koordination;20.10.2022;3,60;2;Nein
 Sö;Sonja;M;2010;;Werfen (Schlagball 80g);Kraft;03.09.2022;16,80;0;Nein
-Mo;Amelie;W;2010;;Seilspringen (Grundsprung Rückwärts);Koordination;21.10.2022;30;3;Nein
-Hl;Mathilda;W;2011;;Seilspringen (Grundsprung Vorwärts);Koordination;21.10.2022;40;3;Nein
-Z;Marta;W;2008;;Geräteturnen Boden (Handstand);Kraft;21.10.2022;3;3;Nein
+Mo;Amelie;W;2010;;Seilspringen (Grundsprung Rückwaerts);Koordination;21.10.2022;30;3;Nein
+Hl;Mathilda;W;2011;;Seilspringen (Grundsprung Vorwaerts);Koordination;21.10.2022;40;3;Nein
+Z;Marta;W;2008;;Geraeteturnen Boden (Handstand);Kraft;21.10.2022;3;3;Nein
 Ai;Sofia;W;2014;;800 m Lauf;Ausdauer;21.10.2022;04:17;2;Nein

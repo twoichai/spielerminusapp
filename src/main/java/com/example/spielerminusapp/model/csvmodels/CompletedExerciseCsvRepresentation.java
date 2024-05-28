@@ -27,7 +27,7 @@ public class CompletedExerciseCsvRepresentation {
     @CsvBindByName(column="Geburtstag")
     private String dob;
 
-    @CsvBindByName(column="Übung")
+    @CsvBindByName(column="Uebung")
     private String exercise;
 
     @CsvBindByName(column="Kategorie")

@@ -604,20 +604,20 @@ function showUebungskatalogTable(evt) {
     const ausdauerSchwimmen = document.getElementById("ausdauer-schwimmen");
     const ausdauerRadfahren = document.getElementById("ausdauer-radfahren");
     const kraftWerfen = document.getElementById("kraft-werfen");
-    const kraftKugelstoßen = document.getElementById("kraft-kugelstoßen");
+    const kraftKugelstossen = document.getElementById("kraft-kugelstossen");
     const kraftStandweitsprung = document.getElementById("kraft-standweitsprung");
-    const kraftGeräteturnen = document.getElementById("kraft-geräteturnen");
+    const kraftGeraeteturnen = document.getElementById("kraft-geraeteturnen");
     const schnelligkeitLaufen = document.getElementById("schnelligkeit-laufen");
     const schnelligkeitSchwimmen = document.getElementById("schnelligkeit-25m-schwimmen");
     const schnelligkeitRadfahren = document.getElementById("schnelligkeit-200m-radfahren");
-    const schnelligkeitGeräteturnen = document.getElementById("schnelligkeit-geräteturnen");
+    const schnelligkeitGeraeteturnen = document.getElementById("schnelligkeit-geraeteturnen");
     const koordinationHochsprung = document.getElementById("koordination-hochsprung");
     const koordinationWeitsprung = document.getElementById("koordination-Weitsprung");
     const koordinationZonenweitsprung = document.getElementById("koordination-Zonenweitsprung");
     const koordinationDrehwurf = document.getElementById("koordination-Drehwurf");
     const koordinationSchleuderball = document.getElementById("koordination-Schleuderball");
     const koordinationSeilsprigen = document.getElementById("koordination-Seilspringen");
-    const koordinationGeräteturnen = document.getElementById("koordination-Geräteturnen");
+    const koordinationGeraeteturnen = document.getElementById("koordination-Geraeteturnen");
     const detailsTitle= document.getElementById("uebungskatalog-detail-values__title");
 
     let typ, id;
@@ -647,7 +647,7 @@ function showUebungskatalogTable(evt) {
         id = 5;
         detailsTitle.textContent = "Werfen";
     }
-    if (kraftKugelstoßen != null && kraftKugelstoßen.contains(evt.target)) {
+    if (kraftKugelstossen != null && kraftKugelstossen.contains(evt.target)) {
         typ = "KRAFT"
         id = 6;
         detailsTitle.textContent = "Kugelstoßen";
@@ -657,7 +657,7 @@ function showUebungskatalogTable(evt) {
         id = 7;
         detailsTitle.textContent = "Standweitsprung";
     }
-    if (kraftGeräteturnen != null && kraftGeräteturnen.contains(evt.target)) {
+    if (kraftGeraeteturnen != null && kraftGeraeteturnen.contains(evt.target)) {
         typ = "KRAFT"
         id = 8;
         detailsTitle.textContent = "Geräteturnen";
@@ -677,7 +677,7 @@ function showUebungskatalogTable(evt) {
         id = 11;
         detailsTitle.textContent = "Radfahren";
     }
-    if (schnelligkeitGeräteturnen != null && schnelligkeitGeräteturnen.contains(evt.target)) {
+    if (schnelligkeitGeraeteturnen != null && schnelligkeitGeraeteturnen.contains(evt.target)) {
         typ = "SCHNELLIGKEIT"
         id = 12;
         detailsTitle.textContent = "Geräteturnen";
@@ -712,7 +712,7 @@ function showUebungskatalogTable(evt) {
         id = 18;
         detailsTitle.textContent = "Seilspringen";
     }
-    if (koordinationGeräteturnen != null && koordinationGeräteturnen.contains(evt.target)) {
+    if (koordinationGeraeteturnen != null && koordinationGeraeteturnen.contains(evt.target)) {
         typ = "KOORDINATION"
         id = 19;
         detailsTitle.textContent = "Geräteturnen";
