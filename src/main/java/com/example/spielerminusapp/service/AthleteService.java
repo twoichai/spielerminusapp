@@ -122,7 +122,7 @@ public class AthleteService {
     private Set<Athlete> parseCsv(InputStream inputStream) throws IOException {
         List<DateTimeFormatter> formatters = Arrays.asList(
                 DateTimeFormatter.ofPattern("dd.MM.yyyy"),
-                DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                DateTimeFormatter.ofPattern("dd.MM.yyyy")
         );
 
         try (Reader reader = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -178,7 +178,7 @@ public class AthleteService {
 
         fields.get("Nachname").setValue(athlete.getLastName());
         fields.get("Vorname").setValue(athlete.getFirstName());
-        fields.get("TTMMJJJJ").setValue(new StringBuilder(athlete.getDob().format(DateTimeFormatter.BASIC_ISO_DATE).toString()).reverse().toString());
+        fields.get("TTMMJJJJ").setValue(new StringBuilder(athlete.getDob().format(DateTimeFormatter.ofPattern("ddMMyyyy")).toString()).toString());
         fields.get("Telefon / E-Mail").setValue(athlete.getEmail());
         fields.get("Geschlecht w  m").setValue(athlete.getSex().toLowerCase());
         fields.get("Alter das im Kalenderjahr erreicht wird").setValue(atlerDasErreichtWird);
