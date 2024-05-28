@@ -56,4 +56,7 @@ public class Athlete implements BasicUser{
 
     @Column(name = "ROLE")
     private String role;
+
+    @Column(name = "SCHWIMMNACHWEIS")
+    private boolean schwimmnachweis;
 }

@@ -76,6 +76,7 @@ public class AthleteService {
                     existingAthlete.setDob(athleteDetails.getDob());
                     existingAthlete.setSex(athleteDetails.getSex());
                     existingAthlete.setEmail(athleteDetails.getEmail());
+                    existingAthlete.setSchwimmnachweis(athleteDetails.isSchwimmnachweis());
                     existingAthlete.setPassword(athleteDetails.getPassword());
                     existingAthlete.setRole("ATHLETE");
                     return athleteRepository.save(existingAthlete);
@@ -137,6 +138,7 @@ public class AthleteService {
                             .email(csvLine.getEmail())
                             .dob(parseDate(csvLine.getDob(), formatters))
                             .sex(csvLine.getSex())
+                            .schwimmnachweis(false)
                             .role("ATHLETE")
                             .password(passwordEncoder.encode(randomPasswordGenerator.generateRandomPassword(12)))
                             .build()
