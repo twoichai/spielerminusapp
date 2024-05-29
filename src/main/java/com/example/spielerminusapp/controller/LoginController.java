@@ -31,4 +31,9 @@ public class LoginController {
         return "change_password";
     }
 
+    @GetMapping("/adminarea")
+    public String adminDetails() {
+        return "admin_details";
+    }
+
 }

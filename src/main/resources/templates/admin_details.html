@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: Montserrat, sans-serif;
-            background-color: rgba(95, 194, 206, 0.87);
+            background-color: rgb(0, 255, 140);
             margin: 0;
             padding: 0;
             display: flex;
@@ -153,8 +153,8 @@
     <h2>Passwort ändern</h2>
     <form id="passwordForm" onsubmit="return sendPassword()">
         <div>
-            <label for="oldPassword">Altes Passwort:</label>
-            <input type="password" id="oldPassword" name="oldPassword" pattern=".{12,}" style="margin-bottom: 16px" required>
+            <label for="oldpassword">Altes Passwort:</label>
+            <input type="password" id="oldpassword" name="oldPassword" pattern=".{12,}" style="margin-bottom: 16px" required>
         </div>
         <div>
             <label for="newpassword">Neues Passwort:</label>
@@ -173,20 +173,20 @@
     </form>
 
     <h2>E-Mail ändern</h2>
-    <form id="oldEmailForm" onsubmit="return sendPassword()">
+    <form id="oldemailForm" onsubmit="changeEmail()">
         <div>
-            <label for="oldEmail">Ihre E-Mail:</label>
-            <input type="email" id="oldEmail" name="oldPassword" pattern=".{12,}" style="margin-bottom: 16px" required>
+            <label for="oldemail">Ihre E-Mail:</label>
+            <input type="email" id="oldemail" name="oldemail" pattern=".{12,}" style="margin-bottom: 16px" required>
         </div>
         <div>
-            <label for="newEmail">Ihre neue E-Mail:</label>
-            <input type="email" id="newEmail" name="newEmail" pattern=".{12,}" style="margin-bottom: 16px" required>
+            <label for="newemail">Ihre neue E-Mail:</label>
+            <input type="email" id="newemail" name="newemail" pattern=".{12,}" style="margin-bottom: 16px" required>
         </div>
         <div>
-            <label for="passwordEmail">Bestätigen Sie Ihren Passwort:</label>
-            <input type="password" id="passwordEmail" name="confirmationPassword" pattern=".{12,}" style="margin-bottom: 16px" required>
+            <label for="passwordemail">Bestätigen Sie Ihren Passwort:</label>
+            <input type="password" id="passwordemail" name="confirmationPassword" pattern=".{12,}" style="margin-bottom: 16px" required>
         </div>
-        <button type="submit" class="custom-button">Speichern</button>
+        <button type="submit" class="custom-button" onclick="changeEmail()">E-Mail Speichern</button>
     </form>
 </div>
 <template id="fehlerMeldung">
@@ -214,21 +214,32 @@
     }
 
     function sendPassword() {
+        const oldPassword = document.getElementById("oldpassword").value;
         const thisNewpassword = document.getElementById("newpassword").value;
         const thisConfirmationPassword = document.getElementById("confirmationPassword").value;
 
-        if (thisNewpassword.length < 12 || thisConfirmationPassword.length < 12) {
-            displayError("Das Password muss mindestens 12 Zeichen lang sein");
+        // Check if the old password is provided
+        if (!oldPassword) {
+            displayError("Altes Passwort muss angegeben werden");
             return false;
         }
 
+        // Check if the new passwords meet the length requirement
+        if (thisNewpassword.length < 12 || thisConfirmationPassword.length < 12) {
+            displayError("Das Passwort muss mindestens 12 Zeichen lang sein");
+            return false;
+        }
+
+        // Check if the new passwords match
         if (thisNewpassword !== thisConfirmationPassword) {
             displayError("Passwörter stimmen nicht überein");
             return false;
         }
 
+        // Send the old and new passwords to the backend
         axios.patch('/user/user-details/changepass',
             {
+                oldPassword: oldPassword,
                 newPassword: thisNewpassword,
                 confirmationPassword: thisConfirmationPassword
             }).then(response => {
@@ -236,16 +247,64 @@
                 //window.location.href = "http://localhost:8080";
                 window.location.pathname = ""
             } else {
-                displayError("An error occurred while changing the password");
+                displayError("Ein Fehler ist aufgetreten beim Ändern des Passworts");
             }
         }).catch(e => {
             console.log(e);
-            displayError("An error occurred while changing the password");
+            displayError("Ein Fehler ist aufgetreten beim Ändern des Passworts");
         });
 
         return false;
     }
+    function changeEmail() {
+        const oldemail = document.getElementById("oldemail").value;
+        const newemail = document.getElementById("newemail").value;
+        const password = document.getElementById("passwordemail").value;
 
+        // Check if the old email, new email, and password are provided
+        if (!oldemmail) {
+            displayError("Alte E-Mail muss angegeben werden");
+            return false;
+        }
+
+        if (!newemail) {
+            displayError("Neue E-Mail muss angegeben werden");
+            return false;
+        }
+
+        if (!password) {
+            displayError("Passwort muss angegeben werden");
+            return false;
+        }
+
+        // Simple email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(newemail)) {
+            displayError("Ungültiges E-Mail-Format");
+            return false;
+        }
+
+        // Send the old email, new email, and password to the backend
+        axios.put('/admin/1/change-email',
+            {
+                oldemail: oldemail,
+                newemail: newemail,
+                password: password
+            }).then(response => {
+            if(response.status === 200) {
+                displaySuccess("E-Mail erfolgreich geändert");
+                // Optionally, you can redirect or update the UI
+                // window.location.pathname = ""
+            } else {
+                displayError("Ein Fehler ist aufgetreten beim Ändern der E-Mail");
+            }
+        }).catch(e => {
+            console.log(e);
+            displayError("Ein Fehler ist aufgetreten beim Ändern der E-Mail");
+        });
+
+        return false;
+    }
     function displayError(message) {
         const errorTemplate = document.getElementById("fehlerMeldung").content.cloneNode(true);
         errorTemplate.querySelector('p').textContent = message;
