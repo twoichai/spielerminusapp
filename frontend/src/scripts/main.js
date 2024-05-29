@@ -506,12 +506,38 @@ function deleteMeineAthleten(id) {
     const playerCard = document.getElementById(id);
 
     try {
-        axios.delete("/athletes/delete/" + id,
-            {}).then(response => {
-            if (response.status == 200) {
-                playerCard.remove();
-            }
+        // First, perform the export operation
+        axios.get('/athletes/export/' + id, {
+            responseType: 'blob'
         })
+            .then(function (exportResponse) {
+                if (exportResponse.status === 200) {
+                    // Create a URL for the CSV file and trigger download
+                    const url = window.URL.createObjectURL(new Blob([exportResponse.data], {type: 'text/csv'}));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'athlete-' + id + '-export.csv');
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // If export is successful, perform the delete operation
+                    return axios.delete("/athletes/delete/" + id);
+                } else {
+                    throw new Error("Failed to export athlete data");
+                }
+            })
+            .then(deleteResponse => {
+                if (deleteResponse.status === 200) {
+                    // If delete is successful, remove the player card from the DOM
+                    playerCard.remove();
+                } else {
+                    throw new Error("Failed to delete athlete");
+                }
+            })
+            .catch(error => {
+                console.error('There was an error:', error);
+            });
     } catch (e) {
         console.log(e);
     }
