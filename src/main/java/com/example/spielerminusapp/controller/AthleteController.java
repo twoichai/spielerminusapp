@@ -121,6 +121,11 @@ public class AthleteController {
         }
     }
 
+    @PatchMapping("/swimming-certificate/{id}")
+    public Athlete updateSwimmingCertificate(@PathVariable Long id, @RequestParam boolean swimmingCertificate) {
+        return athleteService.updateSwimmingCertificate(id, swimmingCertificate);
+    }
+
     @GetMapping("/einzelpruefkarte/{id}")
     public void exportEinzelpruefkarte(@PathVariable Long id, HttpServletResponse response) throws IOException {
         // Generate the PDF file

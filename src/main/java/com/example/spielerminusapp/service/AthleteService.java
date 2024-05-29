@@ -82,12 +82,24 @@ public class AthleteService {
                     existingAthlete.setDob(athleteDetails.getDob());
                     existingAthlete.setSex(athleteDetails.getSex());
                     existingAthlete.setEmail(athleteDetails.getEmail());
-                    existingAthlete.setSchwimmnachweis(athleteDetails.isSchwimmnachweis());
+                    existingAthlete.setSwimmingCertificate(athleteDetails.isSwimmingCertificate());
                     existingAthlete.setPassword(athleteDetails.getPassword());
                     existingAthlete.setRole("ATHLETE");
                     return athleteRepository.save(existingAthlete);
                 });
     }
+
+    public Athlete updateSwimmingCertificate(Long id, boolean swimmingCertificate) {
+        Optional<Athlete> athleteOptional = athleteRepository.findById(id);
+        if (athleteOptional.isPresent()) {
+            Athlete athlete = athleteOptional.get();
+            athlete.setSwimmingCertificate(swimmingCertificate);
+            return athleteRepository.save(athlete);
+        } else {
+            throw new RuntimeException("Athlete not found with id: " + id);
+        }
+    }
+
     /**
      * Delete an athlete by ID.
      * @param id the ID of the athlete to be deleted
@@ -144,7 +156,7 @@ public class AthleteService {
                             .email(csvLine.getEmail())
                             .dob(parseDate(csvLine.getDob(), formatters))
                             .sex(csvLine.getSex())
-                            .schwimmnachweis(false)
+                            .swimmingCertificate(false)
                             .role("ATHLETE")
                             .password(passwordEncoder.encode(randomPasswordGenerator.generateRandomPassword(12)))
                             .build()
@@ -218,7 +230,7 @@ public class AthleteService {
         fields.get("Anzahl 2").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 18L).get(0).getResult()); //seilspringen
 
 
-        if(athlete.isSchwimmnachweis()) {
+        if(athlete.isSwimmingCertificate()) {
             fields.get("Nachweis der Schwimmfertigkeit liegt vor").setValue("Yes");
         } else {
             fields.get("Nachweis der Schwimmfertigkeit liegt vor").setValue("Off");
