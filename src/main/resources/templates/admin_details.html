@@ -10,13 +10,23 @@
     <style>
         body {
             font-family: Montserrat, sans-serif;
-            background-color: rgb(0, 255, 140);
+            background-color: rgba(39, 43, 121, 0.5);
             margin: 0;
             padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            animation: fadeInAnimation ease 2s;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         .login-container {
