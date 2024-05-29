@@ -340,7 +340,9 @@
         <div class="uebersicht-section__header">
             <h3>Übersicht</h3>
         </div>
+
         <div id="playerCard-detail" class="uebersicht-section__main" hidden="true">
+            <div style="display: flex">
             <div class="player-info__background">
                 <div class="player-top">
                     <div class="player-name">
@@ -381,6 +383,25 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- Hello -->
+            <div class="swim-certificate-info__background" style="margin-left: 15px">
+                <div class="swim-certificate-top">
+                    <div class="swim-title">
+                        <h4>Schwimmnachweis vorhanden?</h4>
+                    </div>
+                </div>
+                <div class="swim-certificate-bottom" style="width: 100%; background-color: red">
+                    <div style="width: 70%">
+                        <select id=""  class="form-item__input" name="smiwcertificate" aria-required="true">
+                        <option value="true">Vorhanden</option>
+                        <option value="false">Nicht vorhanden</option>
+                    </select></div>
+                    <div style="width: 30%"><button style="width: 30px; height: 30px;">
+                        Bestätigen
+                    </button></div>
+                </div>
+            </div>
             </div>
             <div class="player-info__attributes">
                 <div class="attribute attribute-ausdauer">

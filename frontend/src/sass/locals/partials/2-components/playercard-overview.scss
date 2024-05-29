@@ -8,6 +8,17 @@
   border: 1px solid config.$neutral-color-200;
   border-radius: 10px;
   box-shadow: inset 0.5em 0 config.$brandcolor-blue;
+
+}
+
+.swim-certificate-info__background {
+  display: block;
+  height: 120px;
+  width: 300px;
+  padding: 10px 20px;
+  border: 1px solid config.$neutral-color-200;
+  border-radius: 10px;
+  box-shadow: inset 0.5em 0 config.$brandcolor-blue;
 }
 
 .player-top,
@@ -16,12 +27,24 @@
   align-items: center;
   justify-content: space-between;
 }
-
+.swim-certificate-top,
+.swim-certificate-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .player-top {
   margin-bottom: 25px;
 }
 
+.swim-certificate-top {
+  margin-bottom: 25px;
+}
+
 .player-name h4 {
+  margin: 0;
+}
+.swim-title h4{
   margin: 0;
 }
 
