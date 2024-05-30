@@ -860,13 +860,19 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         _currentActive = playerCardDom;
         playerCardDom.setAttribute("active", true);
         passOverviewPlayerInfos(overview, playerCard);
-        const ExBtnAction = document.getElementById("create-exercise-action");
+        const ExBtnAction = document.getElementById("create-exercise-action-kraft");
         ExBtnAction.addEventListener("click", () => {
             createExercisePopup("popup-exercise");
         });
         const player_id = playerCard.getAttribute("id")
         createExerciseDropdown("KRAFT", player_id);
-        createExerciseDropdownYear(player_id)
+        createExerciseDropdownYear(player_id, "kraft");
+        createExerciseDropdown("SCHNELLIGKEIT", player_id);
+        createExerciseDropdownYear(player_id, "schnelligkeit");
+        createExerciseDropdown("AUSDAUER", player_id);
+        createExerciseDropdownYear(player_id, "ausdauer");
+        createExerciseDropdown("KOORDINATION", player_id);
+        createExerciseDropdownYear(player_id, "koordination");
     }
 }
 
@@ -1175,7 +1181,7 @@ customElements.define(
                         axios.post('athletes/exercises/saveCompletedExercise/' + exerciseId + "/" + athleteId
                             + "/" + result + "/" + date).then(response => {
                             if (response.status == 200) {
-                                createExerciseDropdownYear(athleteId)
+                                createExerciseDropdownYear(athleteId, "kraft")
                                 alert("Die Leistung wurde erfolgreich erfasst!");
                             }
                         }).catch(error => {
@@ -1231,7 +1237,7 @@ function createExerciseDropdown(ex_type, player_id) {
             }).then(response => {
             if (response.status == 200) {
                 console.log(response.data)
-                const dropdownKraft = document.getElementById("change-exercise-kraft");
+                const dropdownKraft = document.getElementById("change-exercise-" + ex_type.toLowerCase());
                 dropdownKraft.innerHTML = "";
                 for (let item of response.data) {
                     const dropdownOption = document.createElement("option");
@@ -1262,12 +1268,12 @@ function setExerciseDateDefaultValue(dateInput) {
     }
 }
 
-function createExerciseDropdownYear(player_id) {
+function createExerciseDropdownYear(player_id, type) {
     try {
         axios.get('/api/completedExercises/ByPlayerId/' + player_id).then(response => {
             if (response.status == 200) {
                 console.log(response.data)
-                const dropdownKraft = document.getElementById("change-exercise-year-kraft");
+                const dropdownKraft = document.getElementById("change-exercise-year-" + type);
                 dropdownKraft.innerHTML = "";
                 let years = [];
                 for (let item of response.data) {
