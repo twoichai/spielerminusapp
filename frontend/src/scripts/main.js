@@ -868,6 +868,23 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         ExBtnAction.addEventListener("click", () => {
             createExercisePopup("popup-exercise");
         });
+        const einzelpruefKarteBtn = document.getElementById("export-pruefkarte");
+        einzelpruefKarteBtn.addEventListener("click", () => {
+            try {
+                axios.get('athletes/einzelpruefkarte/' + playerCard.getAttribute("id"),  {
+
+                }).then(response => {
+                    if (response.status == 200) {
+                        downloadFile(response.data, 'pruefkarte.pdf');
+
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        });
         const player_id = playerCard.getAttribute("id")
         createExerciseDropdown("KRAFT", player_id);
         createExerciseDropdownYear(player_id)
@@ -1380,4 +1397,24 @@ function createExerciseDropdownYear(player_id) {
     } catch (e) {
         alert(e);
     }
+}
+function downloadFile(data, filename) {
+    // Create a new Blob object using the response data of the file
+    const blob = new Blob([data], { type: data.type });
+
+    // Create a link element
+    const link = document.createElement('a');
+
+    // Set the download attribute with the filename
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+
+    // Append the link to the body
+    document.body.appendChild(link);
+
+    // Programmatically click the link to trigger the download
+    link.click();
+
+    // Remove the link from the document
+    document.body.removeChild(link);
 }
