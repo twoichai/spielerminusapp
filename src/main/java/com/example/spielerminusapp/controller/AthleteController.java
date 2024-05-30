@@ -46,7 +46,20 @@ public class AthleteController {
     public Athlete saveAthlete(@RequestBody Athlete athlete) {
         athlete.setPassword(passwordEncoder.encode(athlete.getPassword()));
         athlete.setRole("ATHLETE");
+        athlete.setUsername(generateUsername(athlete));
         return athleteService.save(athlete);
+    }
+
+    private String generateUsername(Athlete athlete) {
+        String firstName = athlete.getFirstName();
+        String lastName = athlete.getLastName();
+        int birthYear = athlete.getDob().getYear();
+
+        String firstPart = firstName.length() >= 2 ? firstName.substring(0, 2) : firstName;
+        String lastPart = lastName.length() >= 2 ? lastName.substring(0, 2) : lastName;
+        String yearPart = String.valueOf(birthYear);
+
+        return firstPart.toLowerCase() + lastPart.toLowerCase() + yearPart;
     }
 
     @GetMapping("/{id}")
