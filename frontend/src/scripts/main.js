@@ -1123,6 +1123,24 @@ customElements.define(
     },
 );
 
+customElements.define(
+    "exercise-exists-popup",
+
+    class extends HTMLElement {
+        constructor() {
+            super();
+            const template = document.getElementById(
+                "exercise-exists-popup",
+            ).content;
+            const shadowRoot = this.attachShadow({mode: "open"});
+            shadowRoot.appendChild(template.cloneNode(true));
+        }
+        connectedCallback(){}
+    }
+
+
+
+)
 
 customElements.define(
     "exercise-popup",
@@ -1174,9 +1192,21 @@ customElements.define(
                         console.log("exer: " + exerciseId + "at " + athleteId + "re " + result + "date" + date);
                         axios.post('athletes/exercises/saveCompletedExercise/' + exerciseId + "/" + athleteId
                             + "/" + result + "/" + date).then(response => {
+
+
+
                             if (response.status == 200) {
-                                createExerciseDropdownYear(athleteId)
-                                alert("Die Leistung wurde erfolgreich erfasst!");
+                                if (response.data === false) {
+                                    _popupPin = false;
+                                    popUp.remove();
+
+
+                                } else {
+                                    _popupPin = false;
+                                    popUp.remove();
+                                    createExerciseDropdownYear(athleteId)
+                                    alert("Die Leistung wurde erfolgreich erfasst!");
+                                }
                             }
                         }).catch(error => {
                             console.error('Error:', error);

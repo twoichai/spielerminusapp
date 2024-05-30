@@ -718,6 +718,42 @@
         </div>
     </div>
 </template>
+<template id="exercise-exists-popup">
+    <div class="exercise-exists-popup" id="popup-exercise-exists">
+        <div class="exercise-exists-overlay" id="exercise-exists-overlay"></div>
+        <div class="excercise-exists-content" style="height: 250px">
+            <div class="exercise-exists-section" id="exercise-exists-input">
+                <div class="exercise-exists-section__header">
+                    <h2 class="exercise-exists-section__header-text">Es existiert bereits eine Leistung an diesem Tag.</h2>
+                    <h3 class="exercise-exists-section__header-text">Wollen Sie die Leistung überschreiben?</h3>
+                    <br>
+                </div>
+                <div class="exercise-exists-section__main">
+                    <br>
+                    <form action="#" class="exercise-exists-section__main-content">
+                        <div class="change-section__buttons">
+                            <div class="button--cancel" id="cancelOverwrite">
+                                <div>
+                                    Abbrechen
+                                </div>
+                                <div class="button--cancel__arrow">
+                                    <div class="button--cancel__arrow-left"></div>
+                                    <div class="button--cancel__arrow-right"></div>
+                                </div>
+                            </div>
+                            <div class="change-section__save-button">
+                                <button class="button--next" type="button" value="submit" id="confirmOverwrite">
+                                    Überschreiben
+                                    <span class="button--next__arrow"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 <div id="main-wrapper">
     <div class="full-width main">
         <main id="main">
@@ -729,7 +765,7 @@
                     <div class="header-nav__button">
                         <a class="my-profile header-nav__button" role="button" href="/adminarea">
                         <span class="button__text">
-                             Administationsbereich
+                             Administrationsbereich
                         </span>
                         </a>
                     </div>
