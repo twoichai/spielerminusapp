@@ -154,14 +154,14 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('M', 8, 9, 1, 2, 3, 'PUNKTE', 'Boden', 8),
        ('W', 6, 7, 1, 2, 3, 'PUNKTE', 'Boden', 8),
        ('W', 8, 9, 1, 2, 3, 'PUNKTE', 'Boden', 8),
-       ('M', 14, 15, 1, 2, 3, 'PUNKTE', 'Boden', 8),
-       ('W', 14, 15, 1, 2, 3, 'PUNKTE', 'Boden', 8),
        ('M', 10, 11, 1, 2, 3, 'PUNKTE', 'Barren', 8),
        ('W', 10, 11, 1, 2, 3, 'PUNKTE', 'Barren', 8),
        ('M', 12, 13, 1, 2, 3, 'PUNKTE', 'Reck', 8),
        ('W', 12, 13, 1, 2, 3, 'PUNKTE', 'Reck', 8),
        ('M', 16, 17, 1, 2, 3, 'PUNKTE', 'Reck', 8),
        ('W', 16, 17, 1, 2, 3, 'PUNKTE', 'Reck', 8),
+       ('M', 14, 15, 1, 2, 3, 'PUNKTE', 'Boden', 8),
+       ('W', 14, 15, 1, 2, 3, 'PUNKTE', 'Boden', 8),
 
        ('M', 6, 7, 77, 68, 60, 'DEZISEKUNDEN', '30 m', 9),                             -- Laufen: Sprint --
        ('M', 8, 9, 72, 64, 57, 'DEZISEKUNDEN', '30 m', 9),
