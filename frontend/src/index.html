@@ -430,6 +430,7 @@
                             </div>
                             <div class="form-exercise1 form-item form-gender">
                                 <select id="change-exercise-year-ausdauer" class="form-item__input exercise-input1" name="jahr" aria-required="true">
+                                    <option value="NichtsAusgewält">Übung Auswählen</option>
                                 </select>
                                 <label for="change-section-gender" class="form-item__micro form-item-exercise">Jahr</label>
                             </div>
@@ -440,8 +441,10 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="attribute-call-for-action">
-                        <p>Tippe hier, um eine Leistung hinzuzufügen</p>
+                    <div class="attribute-content">
+                        <div class="attribute-chart">
+                            <canvas id="chart-ausdauer"></canvas>
+                        </div>
                     </div>
                 </div>
                 <div class="attribute attribute-kraft">
@@ -455,6 +458,7 @@
                             </div>
                             <div class="form-exercise1 form-item form-gender">
                                 <select id="change-exercise-year-kraft" class="form-item__input exercise-input1" name="jahr" aria-required="true">
+                                    <option value="NichtsAusgewält">Übung Auswählen</option>
                                 </select>
                                 <label for="change-section-gender" class="form-item__micro form-item-exercise">Jahr</label>
                             </div>
@@ -465,7 +469,14 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="attribute-call-for-action">
+                    <div class="attribute-content">
+                        <div class="attribute-chart">
+                            <canvas id="chart-kraft"></canvas>
+                        </div>
+                        <div class="bestes-ergebnis-kraft">
+                            <p>Bestes Ergebnis</p>
+
+                        </div>
                     </div>
                 </div>
                 <div class="attribute attribute-schnelligkeit">
@@ -474,11 +485,13 @@
                         <div class="exercise-dropdown">
                             <div class="form-exercise form-item form-gender">
                                 <select id="change-exercise-schnelligkeit" class="form-item__input exercise-input" name="uebung" aria-required="true">
+                                    <option value="NichtsAusgewält">Übung Auswählen</option>
                                 </select>
                                 <label for="change-section-gender" class="form-item__micro form-item-exercise">Übung</label>
                             </div>
                             <div class="form-exercise1 form-item form-gender">
                                 <select id="change-exercise-year-schnelligkeit" class="form-item__input exercise-input1" name="jahr" aria-required="true">
+                                    <option value="NichtsAusgewält">Übung Auswählen</option>
                                 </select>
                                 <label for="change-section-gender" class="form-item__micro form-item-exercise">Jahr</label>
                             </div>
@@ -489,7 +502,10 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="attribute-call-for-action">
+                    <div class="attribute-content">
+                        <div class="attribute-chart">
+                            <canvas id="chart-schnelligkeit"></canvas>
+                        </div>
                     </div>
                 </div>
                 <div class="attribute attribute-koordination">
@@ -513,8 +529,10 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="attribute-call-for-action">
-                        <p>Tippe hier, um eine Leistung hinzuzufügen</p>
+                    <div class="attribute-content">
+                        <div class="attribute-chart">
+                            <canvas id="chart-koordination"></canvas>
+                        </div>
                     </div>
                 </div>
 

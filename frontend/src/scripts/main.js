@@ -25,7 +25,10 @@ changeButton.addEventListener("click", evt => {
     const main = document.getElementById("main");
     main.appendChild(popUp);
 });*/
+import {Chart} from "chart.js/auto";
 
+
+let _activePlayercard = null;
 let _currentActive = null;
 let _currentActiveNav = null;
 let _currentPopupOrigin = null;
@@ -35,6 +38,12 @@ let _changeOptionPin = false;
 let _addPlayer = false;
 let tmp;
 let _uebungskatalogCurrentActiv = null;
+let daymonChart = [];
+let resultChart = [];
+var kchart = null;
+var schchart = null;
+var auschart = null;
+var kochart = null;
 
 window.onload = (event) => {
     createMeineDSA();
@@ -823,7 +832,7 @@ function convertTime(input) {
 }
 
 function createTableRow(tableRow, item) {
-    let convert;
+    let converter;
 
     tableRow.getElementById("age").textContent = String(item.fromAge) + " - " + String(item.toAge);
     tableRow.getElementById("gender").textContent = item.gender;
@@ -860,9 +869,21 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         _currentActive = playerCardDom;
         playerCardDom.setAttribute("active", true);
         passOverviewPlayerInfos(overview, playerCard);
-        const ExBtnAction = document.getElementById("create-exercise-action-kraft");
-        ExBtnAction.addEventListener("click", () => {
-            createExercisePopup("popup-exercise");
+        const ExBtnActionKraft = document.getElementById("create-exercise-action-kraft");
+        ExBtnActionKraft.addEventListener("click", () => {
+            createExercisePopup("popup-exercise", "kraft");
+        });
+        const ExBtnActionAus = document.getElementById("create-exercise-action-ausdauer");
+        ExBtnActionAus.addEventListener("click", () => {
+            createExercisePopup("popup-exercise", "ausdauer");
+        });
+        const ExBtnActionKoo = document.getElementById("create-exercise-action-koordination");
+        ExBtnActionKoo.addEventListener("click", () => {
+            createExercisePopup("popup-exercise", "koordination");
+        });
+        const ExBtnActionSch = document.getElementById("create-exercise-action-schnelligkeit");
+        ExBtnActionSch.addEventListener("click", () => {
+            createExercisePopup("popup-exercise", "schnelligkeit");
         });
         const player_id = playerCard.getAttribute("id")
         createExerciseDropdown("KRAFT", player_id);
@@ -873,6 +894,29 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         createExerciseDropdownYear(player_id, "ausdauer");
         createExerciseDropdown("KOORDINATION", player_id);
         createExerciseDropdownYear(player_id, "koordination");
+        createCharts();
+
+        const dropdownsch = document.getElementById("change-exercise-schnelligkeit");
+        dropdownsch.addEventListener("change", (evt) => {
+            console.log(evt.target.textContent)
+            changeChartExercise( evt.target.value, player_id, schchart);
+        })
+        const dropdownau = document.getElementById("change-exercise-ausdauer");
+        dropdownau.addEventListener("change", (evt) => {
+            console.log(evt.target.textContent)
+            changeChartExercise( evt.target.value, player_id, auschart);
+        })
+        const dropdownk = document.getElementById("change-exercise-kraft");
+        dropdownk.addEventListener("change", (evt) => {
+            console.log(evt.target.textContent)
+            changeChartExercise( evt.target.value, player_id, kchart);
+        })
+        const dropdownkoo = document.getElementById("change-exercise-koordination");
+        dropdownkoo.addEventListener("change", (evt) => {
+            console.log(evt.target.textContent)
+            changeChartExercise( evt.target.value, player_id, kochart);
+        })
+
     }
 }
 
@@ -1144,6 +1188,7 @@ customElements.define(
 
         connectedCallback() {
             _popupPin = true;
+            const _this = this;
             const linkElem = document.createElement("link");
             linkElem.setAttribute("rel", "stylesheet");
             linkElem.setAttribute("href", "main.07544d9b.css");
@@ -1152,6 +1197,8 @@ customElements.define(
             const overlay = this.shadowRoot.getElementById("exercise-overlay");
             const closeBtn = this.shadowRoot.getElementById("cancelExercise")
             const dateField = this.shadowRoot.getElementById("exercise-date");
+            let data_exercise_type = _this.getAttribute("data-type");
+            console.log(data_exercise_type);
             overlay.addEventListener('click', () => {
                 _popupPin = false;
                 popUp.remove();
@@ -1162,8 +1209,8 @@ customElements.define(
             });
             setExerciseDateDefaultValue(dateField);
             const athleteId = _activePlayercard.getAttribute("id");
-            setExerciseKraftMetric(athleteId, this.shadowRoot);
-            const exerciseId = document.getElementById("change-exercise-kraft").value
+            setExerciseMetric(athleteId, this.shadowRoot, data_exercise_type);
+            const exerciseId = document.getElementById("change-exercise-" + data_exercise_type).value
             const shadowRoot = this.shadowRoot;
             let result;
             let date;
@@ -1181,7 +1228,7 @@ customElements.define(
                         axios.post('athletes/exercises/saveCompletedExercise/' + exerciseId + "/" + athleteId
                             + "/" + result + "/" + date).then(response => {
                             if (response.status == 200) {
-                                createExerciseDropdownYear(athleteId, "kraft")
+                                createExerciseDropdownYear(athleteId, data_exercise_type)
                                 alert("Die Leistung wurde erfolgreich erfasst!");
                             }
                         }).catch(error => {
@@ -1198,15 +1245,16 @@ customElements.define(
     });
 
 
-function createExercisePopup(id) {
+function createExercisePopup(id, typeBox) {
     _popupPin = true;
     const main = document.getElementById("main")
     const exercise = document.createElement("exercise-popup");
+    exercise.setAttribute("data-type", typeBox)
     main.appendChild(exercise);
 }
 
-function setExerciseKraftMetric(playerId, shadow) {
-    const uebungId = document.getElementById("change-exercise-kraft").value;
+function setExerciseMetric(playerId, shadow, extype) {
+    const uebungId = document.getElementById("change-exercise-" + extype).value;
     try {
         axios.get('athletes/exercises/ruleMetricByExIdAthId', {
             params: {
@@ -1268,17 +1316,19 @@ function setExerciseDateDefaultValue(dateInput) {
     }
 }
 
-function createExerciseDropdownYear(player_id, type) {
+function createExerciseDropdownYear(player_id, exertype) {
     try {
         axios.get('/api/completedExercises/ByPlayerId/' + player_id).then(response => {
             if (response.status == 200) {
                 console.log(response.data)
-                const dropdownKraft = document.getElementById("change-exercise-year-" + type);
+                let idbtn = "change-exercise-year-" + exertype.toLowerCase();
+                console.log(idbtn)
+                const dropdownKraft = document.getElementById(idbtn);
                 dropdownKraft.innerHTML = "";
                 let years = [];
                 for (let item of response.data) {
                     const dropdownOption = document.createElement("option");
-                    if (item.exerciseType == "Kraft")
+                    if (item.exerciseType == exertype)
                         dropdownOption.value = item.id;
                     let containsYear;
                     let dateofComp = new Date(item.dateOfCompletion);
@@ -1301,4 +1351,136 @@ function createExerciseDropdownYear(player_id, type) {
     } catch (e) {
         alert(e);
     }
+}
+
+function changeChartExercise(Extitle, player_id, mychart) {
+    //var exChart = document.getElementById("chart-" + ExType);
+    try {
+        axios.get('/api/completedExercises/ByPlayerId/' + player_id).then(response => {
+            if (response.status == 200) {
+                console.log(response.data)
+                daymonChart = [];
+                resultChart = [];
+                for (let item of response.data) {
+                    if (item.exercise.id == Extitle) {
+                        let dateofComp = new Date(item.dateOfCompletion);
+                        let day = dateofComp.getDate();
+                        let month = dateofComp.getMonth() + 1;
+                        let formattedDate = ('0' + day).slice(-2) + '-' + ('0' + month).slice(-2);
+                        daymonChart.push(formattedDate);
+                        console.log(daymonChart);
+
+                        resultChart.push(item.result);
+                        console.log(resultChart);
+                    }
+                }
+                let indices = daymonChart.map((value, index) => index);
+                indices.sort((a, b) => {
+                    let valueA = extractValues(daymonChart[a]);
+                    let valueB = extractValues(daymonChart[b]);
+
+                    if (valueA.first === valueB.first) {
+                        return valueA.second - valueB.second;
+                    } else {
+                        return valueA.first - valueB.first;
+                    }
+                });
+
+                daymonChart = indices.map(index => daymonChart[index]);
+                resultChart = indices.map(index => resultChart[index]);
+
+                mychart.data.datasets[0].data = resultChart;
+                mychart.data.labels = daymonChart;
+
+                // Update chart
+                mychart.update();
+            }
+        })
+    } catch (e) {
+        alert(e);
+    }
+}
+
+function createCharts() {
+    var kraftChart = document.getElementById("chart-kraft");
+    kchart = new Chart(kraftChart, {
+        type: 'line',
+        data: {
+            labels: daymonChart,
+            datasets: [{
+                label: "Ergebnisse für ",
+                borderColor: 'rgba(95, 194, 208, 1)',
+                data: resultChart
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    var ScheChart = document.getElementById("chart-schnelligkeit");
+    schchart = new Chart(ScheChart, {
+        type: 'line',
+        data: {
+            labels: daymonChart,
+            datasets: [{
+                label: "Ergebnisse für ",
+                borderColor: 'rgba(95, 194, 208, 1)',
+                data: resultChart
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    var auChart = document.getElementById("chart-ausdauer");
+    auschart = new Chart(auChart, {
+        type: 'line',
+        data: {
+            labels: daymonChart,
+            datasets: [{
+                label: "Ergebnisse für ",
+                borderColor: 'rgba(95, 194, 208, 1)',
+                data: resultChart
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    var kooChart = document.getElementById("chart-koordination");
+    kochart = new Chart(kooChart, {
+        type: 'line',
+        data: {
+            labels: daymonChart,
+            datasets: [{
+                label: "Ergebnisse für ",
+                borderColor: 'rgba(95, 194, 208, 1)',
+                data: resultChart
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function extractValues(str) {
+    let parts = str.split('-').map(Number); // Teile den String an '-' und konvertiere zu Zahlen
+    return {first: parts[0], second: parts[1]};
 }
