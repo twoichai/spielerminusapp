@@ -154,14 +154,14 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('M', 8, 9, 1, 2, 3, 'PUNKTE', 'Boden', 8),
        ('W', 6, 7, 1, 2, 3, 'PUNKTE', 'Boden', 8),
        ('W', 8, 9, 1, 2, 3, 'PUNKTE', 'Boden', 8),
-       ('M', 14, 15, 1, 2, 3, 'PUNKTE', 'Boden', 8),
-       ('W', 14, 15, 1, 2, 3, 'PUNKTE', 'Boden', 8),
        ('M', 10, 11, 1, 2, 3, 'PUNKTE', 'Barren', 8),
        ('W', 10, 11, 1, 2, 3, 'PUNKTE', 'Barren', 8),
        ('M', 12, 13, 1, 2, 3, 'PUNKTE', 'Reck', 8),
        ('W', 12, 13, 1, 2, 3, 'PUNKTE', 'Reck', 8),
        ('M', 16, 17, 1, 2, 3, 'PUNKTE', 'Reck', 8),
        ('W', 16, 17, 1, 2, 3, 'PUNKTE', 'Reck', 8),
+       ('M', 14, 15, 1, 2, 3, 'PUNKTE', 'Boden', 8),
+       ('W', 14, 15, 1, 2, 3, 'PUNKTE', 'Boden', 8),
 
        ('M', 6, 7, 77, 68, 60, 'DEZISEKUNDEN', '30 m', 9),                             -- Laufen: Sprint --
        ('M', 8, 9, 72, 64, 57, 'DEZISEKUNDEN', '30 m', 9),
@@ -235,10 +235,10 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 95, 105, 115, 'CENTIMETER', NULL, 13),
        ('W', 16, 17, 105, 115, 125,  'CENTIMETER', NULL, 13),
 
-       ('M', 6, 7, -1, -1, -1, 'METER', 'Nicht geeignet', 14), -- Weitsprung
-       ('M', 8, 9, -1, -1, -1, 'METER', 'Nicht geeignet', 14),
-       ('W', 6, 7, -1, -1, -1, 'METER', 'Nicht geeignet', 14),
-       ('W', 8, 9, -1, -1, -1, 'METER', 'Nicht geeignet', 14),
+       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 14), -- Weitsprung
+       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 14),
+       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 14),
+       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 14),
        ('M', 10, 11, 260, 290, 320, 'CENTIMETER', NULL, 14),
        ('M', 12, 13, 320, 350, 380, 'CENTIMETER', NULL, 14),
        ('M', 14, 15, 380, 410, 440, 'CENTIMETER', NULL, 14),
@@ -278,12 +278,12 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 16),
        ('W', 16, 17, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 16),
 
-       ('M', 6, 7, -1, -1, -1, 'METER', 'Nicht geeignet', 17), -- Schleuderball
-       ('M', 8, 9, -1, -1, -1, 'METER', 'Nicht geeignet', 17),
-       ('M', 10, 11, -1, -1, -1, 'METER', 'Nicht geeignet', 17),
-       ('W', 6, 7, -1, -1, -1, 'METER', 'Nicht geeignet', 17),
-       ('W', 8, 9, -1, -1, -1, 'METER', 'Nicht geeignet', 17),
-       ('W', 10, 11, -1, -1, -1, 'METER', 'Nicht geeignet', 17),
+       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17), -- Schleuderball
+       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
+       ('M', 10, 11, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
+       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
+       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
+       ('W', 10, 11, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
 
        ('M', 12, 13, 1950, 2400, 2750, 'CENTIMETER', 'Schleuderball', 17),
        ('M', 14, 15, 2350, 2800, 3200, 'CENTIMETER', 'Schleuderball', 17),

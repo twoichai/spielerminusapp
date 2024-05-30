@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,6 +175,32 @@ public class ExerciseService {
         completedExerciseRepository.deleteById(compExId);
 
         saveCompletedExercise(exerciseId, athleteId, result, date);
+
+
+    }
+
+    public CompletedExercise getBestExercise(Long athleteId, ExerciseType type, Year year){
+        List<CompletedExercise> compExs = completedExerciseRepository.findByAthleteIdAndExerciseType(athleteId, type);
+
+        for (CompletedExercise ce : compExs){
+            if(ce.getDateOfCompletion().getYear() != year.getValue()){
+                compExs.remove(ce);
+            }
+            if(ce.getMedal().equals(Medal.GOLD)){
+                return ce;
+            }
+        }
+        for(CompletedExercise ce : compExs){
+            if(ce.getMedal().equals(Medal.SILBER)){
+                return ce;
+            }
+        }
+        for(CompletedExercise ce : compExs){
+            if(ce.getMedal().equals(Medal.BRONZE)){
+                return ce;
+            }
+        }
+        return compExs.get(0);
 
 
     }
