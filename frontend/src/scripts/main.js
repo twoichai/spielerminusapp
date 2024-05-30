@@ -1171,10 +1171,11 @@ customElements.define(
                     alert("Bitte geben Sie die Werte ein");
                 } else {
                     try {
-                        console.log("exer: " +exerciseId+ "at " + athleteId + "re " + result + "date" + date);
-                        axios.post('athletes/exercises/saveCompletedExercise/' + exerciseId +"/"+ athleteId
-                            + "/" + result + "/"+date).then(response => {
+                        console.log("exer: " + exerciseId + "at " + athleteId + "re " + result + "date" + date);
+                        axios.post('athletes/exercises/saveCompletedExercise/' + exerciseId + "/" + athleteId
+                            + "/" + result + "/" + date).then(response => {
                             if (response.status == 200) {
+                                createExerciseDropdownYear(athleteId)
                                 alert("Die Leistung wurde erfolgreich erfasst!");
                             }
                         }).catch(error => {
@@ -1246,6 +1247,7 @@ function createExerciseDropdown(ex_type, player_id) {
         alert(e);
     }
 }
+
 // Function to set today's date in the date input
 function setExerciseDateDefaultValue(dateInput) {
     if (dateInput) {
@@ -1267,14 +1269,26 @@ function createExerciseDropdownYear(player_id) {
                 console.log(response.data)
                 const dropdownKraft = document.getElementById("change-exercise-year-kraft");
                 dropdownKraft.innerHTML = "";
+                let years = [];
                 for (let item of response.data) {
                     const dropdownOption = document.createElement("option");
                     if (item.exerciseType == "Kraft")
                         dropdownOption.value = item.id;
-                    const dateofComp = item.dateOfCompletion;
+                    let containsYear;
+                    let dateofComp = new Date(item.dateOfCompletion);
                     const yearofComp = dateofComp.getFullYear();
-                    dropdownOption.textContent = yearofComp;
-                    dropdownKraft.appendChild(dropdownOption);
+                    for (let item1 of years) {
+                        if (item1 == yearofComp) {
+                            containsYear = true;
+                            break;
+                        }
+                    }
+                    if (containsYear) {
+                    } else {
+                        years.push(yearofComp)
+                        dropdownOption.textContent = yearofComp;
+                        dropdownKraft.appendChild(dropdownOption);
+                    }
                 }
             }
         });
