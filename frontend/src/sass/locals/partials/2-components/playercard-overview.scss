@@ -35,7 +35,9 @@
   padding: 6px;
   border-radius: 10px;
   width: auto;
-  height: 33px
+  height: 33px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .baestaetigen-button{
@@ -45,6 +47,17 @@
   color: white;
   margin-left: 12px;
   border:none; height: 33px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.baestaetigen-button:hover {
+  background-color: #47a3b0;
+}
+
+.baestaetigen-button:active {
+  transform: scale(0.95);
+  background-color: #39929e;
 }
 
 .player-top {

@@ -34,7 +34,7 @@
   background-color: white;
   min-width: 525px;
   height: calc(100vh - 61px);
-
+  animation: fadeInAnimation ease 2s;
   &__header {
     display: flex;
     align-items: center;
@@ -52,9 +52,19 @@
   &__main {
     display: block;
     padding: 50px 25px 5px 20px;
+    animation: fadeInAnimation ease 2s;
   }
 }
 
 .attribute-schwimmfaehigkeit {
   grid-column: 2 span;
+}
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

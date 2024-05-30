@@ -4,8 +4,15 @@
   width: 30px;
   height: 30px;
   filter: invert(73%) sepia(29%) saturate(609%) hue-rotate(139deg) brightness(89%) contrast(94%);
+  transition: background-color 0.3s, transform 0.3s;
+  cursor: pointer;
 
   &:hover {
-    cursor: pointer;
+    filter: invert(54%) sepia(33%) saturate(406%) hue-rotate(146deg) brightness(92%) contrast(85%); /* Adjust filter on hover */
+  }
+
+  &:active {
+    transform: scale(0.95);
+    filter: invert(43%) sepia(34%) saturate(543%) hue-rotate(160deg) brightness(85%) contrast(85%); /* Adjust filter on click */
   }
 }
