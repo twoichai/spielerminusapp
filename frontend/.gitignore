@@ -3,3 +3,5 @@ dist/
 .cache/
 ./'..
 ./'.
+### SQLite  ###
+./spielerminusapp/mydatabase.db

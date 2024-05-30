@@ -55,7 +55,9 @@ public class CompletedExerciseService {
     public CompletedExercise save(CompletedExercise completedExercise) {
         return completedExerciseRepository.save(completedExercise);
     }
-
+    public List<CompletedExercise> findbyPlayerID(Long id) {
+        return completedExerciseRepository.findByAthleteId(id);
+    }
     /**
      * Update a completed exercise by ID.
      *

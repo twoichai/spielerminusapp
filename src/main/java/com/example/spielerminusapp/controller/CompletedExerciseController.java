@@ -27,6 +27,12 @@ public class CompletedExerciseController {
         List<CompletedExercise> exercises = completedExerciseService.getAllCompletedExercises();
         return ResponseEntity.ok(exercises);
     }
+    @GetMapping("/ByPlayerId/{playerid}")
+    public ResponseEntity<List<CompletedExercise>> getCompletedExerciseByPlayerID(@PathVariable Long playerid) {
+        List<CompletedExercise> completedExercise = completedExerciseService.findbyPlayerID(playerid);
+        return ResponseEntity.ok(completedExercise);
+    }
+
 
     // GET endpoint to retrieve a single completed exercise by ID
     @GetMapping("/{id}")

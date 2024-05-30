@@ -428,11 +428,27 @@
                     </div>
                 </div>
                 <div class="attribute attribute-kraft">
-                    <div class="attribute-title">
+                    <div class="attribute-title position_dropdown">
                         <h4>Kraft</h4>
+                        <div class="exercise-dropdown">
+                            <div class="form-exercise form-item form-gender">
+                                <select id="change-exercise-kraft" class="form-item__input exercise-input" name="uebung" aria-required="true">
+                                </select>
+                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Übung</label>
+                            </div>
+                            <div class="form-exercise1 form-item form-gender">
+                                <select id="change-exercise-year-kraft" class="form-item__input exercise-input1" name="jahr" aria-required="true">
+                                </select>
+                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Jahr</label>
+                            </div>
+                        </div>
+                        <button id="create-exercise-action" class="add-player__button-icon1">
+                            <svg>
+                                <use href="images/icons/add-icon.svg#Button"></use>
+                            </svg>
+                        </button>
                     </div>
                     <div class="attribute-call-for-action">
-                        <p>Tippe hier, um eine Leistung hinzuzufügen</p>
                     </div>
                 </div>
                 <div class="attribute attribute-schnelligkeit">
@@ -658,6 +674,50 @@
         </div>
     </div>
 </template>
+<template id="exercise-popup">
+    <div class="exercise-popup" id="popup-ex">
+        <div class="exercise-overlay" id="exercise-overlay"></div>
+        <div class="excercise-content">
+            <button class="exercise-close-btn" id="exercise-close-btn">&times;</button>
+            <div class="exercise-section" id="exercise-input">
+                <div class="exercise-section__header">
+                    <h2 id="exercise-popUp-identifier" class="exercise-section__header-text">Leistung hinzufügen</h2>
+                </div>
+                <div class="exercise-section__main">
+                    <p class="exercise-section__main-info">Bitte geben Sie die die erreichte Leistung an</p>
+                    </p>
+                    <form action="#" class="exercise-section__main-content">
+                        <div class="form-item form-exercise-result">
+                            <input id="exercise-result" placeholder=" " class="form-item__input" type="number" name="result" aria-required="true">
+                            <label for="exercise-result" class="form-item__micro">Ergebnis</label>
+                        </div>
+                        <div class="form-item form-birthday">
+                            <input id="exercise-date" placeholder=" " class="form-item__input" type="date" name="exercisedate" aria-required="true" value="">
+                            <label for="exercise-date" class="form-item__micro">Datum</label>
+                        </div>
+                        <div class="change-section__buttons">
+                            <div class="button--cancel" id="cancelExercise">
+                                <div>
+                                    Abbrechen
+                                </div>
+                                <div class="button--cancel__arrow">
+                                    <div class="button--cancel__arrow-left"></div>
+                                    <div class="button--cancel__arrow-right"></div>
+                                </div>
+                            </div>
+                            <div class="change-section__save-button">
+                                <button class="button--next" type="button" value="submit" id="sendDataExerciseButton">
+                                    Speichern
+                                    <span class="button--next__arrow"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 <div id="main-wrapper">
     <div class="full-width main">
         <main id="main">
@@ -732,7 +792,6 @@
                     </div>
                 </div>
                 <div class="overall" id="main-view">
-
                 </div>
             </div>
         </main>

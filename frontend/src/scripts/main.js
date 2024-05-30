@@ -46,20 +46,25 @@ function getAllPlayer() {
     while (playerList.hasChildNodes()) {
         playerList.removeChild(playerList.firstChild);
     }
-    axios.get('/athletes').then(response => {
-        for (let item of response.data) {
-            const playerCard = document.createElement("player-card");
+    try {
+        axios.get('/athletes').then(response => {
+            for (let item of response.data) {
+                const playerCard = document.createElement("player-card");
 
-            playerCard.setAttribute("data-fname", item.firstName);
-            playerCard.setAttribute("data-lname", item.lastName);
-            playerCard.setAttribute("data-bd", item.dob);
-            playerCard.setAttribute("data-gender", item.sex);
-            playerCard.setAttribute("data-email", item.email);
-            playerCard.setAttribute("id", item.id);
+                playerCard.setAttribute("data-fname", item.firstName);
+                playerCard.setAttribute("data-lname", item.lastName);
+                playerCard.setAttribute("data-bd", item.dob);
+                playerCard.setAttribute("data-gender", item.sex);
+                playerCard.setAttribute("data-email", item.email);
+                playerCard.setAttribute("id", item.id);
 
-            playerList.appendChild(playerCard);
-        }
-    });
+                playerList.appendChild(playerCard);
+            }
+
+        });
+    } catch (e) {
+        alert(e);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -156,21 +161,25 @@ const popupCreated = (item) => {
 }
 
 function exportPlayersCSV() {
-    axios.get('/athletes/export', {
-        responseType: 'blob'
-    })
-        .then(function (response) {
-            const url = window.URL.createObjectURL(new Blob([response.data], {type: 'text/csv'}));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'all-athletes-export.csv');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+    try {
+        axios.get('/athletes/export', {
+            responseType: 'blob'
         })
-        .catch(function (error) {
-            console.error('There was an error exporting the CSV:', error);
-        });
+            .then(function (response) {
+                const url = window.URL.createObjectURL(new Blob([response.data], {type: 'text/csv'}));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'all-athletes-export.csv');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+            .catch(function (error) {
+                console.error('There was an error exporting the CSV:', error);
+            });
+    } catch (e) {
+        alert(e);
+    }
 }
 
 function checkAction(evt) {
@@ -305,8 +314,6 @@ function filterPlayerBirthdayDescend() {
 }
 
 
-
-
 function containsInOrder(mainString, subString) {
     let startIndex = 0;
     while ((startIndex = mainString.indexOf(subString, startIndex)) !== -1) {
@@ -328,16 +335,20 @@ function addPlayerWithCSV() {
         if (elem.files.length == 1) {
             let formData = new FormData();
             formData.append("file", elem.files[0]);
-            axios.post('/athletes/upload', formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                }
-            })
-                .then(function (response) {
-                    if (response.status == 200) {
-                        getAllPlayer();
+            try {
+                axios.post('/athletes/upload', formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
                     }
-                });
+                })
+                    .then(function (response) {
+                        if (response.status == 200) {
+                            getAllPlayer();
+                        }
+                    });
+            } catch (e) {
+                alert(e);
+            }
         }
     });
 }
@@ -539,7 +550,7 @@ function deleteMeineAthleten(id) {
                 console.error('There was an error:', error);
             });
     } catch (e) {
-        console.log(e);
+        alert(e);
     }
 }
 
@@ -644,7 +655,7 @@ function showUebungskatalogTable(evt) {
     const koordinationSchleuderball = document.getElementById("koordination-Schleuderball");
     const koordinationSeilsprigen = document.getElementById("koordination-Seilspringen");
     const koordinationGeraeteturnen = document.getElementById("koordination-Geraeteturnen");
-    const detailsTitle= document.getElementById("uebungskatalog-detail-values__title");
+    const detailsTitle = document.getElementById("uebungskatalog-detail-values__title");
 
     let typ, id;
 
@@ -745,13 +756,10 @@ function showUebungskatalogTable(evt) {
     }
 
     axios.get("/athletes/exercises",
-        {
-
-        }).then(response => {
-        if(response.status == 200)
-        {
+        {}).then(response => {
+        if (response.status == 200) {
             for (let item of response.data) {
-                if(item.id == id) {
+                if (item.id == id) {
                     createUebungskatalogDetailTable(item);
                 }
             }
@@ -775,16 +783,15 @@ function createUebungskatalogDetailTable(typ) {
     const details = document.getElementById("uebungskatalog-table__header");
 
     for (let item of typ.rule) {
-        if(item.label == label) {
+        if (item.label == label) {
             let tableRowTemplate = document.getElementById("tableRow");
             tableRow = document.importNode(tableRowTemplate.content, true);
-            if(item.valueBronze != 0) {
+            if (item.valueBronze != 0) {
                 createTableRow(tableRow, item);
             }
-        }
-        else if(item.label != label) {
+        } else if (item.label != label) {
             item.label = label;
-            details.textContent = "Details: " +label;
+            details.textContent = "Details: " + label;
 
             let tableTemplate = document.getElementById("uebungskatalog-table-value");
             helperTable = document.importNode(tableTemplate.content, true);
@@ -804,12 +811,12 @@ function createUebungskatalogDetailTable(typ) {
     detailedSection.innerHTML = "";
     detailedSection.appendChild(helperTable);
 }
+
 function convertTime(input) {
     let finalTime
-    if(input.length % 2 == 0) {
+    if (input.length % 2 == 0) {
         finalTime = input[0] + input[1] + ":" + input[2] + input[3];
-    }
-    else {
+    } else {
         finalTime = input[0] + ":" + input[1] + input[2];
     }
     return finalTime;
@@ -852,6 +859,13 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         _currentActive = playerCardDom;
         playerCardDom.setAttribute("active", true);
         passOverviewPlayerInfos(overview, playerCard);
+        const ExBtnAction = document.getElementById("create-exercise-action");
+        ExBtnAction.addEventListener("click", () => {
+            createExercisePopup("popup-exercise");
+        });
+        const player_id = playerCard.getAttribute("id")
+        createExerciseDropdown("KRAFT", player_id);
+        createExerciseDropdownYear(player_id)
     }
 }
 
@@ -1107,3 +1121,103 @@ customElements.define(
         }
     },
 );
+customElements.define(
+    "exercise-popup",
+    class extends HTMLElement {
+        constructor() {
+            super();
+            const template = document.getElementById(
+                "exercise-popup",
+            ).content;
+            const shadowRoot = this.attachShadow({mode: "open"});
+            shadowRoot.appendChild(template.cloneNode(true));
+        }
+
+        connectedCallback() {
+            _popupPin = true;
+            const linkElem = document.createElement("link");
+            linkElem.setAttribute("rel", "stylesheet");
+            linkElem.setAttribute("href", "main.07544d9b.css");
+            this.shadowRoot.appendChild(linkElem);
+            const popUp = this;
+            const overlay = this.shadowRoot.getElementById("exercise-overlay");
+            const closeBtn = this.shadowRoot.getElementById("exercise-close-btn")
+            const dateField = this.shadowRoot.getElementById("exercise-date");
+            overlay.addEventListener('click', () => {
+                _popupPin = false;
+                popUp.remove();
+            });
+            closeBtn.addEventListener('click', () => {
+                _popupPin = false;
+                popUp.remove();
+            });
+            setExerciseDateDefaultValue(dateField);
+        }
+    });
+
+function createExercisePopup(id) {
+    _popupPin = true;
+    const main = document.getElementById("main")
+    const exercise = document.createElement("exercise-popup");
+    main.appendChild(exercise);
+}
+
+function createExerciseDropdown(ex_type, player_id) {
+    try {
+        console.log(ex_type);
+        axios.get('/athletes/exercise/' + player_id,
+            {
+                params: {type: ex_type}
+            }).then(response => {
+            if (response.status == 200) {
+                console.log(response.data)
+                const dropdownKraft = document.getElementById("change-exercise-kraft");
+                dropdownKraft.innerHTML = "";
+                for (let item of response.data) {
+                    const dropdownOption = document.createElement("option");
+                    dropdownOption.value = item.id;
+                    dropdownOption.textContent = item.title;
+                    dropdownKraft.appendChild(dropdownOption);
+                }
+            }
+        });
+    } catch (e) {
+        alert(e);
+    }
+}
+// Function to set today's date in the date input
+function setExerciseDateDefaultValue(dateInput) {
+    if (dateInput) {
+        let today = new Date();
+        let day = String(today.getDate()).padStart(2, '0');
+        let month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        let year = today.getFullYear();
+        let todayDate = `${year}-${month}-${day}`;
+        dateInput.value = todayDate;
+    } else {
+        console.error("Element with ID 'exercise-date' not found.");
+    }
+}
+
+function createExerciseDropdownYear(player_id) {
+    try {
+        axios.get('/api/completedExercises/ByPlayerId/' + player_id).then(response => {
+            if (response.status == 200) {
+                console.log(response.data)
+                const dropdownKraft = document.getElementById("change-exercise-year-kraft");
+                dropdownKraft.innerHTML = "";
+                for (let item of response.data) {
+                    const dropdownOption = document.createElement("option");
+                    if (item.exerciseType == "Kraft")
+                        dropdownOption.value = item.id;
+                    const dateofComp = item.dateOfCompletion;
+                    const yearofComp = dateofComp.getFullYear();
+                    dropdownOption.textContent = yearofComp;
+                    dropdownKraft.appendChild(dropdownOption);
+                }
+            }
+        });
+    } catch (e) {
+        alert(e);
+    }
+}
