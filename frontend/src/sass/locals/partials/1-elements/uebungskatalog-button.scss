@@ -23,7 +23,7 @@
   background: none;
 
   &:hover,
-  &:focus {
+  &[data-active="true"]{
     .uebungskatalog-list__text {
       color: config.$brandcolor-blue;
     background-size: 100% 1px;
