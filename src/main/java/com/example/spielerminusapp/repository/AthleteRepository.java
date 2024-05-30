@@ -11,5 +11,4 @@ import java.util.Optional;
 public interface AthleteRepository extends JpaRepository<Athlete, Long> {
     List<Athlete> findByLastName(String lastName);
     Optional<Athlete> findByUsername(String username);
-    List<Athlete> findByFirstNameAndLastName(String firstName, String lastName);
 }

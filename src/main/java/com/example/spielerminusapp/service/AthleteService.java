@@ -130,12 +130,13 @@ public class AthleteService {
             throw new RuntimeException(e);
         }
     }
-
     private Set<Athlete> parseCsv(InputStream inputStream) throws IOException {
         List<DateTimeFormatter> formatters = Arrays.asList(
                 DateTimeFormatter.ofPattern("dd.MM.yyyy"),
                 DateTimeFormatter.ofPattern("dd.MM.yyyy")
         );
+
+        Set<Athlete> athletes = new HashSet<>();
 
         try (Reader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             HeaderColumnNameMappingStrategy<AthleteCsvRepresentation> strategy = new HeaderColumnNameMappingStrategy<>();
@@ -148,21 +149,52 @@ public class AthleteService {
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
 
-            return csvToBean.parse()
+            csvToBean.parse()
                     .stream()
-                    .map(csvLine -> Athlete.builder()
-                            .firstName(csvLine.getFirstname())
-                            .lastName(csvLine.getLastname())
-                            .email(csvLine.getEmail())
-                            .dob(parseDate(csvLine.getDob(), formatters))
-                            .sex(csvLine.getSex())
-                            .swimmingCertificate(false)
-                            .role("ATHLETE")
-                            .password(passwordEncoder.encode(randomPasswordGenerator.generateRandomPassword(12)))
-                            .build()
-                    )
-                    .collect(Collectors.toSet());
+                    .forEach(csvLine -> {
+                        Athlete athlete = Athlete.builder()
+                                .firstName(csvLine.getFirstname())
+                                .lastName(csvLine.getLastname())
+                                .email(csvLine.getEmail())
+                                .dob(parseDate(csvLine.getDob(), formatters))
+                                .sex(csvLine.getSex())
+                                .swimmingCertificate(false)
+                                .role("ATHLETE")
+                                .password(passwordEncoder.encode(randomPasswordGenerator.generateRandomPassword(12)))
+                                .build();
+
+                        String username = generateUsername(athlete);
+
+                        // Check if the username already exists
+                        Optional<Athlete> existingAthleteOptional = athleteRepository.findByUsername(username);
+                        if (existingAthleteOptional.isPresent()) {
+                            Athlete existingAthlete = existingAthleteOptional.get();
+                            // Update only the specified fields
+                            existingAthlete.setFirstName(athlete.getFirstName());
+                            existingAthlete.setLastName(athlete.getLastName());
+                            existingAthlete.setEmail(athlete.getEmail());
+                            existingAthlete.setDob(athlete.getDob());
+                            existingAthlete.setSex(athlete.getSex());
+                            athletes.add(existingAthlete);
+                        } else {
+                            athlete.setUsername(username);
+                            athletes.add(athlete);
+                        }
+                    });
         }
+
+        return athletes;
+    }
+    private String generateUsername(Athlete athlete) {
+        String firstName = athlete.getFirstName();
+        String lastName = athlete.getLastName();
+        int birthYear = athlete.getDob().getYear();
+
+        String firstPart = firstName.length() >= 2 ? firstName.substring(0, 2) : firstName;
+        String lastPart = lastName.length() >= 2 ? lastName.substring(0, 2) : lastName;
+        String yearPart = String.valueOf(birthYear);
+
+        return firstPart.toLowerCase() + lastPart.toLowerCase() + yearPart;
     }
 
     private LocalDate parseDate(String dateStr, List<DateTimeFormatter> formatters) {
