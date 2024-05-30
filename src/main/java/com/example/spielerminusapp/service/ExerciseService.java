@@ -158,4 +158,23 @@ public class ExerciseService {
         return exerciseRepository.findAll();
     }
 
+    public void updateCompletedExercise(Long exerciseId, Long athleteId, String result, LocalDate date) {
+
+        List<CompletedExercise> compExs = completedExerciseRepository.findByAthleteIdAndExerciseIdOrderByDateOfCompletionDesc(athleteId, exerciseId);
+
+        Long compExId= 1L;
+
+        for(CompletedExercise cex : compExs){
+            if (cex.getDateOfCompletion().equals(date)){
+                compExId = cex.getId();
+            }
+        }
+
+
+        completedExerciseRepository.deleteById(compExId);
+
+        saveCompletedExercise(exerciseId, athleteId, result, date);
+
+
+    }
 }

@@ -17,7 +17,10 @@ import java.util.List;
 @Setter
 
 public class Exercise {
-
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " [id=" + id + ", other fields...]";
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EXERCISE_ID")

@@ -35,6 +35,10 @@ let _changeOptionPin = false;
 let _addPlayer = false;
 let tmp;
 let _uebungskatalogCurrentActiv = null;
+let _exerciseDate = null;
+let _exerciseExId = null;
+let _exerciseAtId = null;
+let _exerciseResult = null;
 
 window.onload = (event) => {
     createMeineDSA();
@@ -1128,6 +1132,7 @@ customElements.define(
 
     class extends HTMLElement {
         constructor() {
+            console.log(1)
             super();
             const template = document.getElementById(
                 "exercise-exists-popup",
@@ -1135,7 +1140,48 @@ customElements.define(
             const shadowRoot = this.attachShadow({mode: "open"});
             shadowRoot.appendChild(template.cloneNode(true));
         }
-        connectedCallback(){}
+        connectedCallback(){
+            console.log(2)
+            _popupPin = true;
+            const linkElem = document.createElement("link");
+            linkElem.setAttribute("rel", "stylesheet");
+            linkElem.setAttribute("href", "main.07544d9b.css");
+            this.shadowRoot.appendChild(linkElem);
+            const popUp = this;
+            const overlay = this.shadowRoot.getElementById("exercise-exists-overlay");
+            const cnlBtn = this.shadowRoot.getElementById("cancelOverwrite");
+            const cnfrmBtn = this.shadowRoot.getElementById("confirmOverwrite");
+
+            overlay.addEventListener('click', () => {
+                _popupPin = false;
+                popUp.remove();
+            });
+            cnlBtn.addEventListener('click', () => {
+                _popupPin = false;
+                popUp.remove();
+            });
+
+            cnfrmBtn.addEventListener('click', () => {
+                try {
+                    console.log("ex: " + _exerciseExId + "")
+                    axios.put('athletes/exercises/updateCompletedExercise/' + _exerciseExId + "/" + _exerciseAtId
+                        + "/" + _exerciseResult + "/" + _exerciseDate).then(response => {
+
+
+
+                        if (response.status == 200) {
+                                _popupPin = false;
+                                popUp.remove();
+                                alert("Die Leistung wurde geändert!")
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                    });
+                } catch (e) {
+                    console.error(e);
+                }
+            });
+        }
     }
 
 
@@ -1189,7 +1235,6 @@ customElements.define(
                     alert("Bitte geben Sie die Werte ein");
                 } else {
                     try {
-                        console.log("exer: " + exerciseId + "at " + athleteId + "re " + result + "date" + date);
                         axios.post('athletes/exercises/saveCompletedExercise/' + exerciseId + "/" + athleteId
                             + "/" + result + "/" + date).then(response => {
 
@@ -1197,9 +1242,14 @@ customElements.define(
 
                             if (response.status == 200) {
                                 if (response.data === false) {
+                                    console.log(response.data);
                                     _popupPin = false;
                                     popUp.remove();
-
+                                    _exerciseExId = exerciseId;
+                                    _exerciseDate = date;
+                                    _exerciseResult = result;
+                                    _exerciseAtId = athleteId;
+                                    createExerciseExistsPopUp();
 
                                 } else {
                                     _popupPin = false;
@@ -1221,7 +1271,12 @@ customElements.define(
         }
     });
 
-
+function createExerciseExistsPopUp() {
+    _popupPin = true;
+    const main = document.getElementById("main")
+    const exerciseExists = document.createElement("exercise-exists-popup");
+    main.appendChild(exerciseExists);
+}
 function createExercisePopup(id) {
     _popupPin = true;
     const main = document.getElementById("main")
