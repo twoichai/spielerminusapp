@@ -14,13 +14,22 @@
   margin-bottom: 15px;
   cursor: pointer;
   background-color: transparent;
+  animation: fadeInAnimation ease 1s;
 
   &:hover:not([active="true"]) {
     background-color: config.$neutral-color-200;
     border: 1px solid config.$neutral-color-400;
   }
 
+  @keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
 
+  100% {
+    opacity: 1;
+  }
+}
   &[active="true"] {
     background-color: config.$brandcolor-blue;
     color: white;
