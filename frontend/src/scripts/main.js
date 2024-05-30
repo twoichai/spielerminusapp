@@ -61,6 +61,7 @@ function getAllPlayer() {
                 playerCard.setAttribute("data-gender", item.sex);
                 playerCard.setAttribute("data-email", item.email);
                 playerCard.setAttribute("id", item.id);
+                playerCard.setAttribute("swim-certificate", item.swimmingCerticate);
 
                 playerList.appendChild(playerCard);
             }
@@ -885,9 +886,27 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
                 console.log(e);
             }
         });
+        const swim_confirm = document.getElementById("swim-confirm");
+        swim_confirm.addEventListener("click", swimFunction)
+
         const player_id = playerCard.getAttribute("id")
         createExerciseDropdown("KRAFT", player_id);
         createExerciseDropdownYear(player_id)
+    }
+}
+function swimFunction (){
+    try {
+        const swimSelectValue = document.getElementById("swim-select").value;
+        axios.patch('athletes/swimming-certificate/' + playerCard.getAttribute("id") + "/" + swimSelectValue, {
+        }).then(response => {
+            if (response.status === 200) {
+                alert("Sportabzeicheneinstellungen wurden geändert")
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    } catch (e) {
+        console.log(e);
     }
 }
 

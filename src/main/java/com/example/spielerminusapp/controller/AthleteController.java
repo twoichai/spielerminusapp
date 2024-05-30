@@ -134,8 +134,8 @@ public class AthleteController {
         }
     }
 
-    @PatchMapping("/swimming-certificate/{id}")
-    public Athlete updateSwimmingCertificate(@PathVariable Long id, @RequestParam boolean swimmingCertificate) {
+    @PatchMapping("/swimming-certificate/{id}/{swimmingCertificate}")
+    public Athlete updateSwimmingCertificate(@PathVariable Long id, @PathVariable boolean swimmingCertificate) {
         return athleteService.updateSwimmingCertificate(id, swimmingCertificate);
     }
 
