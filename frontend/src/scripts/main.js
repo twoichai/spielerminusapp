@@ -870,12 +870,24 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         });
         const einzelpruefKarteBtn = document.getElementById("export-pruefkarte");
         einzelpruefKarteBtn.addEventListener("click", () => {
+            let pruefYear = document.getElementById("pruefkarte-jahr").value;
+            if(pruefYear==="" ||pruefYear===null){
+                pruefYear="2024";
+            }
             try {
-                axios.get('athletes/einzelpruefkarte/' + playerCard.getAttribute("id"),  {
+                axios.get('athletes/einzelpruefkarte/' + playerCard.getAttribute("id") + "/" + pruefYear,  {
+                    responseType: 'blob'
+
 
                 }).then(response => {
                     if (response.status == 200) {
-                        downloadFile(response.data, 'pruefkarte.pdf');
+                        const url = window.URL.createObjectURL(new Blob([response.data], {type: 'text/pdf'}));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', 'pruefkarte.pdf');
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
 
                     }
                 }).catch(error => {

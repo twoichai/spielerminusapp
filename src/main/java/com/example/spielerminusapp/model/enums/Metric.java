@@ -3,8 +3,10 @@ package com.example.spielerminusapp.model.enums;
 public enum Metric {
     MINUTEN,
     METER,
-    SEKUNDEN,
+    DEZISEKUNDEN,
     CENTIMETER,
-    BENUTZERDEFINIERT,
+    ANZAHL,
+
+    GESAMTPUNKTE,
     PUNKTE
 }
