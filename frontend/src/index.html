@@ -677,15 +677,15 @@
 <template id="exercise-popup">
     <div class="exercise-popup" id="popup-ex">
         <div class="exercise-overlay" id="exercise-overlay"></div>
-        <div class="excercise-content">
-            <button class="exercise-close-btn" id="exercise-close-btn">&times;</button>
+        <div class="excercise-content" style="height: 250px">
             <div class="exercise-section" id="exercise-input">
                 <div class="exercise-section__header">
                     <h2 id="exercise-popUp-identifier" class="exercise-section__header-text">Leistung hinzufügen</h2>
+                    <br>
                 </div>
                 <div class="exercise-section__main">
-                    <p class="exercise-section__main-info">Bitte geben Sie die die erreichte Leistung an</p>
-                    </p>
+                    <p class="exercise-section__main-info" id = "erreichte-leistung"></p>
+                    <br>
                     <form action="#" class="exercise-section__main-content">
                         <div class="form-item form-exercise-result">
                             <input id="exercise-result" placeholder=" " class="form-item__input" type="number" name="result" aria-required="true">

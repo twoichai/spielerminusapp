@@ -845,6 +845,7 @@ function createTableRow(tableRow, item) {
 
 
 function selectActivePlayerCard(playerCardDom, playerCard) {
+    _activePlayercard = playerCard;
     const overview = document.getElementById("playerCard-detail");
 
     if (_currentActive != null) {
@@ -1121,6 +1122,8 @@ customElements.define(
         }
     },
 );
+
+
 customElements.define(
     "exercise-popup",
     class extends HTMLElement {
@@ -1141,7 +1144,7 @@ customElements.define(
             this.shadowRoot.appendChild(linkElem);
             const popUp = this;
             const overlay = this.shadowRoot.getElementById("exercise-overlay");
-            const closeBtn = this.shadowRoot.getElementById("exercise-close-btn")
+            const closeBtn = this.shadowRoot.getElementById("cancelExercise")
             const dateField = this.shadowRoot.getElementById("exercise-date");
             overlay.addEventListener('click', () => {
                 _popupPin = false;
@@ -1152,8 +1155,41 @@ customElements.define(
                 popUp.remove();
             });
             setExerciseDateDefaultValue(dateField);
+            const athleteId = _activePlayercard.getAttribute("id");
+            setExerciseKraftMetric(athleteId, this.shadowRoot);
+            const exerciseId = document.getElementById("change-exercise-kraft").value
+            const shadowRoot = this.shadowRoot;
+            let result;
+            let date;
+
+            this.shadowRoot.querySelector('#sendDataExerciseButton').onclick = function packData() {
+                result = shadowRoot.querySelector("#exercise-result").value;
+                console.log(typeof (result));
+                date = shadowRoot.querySelector("#exercise-date").value;
+
+                if (result === "" || date === null || result.is) {
+                    alert("Bitte geben Sie die Werte ein");
+                } else {
+                    try {
+                        console.log("exer: " +exerciseId+ "at " + athleteId + "re " + result + "date" + date);
+                        axios.post('athletes/exercises/saveCompletedExercise/' + exerciseId +"/"+ athleteId
+                            + "/" + result + "/"+date).then(response => {
+                            if (response.status == 200) {
+                                alert("Die Leistung wurde erfolgreich erfasst!");
+                            }
+                        }).catch(error => {
+                            console.error('Error:', error);
+                        });
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
+            }
+
+
         }
     });
+
 
 function createExercisePopup(id) {
     _popupPin = true;
@@ -1161,6 +1197,29 @@ function createExercisePopup(id) {
     const exercise = document.createElement("exercise-popup");
     main.appendChild(exercise);
 }
+
+function setExerciseKraftMetric(playerId, shadow) {
+    const uebungId = document.getElementById("change-exercise-kraft").value;
+    try {
+        axios.get('athletes/exercises/ruleMetricByExIdAthId', {
+            params: {
+                athleteId: parseInt(playerId),
+                exerciseId: parseInt(uebungId)
+            }
+        }).then(response => {
+            if (response.status == 200) {
+                shadow.getElementById("erreichte-leistung").textContent = "Bitte geben Sie die erreichte Leistung in " + response.data.charAt(0).toUpperCase() + response.data.slice(1).toLowerCase() + " an";
+                return response.data.charAt(0).toUpperCase() + response.data.slice(1).toLowerCase();
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    } catch (e) {
+        console.error(e);
+    }
+
+}
+
 
 function createExerciseDropdown(ex_type, player_id) {
     try {
@@ -1180,6 +1239,8 @@ function createExerciseDropdown(ex_type, player_id) {
                     dropdownKraft.appendChild(dropdownOption);
                 }
             }
+        }).catch(error => {
+            console.error('Error:', error);
         });
     } catch (e) {
         alert(e);

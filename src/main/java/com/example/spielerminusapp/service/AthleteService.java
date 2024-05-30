@@ -227,39 +227,39 @@ public class AthleteService {
         fields.get("Geschlecht w  m").setValue(athlete.getSex().toLowerCase());
         fields.get("Alter das im Kalenderjahr erreicht wird").setValue(atlerDasErreichtWird);
         fields.get("0").setValue(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE).substring(2,4));//jahr der prüfung
-        fields.get("Wert").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 1L).get(0).getResult());//Laufen
+        fields.get("Wert").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 1L).get(0).getResult().toString());//Laufen
         fields.get("Wert_2").setValue("");//10 km Lauf
-        fields.get("Wert_3").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 2L).get(0).getResult());//Dauergeländelauf
+        fields.get("Wert_3").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 2L).get(0).getResult().toString());//Dauergeländelauf
         fields.get("Wert_4").setValue("");//Nordicwalking
         fields.get("Punkte Ausdauer").setValue("");
-        fields.get("Wert_5").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 3L).get(0).getResult());//Schwimmen
-        fields.get("Wert_6").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 4L).get(0).getResult());//Radfahren
+        fields.get("Wert_5").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 3L).get(0).getResult().toString());//Schwimmen
+        fields.get("Wert_6").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 4L).get(0).getResult().toString());//Radfahren
 
-        fields.get("Wert_7").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 5L).get(0).getResult());//Schlagball
+        fields.get("Wert_7").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 5L).get(0).getResult().toString());//Schlagball
         fields.get("Wert_8").setValue("");//Medizinball
-        fields.get("Wert_9").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 6L).get(0).getResult());//Kugelstossen
+        fields.get("Wert_9").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 6L).get(0).getResult().toString());//Kugelstossen
         fields.get("Wert_10").setValue("");//Steinstossen
         fields.get("Punkte Kraft").setValue("");
-        fields.get("Wert_11").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 7L).get(0).getResult());//standweitsprung
-        fields.get("Übung 627").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 8L).get(0).getResult());//Gerätturnen 6.2.7
+        fields.get("Wert_11").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 7L).get(0).getResult().toString());//standweitsprung
+        fields.get("Übung 627").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 8L).get(0).getResult().toString());//Gerätturnen 6.2.7
 
 
-        fields.get("Wert_12").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 9L).get(0).getResult()); //laufen
-        fields.get("Wert_13").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 10L).get(0).getResult()); //schwimmen
-        fields.get("Wert_14").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 11L).get(0).getResult()); //radfahren
+        fields.get("Wert_12").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 9L).get(0).getResult().toString()); //laufen
+        fields.get("Wert_13").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 10L).get(0).getResult().toString()); //schwimmen
+        fields.get("Wert_14").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 11L).get(0).getResult().toString()); //radfahren
         fields.get("Punkte Schnelligkeit").setValue("");
-        fields.get("Übung 634").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 12L).get(0).getResult());//Gerätturnen 6.3.4
+        fields.get("Übung 634").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 12L).get(0).getResult().toString());//Gerätturnen 6.3.4
 
 
-        fields.get("Wert_15").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 13L).get(0).getResult()); //hochsprung
-        fields.get("Wert_16").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 14L).get(0).getResult()); //weitsprung
-        fields.get("Wert_17").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 15L).get(0).getResult()); //zonenweitsprung
-        fields.get("Wert_18").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 16L).get(0).getResult()); //drehwurf
-        fields.get("Wert_19").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 17L).get(0).getResult()); //schleuderball
+        fields.get("Wert_15").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 13L).get(0).getResult().toString()); //hochsprung
+        fields.get("Wert_16").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 14L).get(0).getResult().toString()); //weitsprung
+        fields.get("Wert_17").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 15L).get(0).getResult().toString()); //zonenweitsprung
+        fields.get("Wert_18").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 16L).get(0).getResult().toString()); //drehwurf
+        fields.get("Wert_19").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 17L).get(0).getResult().toString()); //schleuderball
         fields.get("Punkte Koordination").setValue("");
-        fields.get("Ergänzung").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 19L).get(0).getResult());//Gerätturnen 6.4.7 for some reason called ergänzung :D
+        fields.get("Ergänzung").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 19L).get(0).getResult().toString());//Gerätturnen 6.4.7 for some reason called ergänzung :D
 
-        fields.get("Anzahl 2").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 18L).get(0).getResult()); //seilspringen
+        fields.get("Anzahl 2").setValue(completedExerciseService.getCompletedExercisesByAthleteIdAndExerciseId(athlete.getId(), 18L).get(0).getResult().toString()); //seilspringen
 
 
         if(athlete.isSwimmingCertificate()) {
