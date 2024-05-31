@@ -447,15 +447,47 @@
             <div class="player-info__attributes">
                 <div class="attribute attribute-ausdauer">
                     <div class="attribute-title">
-                        <h4>Ausdauer</h4>
+                        <h3>Ausdauer</h3>
+                        <div class="exercise-dropdown">
+                            <div class="form-exercise form-item form-gender">
+                                <select id="change-exercise-ausdauer" class="form-item__input exercise-input" name="uebung" aria-required="true">
+                                </select>
+                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Übung</label>
+                            </div>
+                            <div class="form-exercise1 form-item form-gender">
+                                <select id="change-exercise-year-ausdauer" class="form-item__input exercise-input1" name="jahr" aria-required="true">
+                                    <option value="NichtsAusgewält">Übung Auswählen</option>
+                                </select>
+                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Jahr</label>
+                            </div>
+                        </div>
+                        <button id="create-exercise-action-ausdauer" class="add-player__button-icon1">
+                            <svg>
+                                <use href="images/icons/add-icon.svg#Button"></use>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="attribute-call-for-action">
-                        <p>Tippe hier, um eine Leistung hinzuzufügen</p>
+                    <div class="attribute-content">
+                        <div class="attribute-chart">
+                            <canvas id="chart-ausdauer"></canvas>
+                        </div>
+                        <div class="bestes-ergebnis">
+                            <div class="bestes-ergebnis-h4">
+                                <h4>Bestes Ergebnis:</h4>
+                            </div>
+                            <div>
+                                <div class="bestes-result-eintragen">
+                                    <p id="value-best-exercise-ausdauer"></p>
+                                    <p id="metric-best-exercise-ausdauer"></p>
+                                </div>
+                                <div class="medal-anzeige" id="result-medal-by-excercise-id-ausdauer"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="attribute attribute-kraft">
                     <div class="attribute-title position_dropdown">
-                        <h4>Kraft</h4>
+                        <h3>Kraft</h3>
                         <div class="exercise-dropdown">
                             <div class="form-exercise form-item form-gender">
                                 <select id="change-exercise-kraft" class="form-item__input exercise-input" name="uebung"
@@ -465,36 +497,115 @@
                                        class="form-item__micro form-item-exercise">Übung</label>
                             </div>
                             <div class="form-exercise1 form-item form-gender">
-                                <select id="change-exercise-year-kraft" class="form-item__input exercise-input1"
-                                        name="jahr" aria-required="true">
+                                <select id="change-exercise-year-kraft" class="form-item__input exercise-input1" name="jahr" aria-required="true">
+                                    <option value="NichtsAusgewält">Übung Auswählen</option>
                                 </select>
                                 <label for="change-section-gender"
                                        class="form-item__micro form-item-exercise">Jahr</label>
                             </div>
                         </div>
-                        <button id="create-exercise-action" class="add-player__button-icon1">
+                        <button id="create-exercise-action-kraft" class="add-player__button-icon1">
                             <svg>
                                 <use href="images/icons/add-icon.svg#Button"></use>
                             </svg>
                         </button>
                     </div>
-                    <div class="attribute-call-for-action">
+                    <div class="attribute-content">
+                        <div class="attribute-chart">
+                            <canvas id="chart-kraft"></canvas>
+                        </div>
+                        <div class="bestes-ergebnis">
+                            <div class="bestes-ergebnis-h4">
+                                <h4>Bestes Ergebnis:</h4>
+                            </div>
+                            <div>
+                                <div class="bestes-result-eintragen">
+                                    <p id="value-best-exercise-kraft"></p>
+                                    <p id="metric-best-exercise-kraft"></p>
+                                </div>
+                                <div class="medal-anzeige" id="result-medal-by-excercise-id-kraft"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="attribute attribute-schnelligkeit">
-                    <div class="attribute-title">
-                        <h4>Schnelligkeit</h4>
+                    <div class="attribute-title position_dropdown">
+                        <h3>Schnelligkeit</h3>
+                        <div class="exercise-dropdown">
+                            <div class="form-exercise form-item form-gender">
+                                <select id="change-exercise-schnelligkeit" class="form-item__input exercise-input" name="uebung" aria-required="true">
+                                    <option value="NichtsAusgewält">Übung Auswählen</option>
+                                </select>
+                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Übung</label>
+                            </div>
+                            <div class="form-exercise1 form-item form-gender">
+                                <select id="change-exercise-year-schnelligkeit" class="form-item__input exercise-input1" name="jahr" aria-required="true">
+                                    <option value="NichtsAusgewält">Übung Auswählen</option>
+                                </select>
+                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Jahr</label>
+                            </div>
+                        </div>
+                        <button id="create-exercise-action-schnelligkeit" class="add-player__button-icon1">
+                            <svg>
+                                <use href="images/icons/add-icon.svg#Button"></use>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="attribute-call-for-action">
-                        <p>Tippe hier, um eine Leistung hinzuzufügen</p>
+                    <div class="attribute-content">
+                        <div class="attribute-chart">
+                            <canvas id="chart-schnelligkeit"></canvas>
+                        </div>
+                        <div class="bestes-ergebnis">
+                            <div class="bestes-ergebnis-h4">
+                                <h4>Bestes Ergebnis:</h4>
+                            </div>
+                            <div>
+                                <div class="bestes-result-eintragen">
+                                    <p id="value-best-exercise-schnelligkeit"></p>
+                                    <p id="metric-best-exercise-schnelligkeit"></p>
+                                </div>
+                                <div class="medal-anzeige" id="result-medal-by-excercise-id-schnelligkeit"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="attribute attribute-koordination">
                     <div class="attribute-title">
-                        <h4>Koordination</h4>
+                        <h3>Koordination</h3>
+                        <div class="exercise-dropdown">
+                            <div class="form-exercise form-item form-gender">
+                                <select id="change-exercise-koordination" class="form-item__input exercise-input" name="uebung" aria-required="true">
+                                </select>
+                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Übung</label>
+                            </div>
+                            <div class="form-exercise1 form-item form-gender">
+                                <select id="change-exercise-year-koordination" class="form-item__input exercise-input1" name="jahr" aria-required="true">
+                                </select>
+                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Jahr</label>
+                            </div>
+                        </div>
+                        <button id="create-exercise-action-koordination" class="add-player__button-icon1">
+                            <svg>
+                                <use href="images/icons/add-icon.svg#Button"></use>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="attribute-call-for-action">
-                        <p>Tippe hier, um eine Leistung hinzuzufügen</p>
+                    <div class="attribute-content">
+                        <div class="attribute-chart">
+                            <canvas id="chart-koordination"></canvas>
+                        </div>
+                        <div class="bestes-ergebnis">
+                            <div class="bestes-ergebnis-h4">
+                                <h4>Bestes Ergebnis:</h4>
+                            </div>
+                            <div>
+                                <div class="bestes-result-eintragen">
+                                    <p id="value-best-exercise-koordination"></p>
+                                    <p id="metric-best-exercise-koordination"></p>
+                                </div>
+                                <div class="medal-anzeige" id="result-medal-by-excercise-id-koordination"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -711,7 +822,7 @@
 <template id="exercise-popup">
     <div class="exercise-popup" id="popup-ex">
         <div class="exercise-overlay" id="exercise-overlay"></div>
-        <div class="exercise-content" style="height: 250px">
+        <div class="excercise-content" style="height: 270px">
             <div class="exercise-section" id="exercise-input">
                 <div class="exercise-section__header">
                     <h2 id="exercise-popUp-identifier" class="exercise-section__header-text">Leistung hinzufügen</h2>
