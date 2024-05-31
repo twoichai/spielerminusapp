@@ -61,7 +61,7 @@ function getAllPlayer() {
                 playerCard.setAttribute("data-gender", item.sex);
                 playerCard.setAttribute("data-email", item.email);
                 playerCard.setAttribute("id", item.id);
-                playerCard.setAttribute("swim-certificate", item.swimmingCerticate);
+                playerCard.setAttribute("swim-certificate", item.swimmingCertificate);
 
 
                 playerList.appendChild(playerCard);
@@ -962,6 +962,14 @@ customElements.define(
             const linkElem = document.createElement("link");
             linkElem.setAttribute("rel", "stylesheet");
             linkElem.setAttribute("href", "main.07544d9b.css");
+
+            const swimProof = (this.getAttribute("swim-certificate"));
+            console.log(swimProof)
+            if (swimProof === true) {
+                this.shadowRoot.querySelector("#swim-icon").style.visibility = "visible"
+            } else {
+                this.shadowRoot.querySelector("#swim-icon").style.visibility = "hidden"
+            }
 
             this.shadowRoot.appendChild(linkElem);
 
