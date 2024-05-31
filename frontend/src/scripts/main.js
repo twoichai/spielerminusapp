@@ -50,6 +50,7 @@ let _exerciseAtId = null;
 let _exerciseResult = null;
 
 
+
 window.onload = (event) => {
     createMeineDSA();
 };
@@ -922,7 +923,8 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
             }
         });
         const swim_confirm = document.getElementById("swim-confirm");
-        swim_confirm.addEventListener("click", swimFunction)
+
+        swim_confirm.addEventListener("click", swimFunction())
 
         const player_id = playerCard.getAttribute("id")
         createExerciseDropdown("KRAFT", player_id);
@@ -990,8 +992,15 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
 function swimFunction (){
     try {
         const swimSelectValue = document.getElementById("swim-select").value;
-        const testValue = _activePlayercard.getAttribute("id")
-        console.log(testValue)
+        const testValue = _activePlayercard.getAttribute("id");
+        const swimIcon = document.getElementById("swim-icon");
+        console.log(testValue);
+        console.log(swimSelectValue)
+        if (swimSelectValue) {
+            swimIcon.style.visibility = "visible";
+        } else {
+            swimIcon.style.visibility = "hidden";
+        }
         axios.patch('athletes/swimming-certificate/' + _activePlayercard.getAttribute("id") + "/" + swimSelectValue, {
         }).then(response => {
             if (response.status === 200) {
@@ -1037,18 +1046,21 @@ customElements.define(
 
         connectedCallback() {
             const shadowRoot = this.shadowRoot;
-            const _this = this;
 
             const linkElem = document.createElement("link");
             linkElem.setAttribute("rel", "stylesheet");
             linkElem.setAttribute("href", "main.07544d9b.css");
 
+
+            console.log(swimIcon);
+
             const swimProof = (this.getAttribute("swim-certificate"));
+            let swimIcon = document.getElementById("swim-icon");
             console.log(swimProof)
             if (swimProof === true) {
-                this.shadowRoot.querySelector("#swim-icon").style.visibility = "visible"
+                swimIcon.style.visibility = "visible"
             } else {
-                this.shadowRoot.querySelector("#swim-icon").style.visibility = "hidden"
+                swimIcon.style.visibility = "hidden"
             }
 
             this.shadowRoot.appendChild(linkElem);
@@ -1419,7 +1431,7 @@ function createExerciseExistsPopUp() {
     const exerciseExists = document.createElement("exercise-exists-popup");
     main.appendChild(exerciseExists);
 }
-function createExercisePopup(id) {
+function createExercisePopup(id, typeBox) {
     _popupPin = true;
     const main = document.getElementById("main")
     const exercise = document.createElement("exercise-popup");
@@ -1724,7 +1736,7 @@ function capitalizeFirstLetterOnly(string) {
     var lowerCaseString = string.toLowerCase();
     // Den ersten Buchstaben des Kleinbuchstaben-Strings großschreiben und den Rest unverändert lassen
     return lowerCaseString.charAt(0).toUpperCase() + lowerCaseString.slice(1);
-
+}
 function downloadFile(data, filename) {
     // Create a new Blob object using the response data of the file
     const blob = new Blob([data], { type: data.type });

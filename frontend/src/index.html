@@ -415,8 +415,8 @@
                         <div style="width: 70%">
                             <select id="swim-select" class="form-item__input swim-form" name="smiwcertificate"
                                     aria-required="true">
-                                <option value="true">Vorhanden</option>
-                                <option value="false">Nicht vorhanden</option>
+                                <option value=true>Vorhanden</option>
+                                <option value=false>Nicht vorhanden</option>
                             </select></div>
                         <div style="width: 45%">
                             <button id="swim-confirm" class="baestaetigen-button">
@@ -434,7 +434,7 @@
                     </div>
                     <div class="swim-certificate-bottom" style="width: 100%;">
                         <div style="width: 50%">
-                             <input type="text" id="pruefkarte-jahr" name="pruefkarte-jahr" placeholder="jahr" class="form-item__input swim-form">
+                             <input type="text" id="pruefkarte-jahr" name="pruefkarte-jahr" placeholder="Jahr" class="form-item__input swim-form">
                         </div>
                         <div style="margin-left: 20px; width: 45%">
                             <button  class="baestaetigen-button" id="export-pruefkarte">
@@ -634,8 +634,8 @@
             </button>
         </div>
         <div class="playerCard__swim-ability">
-            <div id="swim-icon"  class="ability-icon">
-                <img src="images/imgs/swim-icon.png">
+            <div class="ability-icon">
+                <img id="swim-icon" src="images/icons/swim-icon.png">
             </div>
         </div>
         <div class="playerCard__medals">
@@ -822,7 +822,7 @@
 <template id="exercise-popup">
     <div class="exercise-popup" id="popup-ex">
         <div class="exercise-overlay" id="exercise-overlay"></div>
-        <div class="excercise-content" style="height: 270px">
+        <div class="exercise-content" style="height: 270px">
             <div class="exercise-section" id="exercise-input">
                 <div class="exercise-section__header">
                     <h2 id="exercise-popUp-identifier" class="exercise-section__header-text">Leistung hinzufügen</h2>
