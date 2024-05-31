@@ -11,7 +11,19 @@
             margin: 0;
             padding: 0;
             background-color: rgba(95, 194, 206, 0.87);
+         animation: fadeInAnimation ease 1s;
         }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+
         header {
             background-color: #FF4500;
             color: white;
@@ -81,7 +93,7 @@
     <section id="einleitung">
         <h2>Willkommen zu der Applikation!</h2>
         <p>Hi lieber Kunde! Diese Datei ist für Dich von dem <b>Team</b> Spaten bereitgestellt, damit du mit unserer Applikation SpielerMinus vertraut wirst. Hier findest du auch unseren Werdegang, Philosophie des Teams und andere wichtige Informationen.
-            <p>Bei jäglichen Fragen kontaktiere gerne unseren Product Owner <b>Illya Benyuk</b> oder Seine Vertretung <b>Nicklas Ewes</b>. Sonst steht dir Unser ganzes Team zur Verfügung!
+            <p>Bei jeglichen Fragen kontaktiere gerne unseren Product Owner <b>Illya Benyuk</b> oder Seine Vertretung <b>Nicklas Ewes</b>. Sonst steht dir Unser ganzes Team zur Verfügung!
             </p>
     </section>
     <section id="verwendung-athletenbereich">
@@ -92,12 +104,12 @@
         <ol>
             <li>Du bekommst eine, bei Bedarf nach Deinen Kriterien, sortierte Athletenliste.</li>
             <li>Athleten können von Dir angelegt werden, wenn Du auf "+" drückst.</li>
-            <li>Es ist Dir möglich Athlete zu exportieren, zu importieren, zu verändern und zu löschen.</li>
+            <li>Es ist Dir möglich Athleten zu exportieren, zu importieren, zu verändern und zu löschen.</li>
             <li>Du kannst die Athleten sich detailliert anschauen.</li>
         </ol>
         <p>Bei der detaillierten Einsicht kannst du jeweils die Sportarten nach Kategorie eintragen für Athleten eintragen. Dabei wird dir ein Ergebnisgraf generiert und du kannst auch zwischen unterschiedlichen Jahren wechseln.</p>
         <h2>Exporte und Importe</h2>
-        <p>Wie gewünscht, wurde für Dich die Möglichkeit Athleten in einer CSV Datei zu importieren und exportieren implementiert.
+        <p>Wie gewünscht, wurde für Dich die Möglichkeit Athleten in einer CSV-Datei zu importieren und exportieren implementiert.
         Bei Dopplung der Werte wird der bestehende Athlet überschrieben, dabei werden jeweils Name, Nachname und Geburtstag überprüft. Zusätzlich lässt sich die Prüfkarte in PDF leicht exportieren</p>
         <p>Athleten werden immer vor der Löschung exportiert. Dies ist ein Sicherheitsmechanismus. Sonst kann jeder einzelne Athlet exportiert werden.</p>
     </section>
@@ -106,7 +118,7 @@
         <p>Dir steht die Möglichkeit offen den aktuellen Übungskatalog anzuschauen. Dabei kannst du</p>
         <ol>
             <li>Regel für unterschiedliche Kategorien begutachten</li>
-            <li>bestehende Werte für Erhalt der Medallien anpassen (Vorsicht geboten!)</li>
+            <li>bestehende Werte für Erhalt der Medaillen anpassen (Vorsicht geboten!)</li>
             <li>Neue Regeln Einfügen oder Löschen</li>
         </ol>
     </section>
