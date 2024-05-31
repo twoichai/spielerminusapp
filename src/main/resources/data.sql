@@ -122,12 +122,12 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 2000, 2400, 2700, 'CENTIMETER', 'Wurfball (200 g)', 5),
        ('W', 16, 17, 2400, 2700, 3100, 'CENTIMETER', 'Wurfball (200 g)', 5),
 
-       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 6), -- Kugelstoßen --
-       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 6),
-       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 6),
-       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 6),
-       ('M', 10, 11, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 6),
-       ('W', 10, 11, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 6),
+       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', NULL, 6), -- Kugelstoßen --
+       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', NULL, 6),
+       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', NULL, 6),
+       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', NULL, 6),
+       ('M', 10, 11, -1, -1, -1, 'CENTIMETER', NULL, 6),
+       ('W', 10, 11, -1, -1, -1, 'CENTIMETER', NULL, 6),
 
        ('M', 12, 13, 625, 675, 725, 'CENTIMETER', '3 kg', 6),
        ('W', 12, 13, 475, 525, 575, 'CENTIMETER', '3 kg', 6),
@@ -192,8 +192,8 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 330, 275, 215, 'DEZISEKUNDEN', NULL, 10),
        ('W', 16, 17, 305, 255, 200, 'DEZISEKUNDEN', NULL, 10),
 
-       ('M', 6, 7, -1, -1, -1, 'DEZISEKUNDEN', 'Nicht geeignet', 11), -- 200 m Radfahren --
-       ('W', 6, 7, -1, -1, -1, 'DEZISEKUNDEN', 'Nicht geeignet', 11),
+       ('M', 6, 7, -1, -1, -1, 'DEZISEKUNDEN', NULL, 11), -- 200 m Radfahren --
+       ('W', 6, 7, -1, -1, -1, 'DEZISEKUNDEN', NULL, 11),
        ('M', 8, 9, 380, 330, 280, 'DEZISEKUNDEN', NULL, 11),
        ('M', 10, 11, 350, 305, 260, 'DEZISEKUNDEN', NULL, 11),
        ('M', 12, 13, 295, 260, 225, 'DEZISEKUNDEN', NULL, 11),
@@ -221,10 +221,10 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 1, 2, 3, 'PUNKTE', 'Sprung', 12),
        ('W', 16, 17, 1, 2, 3, 'PUNKTE', 'Sprung', 12),
 
-       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 13), -- Hochsprung  -- starts with 0, what to do?
-       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 13),
-       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 13),
-       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 13),
+       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', NULL, 13), -- Hochsprung  -- starts with 0, what to do?
+       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', NULL, 13),
+       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', NULL, 13),
+       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', NULL, 13),
        ('M', 10, 11, 85, 95, 105, 'CENTIMETER', NULL, 13),
        ('M', 12, 13, 95, 105, 115, 'CENTIMETER', NULL, 13),
        ('M', 14, 15, 110, 120, 130, 'CENTIMETER', NULL, 13),
@@ -235,10 +235,10 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('W', 14, 15, 95, 105, 115, 'CENTIMETER', NULL, 13),
        ('W', 16, 17, 105, 115, 125,  'CENTIMETER', NULL, 13),
 
-       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 14), -- Weitsprung
-       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 14),
-       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 14),
-       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 14),
+       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', NULL, 14), -- Weitsprung
+       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', NULL, 14),
+       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', NULL, 14),
+       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', NULL, 14),
        ('M', 10, 11, 260, 290, 320, 'CENTIMETER', NULL, 14),
        ('M', 12, 13, 320, 350, 380, 'CENTIMETER', NULL, 14),
        ('M', 14, 15, 380, 410, 440, 'CENTIMETER', NULL, 14),
@@ -253,16 +253,16 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('M', 8, 9, 27, 30, 33, 'GESAMTPUNKTE', 'Zonenweitsprung', 15),
        ('W', 6, 7, 18, 21, 24, 'GESAMTPUNKTE', 'Zonenweitsprung', 15),
        ('W', 8, 9, 24, 27, 30, 'GESAMTPUNKTE', 'Zonenweitsprung', 15),
-       ('M', 10, 11, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 15),
-       ('M', 12, 13, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 15),
-       ('M', 14, 15, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 15),
-       ('M', 16, 17, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 15),
+       ('M', 10, 11, -1, -1, -1, 'GESAMTPUNKTE', NULL, 15),
+       ('M', 12, 13, -1, -1, -1, 'GESAMTPUNKTE', NULL, 15),
+       ('M', 14, 15, -1, -1, -1, 'GESAMTPUNKTE', NULL, 15),
+       ('M', 16, 17, -1, -1, -1, 'GESAMTPUNKTE', NULL, 15),
 
 
-       ('W', 10, 11, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 15),
-       ('W', 12, 13, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 15),
-       ('W', 14, 15, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 15),
-       ('W', 16, 17, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 15),
+       ('W', 10, 11, -1, -1, -1, 'GESAMTPUNKTE', NULL, 15),
+       ('W', 12, 13, -1, -1, -1, 'GESAMTPUNKTE', NULL, 15),
+       ('W', 14, 15, -1, -1, -1, 'GESAMTPUNKTE', NULL, 15),
+       ('W', 16, 17, -1, -1, -1, 'GESAMTPUNKTE', NULL, 15),
 
        ('M', 6, 7, 15, 18, 24, 'GESAMTPUNKTE', 'Drehwurf', 16), -- Drehwurf
        ('M', 8, 9, 21, 27, 33, 'GESAMTPUNKTE', 'Drehwurf', 16),
@@ -271,19 +271,19 @@ VALUES ('M', 6, 7, 540, 500, 415, 'MINUTEN', NULL, 1), -- 800m Lauf --
        ('W', 8, 9, 18, 21, 27, 'GESAMTPUNKTE', 'Drehwurf', 16),
        ('W', 10, 11, 27, 30, 36, 'GESAMTPUNKTE', 'Drehwurf', 16),
 
-       ('M', 12, 13, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 16),
-       ('M', 14, 15, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 16),
-       ('M', 16, 17, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 16),
-       ('W', 12, 13, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 16),
-       ('W', 14, 15, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 16),
-       ('W', 16, 17, -1, -1, -1, 'GESAMTPUNKTE', 'Nicht geeignet', 16),
+       ('M', 12, 13, -1, -1, -1, 'GESAMTPUNKTE', NULL, 16),
+       ('M', 14, 15, -1, -1, -1, 'GESAMTPUNKTE', NULL, 16),
+       ('M', 16, 17, -1, -1, -1, 'GESAMTPUNKTE', NULL, 16),
+       ('W', 12, 13, -1, -1, -1, 'GESAMTPUNKTE', NULL, 16),
+       ('W', 14, 15, -1, -1, -1, 'GESAMTPUNKTE', NULL, 16),
+       ('W', 16, 17, -1, -1, -1, 'GESAMTPUNKTE', NULL, 16),
 
-       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17), -- Schleuderball
-       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
-       ('M', 10, 11, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
-       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
-       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
-       ('W', 10, 11, -1, -1, -1, 'CENTIMETER', 'Nicht geeignet', 17),
+       ('M', 6, 7, -1, -1, -1, 'CENTIMETER', NULL, 17), -- Schleuderball
+       ('M', 8, 9, -1, -1, -1, 'CENTIMETER', NULL, 17),
+       ('M', 10, 11, -1, -1, -1, 'CENTIMETER', NULL, 17),
+       ('W', 6, 7, -1, -1, -1, 'CENTIMETER', NULL, 17),
+       ('W', 8, 9, -1, -1, -1, 'CENTIMETER', NULL, 17),
+       ('W', 10, 11, -1, -1, -1, 'CENTIMETER', NULL, 17),
 
        ('M', 12, 13, 1950, 2400, 2750, 'CENTIMETER', 'Schleuderball', 17),
        ('M', 14, 15, 2350, 2800, 3200, 'CENTIMETER', 'Schleuderball', 17),

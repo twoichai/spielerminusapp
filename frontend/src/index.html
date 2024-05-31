@@ -94,53 +94,59 @@
 
         </div>
     </div>
-    <div style="visibility: hidden; width: 100%" id="uebungskatalog-detail-values"
-         class="uebungskatalog-detail-values uebungskatalog-detail">
+    <div style="display: none; width: 100%" id="uebungskatalog-detail-values" class="uebungskatalog-detail-values uebungskatalog-detail">
         <div class="uebungskatalog-detail-values__header uebungskatalog-detail__header">
             <div class="uebungskatalog-detail-values__title uebungskatalog-detail__title">
                 <h3 id="uebungskatalog-detail-values__title">Error</h3>
             </div>
         </div>
-        <div style="overflow-y: scroll; direction: ltr; max-height: calc(100vh - 119px); min-width: 100%; padding: 20px"
-             id="uebungskatalog-detail-values__main" class="uebungskatalog-detail-values__main">
-
+        <div style="overflow-y: scroll; direction: ltr; max-height: calc(100vh - 119px); min-width: 100%;" id="uebungskatalog-detail-values__main" class="uebungskatalog-detail-values__main">
         </div>
     </div>
 </template>
 <template id="uebungskatalog-table-value">
-    <div class="uebungskatalog-table__header">
-        <h3 id="uebungskatalog-table__header"></h3>
+    <div class="uebungskatalog-table__wrapper">
+        <div class="uebungskatalog-table__header">
+            <h3 style="display: none" id="uebungskatalog-table__details" class="uebungskatalog-table__header topBottomMargin">Details: <p id="uebungskatalog-table__header"></p></h3>
+        </div>
+        <div id="main-table-section" class="uebbungskatalog-table__main">
+            <table id="uebungskatalog-table__main">
+                <thead>
+                <tr>
+                    <th class="tableHeader">Alter</th>
+                    <th class="tableHeader">Geschlecht</th>
+                    <th class="tableHeader">Einheit</th>
+                    <th class="tableHeader">Bronze</th>
+                    <th class="tableHeader">Silber</th>
+                    <th class="tableHeader">Gold</th>
+                </tr>
+                </thead>
+                <tbody id="uebungskatalog-table__body">
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div id="main-table-section" class="uebbungskatalog-table__main">
-        <table id="uebungskatalog-table__main">
-            <thead>
-            <tr>
-                <th class="tableHeader">Alter</th>
-                <th class="tableHeader">Geschlecht</th>
-                <th class="tableHeader">Einheit</th>
-                <th class="tableHeader">Bronze</th>
-                <th class="tableHeader">Silber</th>
-                <th class="tableHeader">Gold</th>
-            </tr>
-            </thead>
-            <tbody id="uebungskatalog-table__body">
-
-            </tbody>
-        </table>
+</template>
+<template id="tableChangeButton">
+    <div class="change-section__save-button">
+        <button class="button--next" type="button" value="submit">
+            Bearbeiten
+            <span class="button--next__arrow"></span>
+        </button>
     </div>
 </template>
 <template id="tableRow">
-    <tr>
-        <td contenteditable="true" id="age"></td>
-        <td contenteditable="true" id="gender"></td>
-        <td contenteditable="true" id="metric"></td>
-        <td contenteditable="true" id="bronze"></td>
-        <td contenteditable="true" id="silver"></td>
-        <td contenteditable="true" id="gold"></td>
+    <tr class="row">
+        <td contenteditable="false" id="age"></td>
+        <td contenteditable="false" id="gender"></td>
+        <td contenteditable="false" id="metric"></td>
+        <td contenteditable="false" id="bronze"></td>
+        <td contenteditable="false" id="silver"></td>
+        <td contenteditable="false" id="gold"></td>
     </tr>
 </template>
 <template id="uebungskatalog-ausdauer-kinder">
-    <div class="uebungskatalog-list">
+    <div id="uebungskatalog-details-list"  class="uebungskatalog-list">
         <div class="uebungskatalog-list__ausdauer">
             <button class="uebungskatalog-list__button" id="ausdauer-800-meter">
                 <span class="uebungskatalog-list__text">800 Meter Lauf</span>
@@ -176,7 +182,7 @@
     </div>
 </template>
 <template id="uebungskatalog-kraft-kinder">
-    <div class="uebungskatalog-list">
+    <div id="uebungskatalog-details-list" class="uebungskatalog-list">
         <div class="uebungskatalog-list__ausdauer">
             <button class="uebungskatalog-list__button" id="kraft-werfen">
                 <span class="uebungskatalog-list__text">Werfen</span>
@@ -195,7 +201,7 @@
         </div>
         <div class="uebungskatalog-list__schnelligkeit">
             <button class="uebungskatalog-list__button" id="kraft-standweitsprung">
-                <span class="uebungskatalog-list__text">Schwimmen</span>
+                <span class="uebungskatalog-list__text">Standweitsprung</span>
                 <svg class="uebungskatalog-list__icon">
                     <use href="images/icons/pointer-icon.svg#Layer_1"></use>
                 </svg>
@@ -212,7 +218,7 @@
     </div>
 </template>
 <template id="uebungskatalog-schnelligkeit-kinder">
-    <div class="uebungskatalog-list">
+    <div id="uebungskatalog-details-list" class="uebungskatalog-list">
         <div class="uebungskatalog-list__ausdauer">
             <button class="uebungskatalog-list__button" id="schnelligkeit-laufen">
                 <span class="uebungskatalog-list__text">Laufen</span>
@@ -248,7 +254,7 @@
     </div>
 </template>
 <template id="uebungskatalog-koordination-kinder">
-    <div class="uebungskatalog-list">
+    <div id="uebungskatalog-details-list" class="uebungskatalog-list">
         <div class="uebungskatalog-list__ausdauer">
             <button class="uebungskatalog-list__button" id="koordination-hochsprung">
                 <span class="uebungskatalog-list__text">Hochsprung</span>
@@ -635,7 +641,7 @@
         </div>
         <div class="playerCard__swim-ability">
             <div class="ability-icon">
-                <img id="swim-icon" src="images/icons/swim-icon.png">
+                <img id="swim-icon" src="images/imgs/swim-icon.png">
             </div>
         </div>
         <div class="playerCard__medals">
@@ -643,6 +649,79 @@
         </div>
     </div>
 </template>
+
+<template id="change-table-popup">
+    <div id="change-table-pop" class="change-section-wrapper" >
+        <div class="change-section-holder" style="transform: translateY(-6.2%)">
+            <div class="change-section">
+                <div class="change-section__header">
+                    <h2 class="change-section__header-text">Übungskatalog Bearbeiten</h2>
+                </div>
+                <div class="change-section__main">
+                    <p class="change-section__main-info">Bitte geben Sie die Informationen an</p>
+                    <form>
+                        <div class="form-item form-age">
+                            <select id="change-table-age" class="form-item__input" name="type" aria-required="true">
+                                <option value="6 - 7">6 - 7</option>
+                                <option value="8 - 9">8 - 9</option>
+                                <option value="10 - 11">10 - 11</option>
+                                <option value="12 - 13">12 - 13</option>
+                                <option value="14 - 15">14 - 15</option>
+                                <option value="16 - 17">16 - 17</option>
+                            </select>
+                            <label for="change-table-age" class="form-item__micro">Alter</label>
+                        </div>
+                        <div class="form-item form-gender">
+                            <select id="change-table-gender" class="form-item__input" name="gender" aria-required="true">
+                                <option value="M">Männlich</option>
+                                <option value="W">Weiblich</option>
+                            </select>
+                            <label for="change-table-gender" class="form-item__micro">Geschlecht</label>
+                        </div>
+                        <div class="form-item form-metric">
+                            <select id="change-table-metric" class="form-item__input" name="metric" aria-required="true">
+                                <option id="table-metric" value=""></option>
+                            </select>
+                            <label for="change-table-metric" class="form-item__micro">Einheit</label>
+                        </div>
+                        <div class="form-item form-bronze" id="change-table-bronze">
+                            <input id="change-table-bronze-value" placeholder=" " class="form-item__input" name="bronze" aria-required="true">
+                            <label for="change-table-bronze-value" class="form-item__micro">Bronze</label>
+                        </div>
+                        <div class="form-item form-silver" id="change-table-silver">
+                            <input id="change-table-silver-value" placeholder=" " class="form-item__input" name="silver" aria-required="true">
+                            <label for="change-table-silver-value" class="form-item__micro">Silber</label>
+                        </div>
+                        <div class="form-item form-gold" id="change-table-gold">
+                            <input id="change-table-gold-value" placeholder=" " class="form-item__input" name="gold" aria-required="true">
+                            <label for="change-table-gold-value" class="form-item__micro">Gold</label>
+                        </div>
+                        <div class="change-section__buttons">
+                            <div class="button--cancel" id="cancel-change">
+                                <div>
+                                    Abbrechen
+                                </div>
+                                <div class="button--cancel__arrow">
+                                    <div class="button--cancel__arrow-left"></div>
+                                    <div class="button--cancel__arrow-right"></div>
+                                </div>
+                            </div>
+                            <div class="change-section__save-button">
+                                <button class="button--next" type="button" value="submit" id="send-table-button">
+                                    Speichern
+                                    <span class="button--next__arrow"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
 <template id="change-section-popup">
     <div class="change-section-wrapper" id="change-section-wrapper">
         <div class="change-section-holder">
