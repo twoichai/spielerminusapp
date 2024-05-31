@@ -10,10 +10,10 @@
             font-family: Montserrat, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: rgba(95, 194, 206, 0.87);
         }
         header {
-            background-color: #333;
+            background-color: #FF4500;
             color: white;
             padding: 10px 0;
             text-align: center;
@@ -38,17 +38,20 @@
             padding: 10px 0;
             background-color: #e2e2e2;
             text-align: center;
+            background-color: #FF4500;
         }
         nav a {
             margin: 0 15px;
             text-decoration: none;
             color: #333;
+
         }
         nav a:hover {
             text-decoration: underline;
+
         }
         footer {
-            background-color: #333;
+            background-color: #FF4500;
             color: white;
             text-align: center;
             padding: 10px 0;
@@ -72,7 +75,7 @@
         <a href="#einleitung">Einleitung</a>
         <a href="#installation">Installation</a>
         <a href="#verwendung">Verwendung</a>
-        <a style="color: red" href="#support">Zurück zu der Applikation</a>
+        <a style="color: white" href="/">Zurück zu der Applikation</a>
 
     </nav>
     <section id="einleitung">
@@ -82,20 +85,21 @@
             </p>
     </section>
     <section id="verwendung-athletenbereich">
-        <h2>Files </h2>
+        <h2>Files</h2>
             <p>In dem ganzen Packet hast du die Applikation, Admincredentials mit One-Time Password und diese Anleitung bekommen. Separat wird jedes Mitglied seinen Bericht über die Erfahrung in dem Team und über die Arbeit nach Scrum Methode auf HVS hochgeladen.</p>
         <h2>Athletenbereich </h2>
         <p>Nun fragst du dich, "Was kann ich in dem Athletenbereich machen?" Am besten tobst Du dich da aus, aber hier ein kleiner Überblick zu den Funktionen:</p>
         <ol>
             <li>Du bekommst eine, bei Bedarf nach Deinen Kriterien, sortierte Athletenliste.</li>
-            <li>Spieler können von Dir angelegt werden, wenn Du auf "+" drückst.</li>
+            <li>Athleten können von Dir angelegt werden, wenn Du auf "+" drückst.</li>
             <li>Es ist Dir möglich Athlete zu exportieren, zu importieren, zu verändern und zu löschen.</li>
-            <li>Du kannst die Spieler sich detailliert anschauen.</li>
+            <li>Du kannst die Athleten sich detailliert anschauen.</li>
         </ol>
+        <p>Bei der detaillierten Einsicht kannst du jeweils die Sportarten nach Kategorie eintragen für Athleten eintragen. Dabei wird dir ein Ergebnisgraf generiert und du kannst auch zwischen unterschiedlichen Jahren wechseln.</p>
         <h2>Exporte und Importe</h2>
-        <p>Wie gewünscht wurde für Dich die Möglichkeit Athleten in einer CSV Datei zu importieren und exportieren implementiert.
-        Bei Dopplung der Werte wird der bestehende Athlet überschrieben, dabei werden jeweils Name, Nachname und Geburtstag überprüft.</p>
-        <p>Spieler werden immer vor der Löschung exportiert. Dies ist ein Sicherheitsmechanismus. Sonst kann jeder einzelne Spieler exportiert werden.</p>
+        <p>Wie gewünscht, wurde für Dich die Möglichkeit Athleten in einer CSV Datei zu importieren und exportieren implementiert.
+        Bei Dopplung der Werte wird der bestehende Athlet überschrieben, dabei werden jeweils Name, Nachname und Geburtstag überprüft. Zusätzlich lässt sich die Prüfkarte in PDF leicht exportieren</p>
+        <p>Athleten werden immer vor der Löschung exportiert. Dies ist ein Sicherheitsmechanismus. Sonst kann jeder einzelne Athlet exportiert werden.</p>
     </section>
     <section id="verwendung-übungskatalog">
         <h2>Übungskatalog</h2>
@@ -105,6 +109,15 @@
             <li>bestehende Werte für Erhalt der Medallien anpassen (Vorsicht geboten!)</li>
             <li>Neue Regeln Einfügen oder Löschen</li>
         </ol>
+    </section>
+    <section id="admin-bereich">
+        <h2>Was ist in dem Adminbereich?</h2>
+        <p>Da sind für Dich zwei Methoden implementiert</p>
+        <ol>
+            <li>Passwortänderung</li>
+            <li>E-Mailveränderung</li>
+        </ol>
+        <p>In beiden Fällen musst Du Deine alten Werte angeben und gegebenenfalls mit Passwort bestätigen. Passwort wird dabei nach Stärke überprüft! Dabei muss Dein Password mindestens 12 Zeichen haben</p>
     </section>
     <section id="info-team">
         <h2>Was und wer ist Team Spaten?</h2>
@@ -116,16 +129,8 @@
             <p><b>Backend:</b> für das Rückgrat der Applikation war Herr Ewes zuständig</p>
             <p><b>Product Owner:</b> für die Kommunikation mit anderen Product Owners und dem Kunden hat sich Herr Benyuk eingesetzt</p>
             <p><b>Scrum Masters:</b> jeweils Herr Ewes und Herr Al-Barakat haben sich für das Management des Teams eingesetzt
-            <p><b>Jira und Branding:</b> Herr Ackermann war jeweils für unsere Jira Führung und Darstellung als Team Spaten und Branding zuständig</p>
-    </section>
-    <section id="admin-bereich">
-        <h2>Was ist in dem Adminbereich?</h2>
-        <p>Da sind für Dich zwei Methoden implementiert</p>
-        <ol>
-            <li>Passwortänderung</li>
-            <li>E-Mailveränderung</li>
-        </ol>
-        <p>In beiden Fällen musst Du Deine alten Werte angeben und gegebenenfalls mit Passwort bestätigen. Passwort wird dabei nach Stärke überprüft!</p>
+            <p><b>Jira und Branding:</b> Herr Ackermann war jeweils für unsere Jira Führung und Branding von Team Spaten zuständig</p>
+        <p><b>Dokumentation und Videoaufnahmen:</b> Herr Amen war für Videoanleitungen und die Dokumentation zuständig</p>
     </section>
     <section id="philosophie">
         <h2>Philosophie des Teams</h2>
@@ -144,8 +149,5 @@
     <div>
         <p>&copy; 2024 Team Spaten.    Alle Rechte vorbehalten.</p>
    </div>
-
-
-
 </body>
 </html>
