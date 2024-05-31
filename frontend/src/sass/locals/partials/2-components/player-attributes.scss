@@ -77,9 +77,34 @@
 
 .attribute-chart {
   width: 50%;
+  border-right-color: black ;
 }
 .attribute-content {
   display: flex;
+}
+
+.bestes-ergebnis {
+  display: block;
+  height: 100%;
+}
+.bestes-ergebnis-h4 {
+  align-self: flex-start;
+  padding: 20px 10px 0px 20px;
+}
+
+.bestes-result-eintragen {
+  display: flex;
+  gap: 5px;
+  padding: 20px;
+
+}
+.medal-anzeige {
+  padding: 10px 40px 40px 150px;
+
+}
+
+.medal-anzeige img {
+  width: 50px;
 }
 
 .attribute-call-for-action {

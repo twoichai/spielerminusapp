@@ -445,6 +445,18 @@
                         <div class="attribute-chart">
                             <canvas id="chart-ausdauer"></canvas>
                         </div>
+                        <div class="bestes-ergebnis">
+                            <div class="bestes-ergebnis-h4">
+                                <h4>Bestes Ergebnis:</h4>
+                            </div>
+                            <div>
+                                <div class="bestes-result-eintragen">
+                                    <p id="value-best-exercise-ausdauer"></p>
+                                    <p id="metric-best-exercise-ausdauer"></p>
+                                </div>
+                                <div class="medal-anzeige" id="result-medal-by-excercise-id-ausdauer"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="attribute attribute-kraft">
@@ -473,9 +485,17 @@
                         <div class="attribute-chart">
                             <canvas id="chart-kraft"></canvas>
                         </div>
-                        <div class="bestes-ergebnis-kraft">
-                            <p>Bestes Ergebnis</p>
-
+                        <div class="bestes-ergebnis">
+                            <div class="bestes-ergebnis-h4">
+                                <h4>Bestes Ergebnis:</h4>
+                            </div>
+                            <div>
+                                <div class="bestes-result-eintragen">
+                                    <p id="value-best-exercise-kraft"></p>
+                                    <p id="metric-best-exercise-kraft"></p>
+                                </div>
+                                <div class="medal-anzeige" id="result-medal-by-excercise-id-kraft"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -506,6 +526,18 @@
                         <div class="attribute-chart">
                             <canvas id="chart-schnelligkeit"></canvas>
                         </div>
+                        <div class="bestes-ergebnis">
+                            <div class="bestes-ergebnis-h4">
+                                <h4>Bestes Ergebnis:</h4>
+                            </div>
+                            <div>
+                                <div class="bestes-result-eintragen">
+                                    <p id="value-best-exercise-schnelligkeit"></p>
+                                    <p id="metric-best-exercise-schnelligkeit"></p>
+                                </div>
+                                <div class="medal-anzeige" id="result-medal-by-excercise-id-schnelligkeit"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="attribute attribute-koordination">
@@ -532,6 +564,18 @@
                     <div class="attribute-content">
                         <div class="attribute-chart">
                             <canvas id="chart-koordination"></canvas>
+                        </div>
+                        <div class="bestes-ergebnis">
+                            <div class="bestes-ergebnis-h4">
+                                <h4>Bestes Ergebnis:</h4>
+                            </div>
+                            <div>
+                                <div class="bestes-result-eintragen">
+                                    <p id="value-best-exercise-koordination"></p>
+                                    <p id="metric-best-exercise-koordination"></p>
+                                </div>
+                                <div class="medal-anzeige" id="result-medal-by-excercise-id-koordination"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -745,7 +789,7 @@
 <template id="exercise-popup">
     <div class="exercise-popup" id="popup-ex">
         <div class="exercise-overlay" id="exercise-overlay"></div>
-        <div class="excercise-content" style="height: 250px">
+        <div class="excercise-content" style="height: 270px">
             <div class="exercise-section" id="exercise-input">
                 <div class="exercise-section__header">
                     <h2 id="exercise-popUp-identifier" class="exercise-section__header-text">Leistung hinzufügen</h2>

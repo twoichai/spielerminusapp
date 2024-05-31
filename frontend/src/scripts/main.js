@@ -896,25 +896,54 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         createExerciseDropdownYear(player_id, "koordination");
         createCharts();
 
+
+        const dropdownau = document.getElementById("change-exercise-ausdauer");
         const dropdownsch = document.getElementById("change-exercise-schnelligkeit");
+        const dropdownk = document.getElementById("change-exercise-kraft");
+        const dropdownkoo = document.getElementById("change-exercise-koordination");
+        const dropdownschy = document.getElementById("change-exercise-year-schnelligkeit");
+        const dropdownauy = document.getElementById("change-exercise-year-ausdauer");
+        const dropdownky = document.getElementById("change-exercise-year-kraft");
+        const dropdownkooy = document.getElementById("change-exercise-year-koordination");
+
+        //change in exercise dropdown
         dropdownsch.addEventListener("change", (evt) => {
             console.log(evt.target.textContent)
-            changeChartExercise( evt.target.value, player_id, schchart);
+            changeChartExercise( evt.target.value, player_id, schchart, "schnelligkeit", dropdownschy.value);
         })
-        const dropdownau = document.getElementById("change-exercise-ausdauer");
         dropdownau.addEventListener("change", (evt) => {
             console.log(evt.target.textContent)
-            changeChartExercise( evt.target.value, player_id, auschart);
+            changeChartExercise( evt.target.value, player_id, auschart, "ausdauer", dropdownky.value);
         })
-        const dropdownk = document.getElementById("change-exercise-kraft");
         dropdownk.addEventListener("change", (evt) => {
             console.log(evt.target.textContent)
-            changeChartExercise( evt.target.value, player_id, kchart);
+            changeChartExercise( evt.target.value, player_id, kchart, "kraft", dropdownauy.value);
         })
-        const dropdownkoo = document.getElementById("change-exercise-koordination");
+
         dropdownkoo.addEventListener("change", (evt) => {
             console.log(evt.target.textContent)
-            changeChartExercise( evt.target.value, player_id, kochart);
+            changeChartExercise( evt.target.value, player_id, kochart, "koordination", dropdownschy.value);
+        })
+
+        //change in year dropdown
+        dropdownschy.addEventListener("change", (evt) => {
+            console.log(evt.target.textContent)
+            changeChartExercise( dropdownsch.value, player_id, schchart, "schnelligkeit", evt.target.value);
+        })
+
+        dropdownauy.addEventListener("change", (evt) => {
+            console.log(evt.target.textContent)
+            changeChartExercise( dropdownau.value, player_id, auschart, "ausdauer", evt.target.value);
+        })
+
+        dropdownky.addEventListener("change", (evt) => {
+            console.log(dropdownk.value)
+            changeChartExercise( dropdownk.value, player_id, kchart, "kraft", evt.target.value);
+        })
+
+        dropdownkooy.addEventListener("change", (evt) => {
+            console.log(dropdownkoo.value)
+            changeChartExercise( dropdownkoo.value, player_id, kochart, "koordination", evt.target.value);
         })
 
     }
@@ -1328,8 +1357,6 @@ function createExerciseDropdownYear(player_id, exertype) {
                 let years = [];
                 for (let item of response.data) {
                     const dropdownOption = document.createElement("option");
-                    if (item.exerciseType == exertype)
-                        dropdownOption.value = item.id;
                     let containsYear;
                     let dateofComp = new Date(item.dateOfCompletion);
                     const yearofComp = dateofComp.getFullYear();
@@ -1342,6 +1369,7 @@ function createExerciseDropdownYear(player_id, exertype) {
                     if (containsYear) {
                     } else {
                         years.push(yearofComp)
+                        dropdownOption.value = yearofComp;
                         dropdownOption.textContent = yearofComp;
                         dropdownKraft.appendChild(dropdownOption);
                     }
@@ -1353,7 +1381,7 @@ function createExerciseDropdownYear(player_id, exertype) {
     }
 }
 
-function changeChartExercise(Extitle, player_id, mychart) {
+function changeChartExercise(Extitle, player_id, mychart, extype, year) {
     //var exChart = document.getElementById("chart-" + ExType);
     try {
         axios.get('/api/completedExercises/ByPlayerId/' + player_id).then(response => {
@@ -1361,19 +1389,49 @@ function changeChartExercise(Extitle, player_id, mychart) {
                 console.log(response.data)
                 daymonChart = [];
                 resultChart = [];
+                let medals = [];
+                let metric = null;
                 for (let item of response.data) {
                     if (item.exercise.id == Extitle) {
                         let dateofComp = new Date(item.dateOfCompletion);
-                        let day = dateofComp.getDate();
-                        let month = dateofComp.getMonth() + 1;
-                        let formattedDate = ('0' + day).slice(-2) + '-' + ('0' + month).slice(-2);
-                        daymonChart.push(formattedDate);
-                        console.log(daymonChart);
-
-                        resultChart.push(item.result);
-                        console.log(resultChart);
+                        let getyear = dateofComp.getFullYear();
+                        if ( getyear == year ){
+                            let day = dateofComp.getDate();
+                            let month = dateofComp.getMonth() + 1;
+                            let formattedDate = ('0' + day).slice(-2) + '-' + ('0' + month).slice(-2);
+                            daymonChart.push(formattedDate);
+                            resultChart.push(item.result);
+                            metric = item.exercise.rule[0].metric;
+                            medals.push(item.medal);
+                        }
                     }
                 }
+                let getmedal = "No Medal";
+                let groessterWert;
+                if (extype === "ausdauer" || extype === "schnelligkeit") {
+                    groessterWert = resultChart[0];
+                    getmedal = medals[0];
+                    for (let i = 0; i < resultChart.length; i++) {
+                        if ( resultChart[i] < groessterWert) {
+                            groessterWert = resultChart[i];
+                            getmedal = medals[i];
+                        }
+                    }
+
+                }
+                if (extype === "kraft" || extype === "koordination") {
+                    groessterWert = resultChart[0];
+                    getmedal = medals[0];
+                    for (let i = 0; i < resultChart.length; i++) {
+                        if ( resultChart[i] > groessterWert) {
+                            groessterWert = resultChart[i];
+                            getmedal = medals[i];
+                        }
+                    }
+
+                }
+
+
                 let indices = daymonChart.map((value, index) => index);
                 indices.sort((a, b) => {
                     let valueA = extractValues(daymonChart[a]);
@@ -1385,6 +1443,9 @@ function changeChartExercise(Extitle, player_id, mychart) {
                         return valueA.first - valueB.first;
                     }
                 });
+                let goldURL = 'medals_gold.jpg';
+                let silberURL = 'medals_silber.jpg';
+                let bronzeURL = 'medals_bronze.jpg';
 
                 daymonChart = indices.map(index => daymonChart[index]);
                 resultChart = indices.map(index => resultChart[index]);
@@ -1394,6 +1455,33 @@ function changeChartExercise(Extitle, player_id, mychart) {
 
                 // Update chart
                 mychart.update();
+
+                const bestvalue = document.getElementById("value-best-exercise-" + extype);
+                const bestmetric = document.getElementById("metric-best-exercise-" + extype);
+
+                if ( groessterWert === null ) {
+                    bestvalue.textContent = "Noch kein Ergebniss";
+
+                }else {
+                    bestvalue.textContent = groessterWert;
+                    var formatted4String = capitalizeFirstLetterOnly(metric);
+                    bestmetric.textContent = formatted4String;
+                }
+
+                if ( getmedal === "GOLD") {
+                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
+                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = '<img src="' + goldURL + '" alt="Medaille">';
+                } else if ( getmedal === "SILBER") {
+                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
+                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = '<img src="' + silberURL + '" alt="Medaille">';
+                } else if ( getmedal === "BRONZE") {
+                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
+                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = '<img src="' + bronzeURL + '" alt="Medaille">';
+                } else {
+                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
+                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
+                }
+
             }
         })
     } catch (e) {
@@ -1483,4 +1571,11 @@ function createCharts() {
 function extractValues(str) {
     let parts = str.split('-').map(Number); // Teile den String an '-' und konvertiere zu Zahlen
     return {first: parts[0], second: parts[1]};
+}
+
+function capitalizeFirstLetterOnly(string) {
+    // Den gesamten String in Kleinbuchstaben umwandeln
+    var lowerCaseString = string.toLowerCase();
+    // Den ersten Buchstaben des Kleinbuchstaben-Strings großschreiben und den Rest unverändert lassen
+    return lowerCaseString.charAt(0).toUpperCase() + lowerCaseString.slice(1);
 }
