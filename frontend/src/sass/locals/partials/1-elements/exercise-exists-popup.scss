@@ -8,7 +8,7 @@
   filter: invert(73%) sepia(29%) saturate(609%) hue-rotate(139deg) brightness(89%) contrast(94%);
 }
 
-.exercise-overlay {
+.exercise-exists-overlay {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -18,21 +18,21 @@
   z-index:900;
 }
 
-.exercise-content {
+.exercise-exists-content {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
   background: white;
   width: 450px;
-  height: 270px;
+  height: 220px;
   z-index: 901;
   border-radius: 20px;
   padding: 20px;
   box-sizing: border-box;
 }
 
-.exercise-close-btn {
+.exercise-exists-close-btn {
   position: absolute;
   right: 20px;
   top: 20px;

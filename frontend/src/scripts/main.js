@@ -44,6 +44,11 @@ var kchart = null;
 var schchart = null;
 var auschart = null;
 var kochart = null;
+let _exerciseDate = null;
+let _exerciseExId = null;
+let _exerciseAtId = null;
+let _exerciseResult = null;
+
 
 window.onload = (event) => {
     createMeineDSA();
@@ -66,6 +71,7 @@ function getAllPlayer() {
                 playerCard.setAttribute("data-gender", item.sex);
                 playerCard.setAttribute("data-email", item.email);
                 playerCard.setAttribute("id", item.id);
+                playerCard.setAttribute("swim-certificate", item.swimmingCerticate);
 
                 playerList.appendChild(playerCard);
             }
@@ -885,6 +891,38 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         ExBtnActionSch.addEventListener("click", () => {
             createExercisePopup("popup-exercise", "schnelligkeit");
         });
+        const einzelpruefKarteBtn = document.getElementById("export-pruefkarte");
+        einzelpruefKarteBtn.addEventListener("click", () => {
+            let pruefYear = document.getElementById("pruefkarte-jahr").value;
+            if(pruefYear==="" ||pruefYear===null){
+                pruefYear="2024";
+            }
+            try {
+                axios.get('athletes/einzelpruefkarte/' + playerCard.getAttribute("id") + "/" + pruefYear,  {
+                    responseType: 'blob'
+
+
+                }).then(response => {
+                    if (response.status == 200) {
+                        const url = window.URL.createObjectURL(new Blob([response.data], {type: 'text/pdf'}));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', 'pruefkarte.pdf');
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
+            } catch (e) {
+                console.log(e);
+            }
+        });
+        const swim_confirm = document.getElementById("swim-confirm");
+        swim_confirm.addEventListener("click", swimFunction)
+
         const player_id = playerCard.getAttribute("id")
         createExerciseDropdown("KRAFT", player_id);
         createExerciseDropdownYear(player_id, "kraft");
@@ -946,6 +984,21 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
             changeChartExercise( dropdownkoo.value, player_id, kochart, "koordination", evt.target.value);
         })
 
+    }
+}
+function swimFunction (){
+    try {
+        const swimSelectValue = document.getElementById("swim-select").value;
+        axios.patch('athletes/swimming-certificate/' + playerCard.getAttribute("id") + "/" + swimSelectValue, {
+        }).then(response => {
+            if (response.status === 200) {
+                alert("Sportabzeicheneinstellungen wurden geändert")
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+    } catch (e) {
+        console.log(e);
     }
 }
 
@@ -1202,6 +1255,66 @@ customElements.define(
     },
 );
 
+customElements.define(
+    "exercise-exists-popup",
+
+    class extends HTMLElement {
+        constructor() {
+            console.log(1)
+            super();
+            const template = document.getElementById(
+                "exercise-exists-popup",
+            ).content;
+            const shadowRoot = this.attachShadow({mode: "open"});
+            shadowRoot.appendChild(template.cloneNode(true));
+        }
+        connectedCallback(){
+            console.log(2)
+            _popupPin = true;
+            const linkElem = document.createElement("link");
+            linkElem.setAttribute("rel", "stylesheet");
+            linkElem.setAttribute("href", "main.07544d9b.css");
+            this.shadowRoot.appendChild(linkElem);
+            const popUp = this;
+            const overlay = this.shadowRoot.getElementById("exercise-exists-overlay");
+            const cnlBtn = this.shadowRoot.getElementById("cancelOverwrite");
+            const cnfrmBtn = this.shadowRoot.getElementById("confirmOverwrite");
+
+            overlay.addEventListener('click', () => {
+                _popupPin = false;
+                popUp.remove();
+            });
+            cnlBtn.addEventListener('click', () => {
+                _popupPin = false;
+                popUp.remove();
+            });
+
+            cnfrmBtn.addEventListener('click', () => {
+                try {
+                    console.log("ex: " + _exerciseExId + "")
+                    axios.put('athletes/exercises/updateCompletedExercise/' + _exerciseExId + "/" + _exerciseAtId
+                        + "/" + _exerciseResult + "/" + _exerciseDate).then(response => {
+
+
+
+                        if (response.status == 200) {
+                                _popupPin = false;
+                                popUp.remove();
+                                alert("Die Leistung wurde geändert!")
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                    });
+                } catch (e) {
+                    console.error(e);
+                }
+            });
+        }
+    }
+
+
+
+)
 
 customElements.define(
     "exercise-popup",
@@ -1253,12 +1366,28 @@ customElements.define(
                     alert("Bitte geben Sie die Werte ein");
                 } else {
                     try {
-                        console.log("exer: " + exerciseId + "at " + athleteId + "re " + result + "date" + date);
                         axios.post('athletes/exercises/saveCompletedExercise/' + exerciseId + "/" + athleteId
                             + "/" + result + "/" + date).then(response => {
+
+
+
                             if (response.status == 200) {
-                                createExerciseDropdownYear(athleteId, data_exercise_type)
-                                alert("Die Leistung wurde erfolgreich erfasst!");
+                                if (response.data === false) {
+                                    console.log(response.data);
+                                    _popupPin = false;
+                                    popUp.remove();
+                                    _exerciseExId = exerciseId;
+                                    _exerciseDate = date;
+                                    _exerciseResult = result;
+                                    _exerciseAtId = athleteId;
+                                    createExerciseExistsPopUp();
+
+                                } else {
+                                    _popupPin = false;
+                                    popUp.remove();
+                                    createExerciseDropdownYear(athleteId)
+                                    alert("Die Leistung wurde erfolgreich erfasst!");
+                                }
                             }
                         }).catch(error => {
                             console.error('Error:', error);
@@ -1273,8 +1402,13 @@ customElements.define(
         }
     });
 
-
-function createExercisePopup(id, typeBox) {
+function createExerciseExistsPopUp() {
+    _popupPin = true;
+    const main = document.getElementById("main")
+    const exerciseExists = document.createElement("exercise-exists-popup");
+    main.appendChild(exerciseExists);
+}
+function createExercisePopup(id) {
     _popupPin = true;
     const main = document.getElementById("main")
     const exercise = document.createElement("exercise-popup");
@@ -1380,6 +1514,7 @@ function createExerciseDropdownYear(player_id, exertype) {
         alert(e);
     }
 }
+
 
 function changeChartExercise(Extitle, player_id, mychart, extype, year) {
     //var exChart = document.getElementById("chart-" + ExType);
@@ -1578,4 +1713,24 @@ function capitalizeFirstLetterOnly(string) {
     var lowerCaseString = string.toLowerCase();
     // Den ersten Buchstaben des Kleinbuchstaben-Strings großschreiben und den Rest unverändert lassen
     return lowerCaseString.charAt(0).toUpperCase() + lowerCaseString.slice(1);
+
+function downloadFile(data, filename) {
+    // Create a new Blob object using the response data of the file
+    const blob = new Blob([data], { type: data.type });
+
+    // Create a link element
+    const link = document.createElement('a');
+
+    // Set the download attribute with the filename
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+
+    // Append the link to the body
+    document.body.appendChild(link);
+
+    // Programmatically click the link to trigger the download
+    link.click();
+
+    // Remove the link from the document
+    document.body.removeChild(link);
 }

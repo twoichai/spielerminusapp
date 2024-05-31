@@ -13,9 +13,10 @@
     <!--Zu entfernen bei Release!-->
 
     <style>
-        body{
-        animation: fadeInAnimation ease 2s;
+        body {
+            animation: fadeInAnimation ease 2s;
         }
+
         @keyframes fadeInAnimation {
             0% {
                 opacity: 0;
@@ -90,13 +91,15 @@
 
         </div>
     </div>
-    <div style="visibility: hidden; width: 100%" id="uebungskatalog-detail-values" class="uebungskatalog-detail-values uebungskatalog-detail">
+    <div style="visibility: hidden; width: 100%" id="uebungskatalog-detail-values"
+         class="uebungskatalog-detail-values uebungskatalog-detail">
         <div class="uebungskatalog-detail-values__header uebungskatalog-detail__header">
             <div class="uebungskatalog-detail-values__title uebungskatalog-detail__title">
                 <h3 id="uebungskatalog-detail-values__title">Error</h3>
             </div>
         </div>
-        <div style="overflow-y: scroll; direction: ltr; max-height: calc(100vh - 119px); min-width: 100%; padding: 20px" id="uebungskatalog-detail-values__main" class="uebungskatalog-detail-values__main">
+        <div style="overflow-y: scroll; direction: ltr; max-height: calc(100vh - 119px); min-width: 100%; padding: 20px"
+             id="uebungskatalog-detail-values__main" class="uebungskatalog-detail-values__main">
 
         </div>
     </div>
@@ -134,7 +137,7 @@
     </tr>
 </template>
 <template id="uebungskatalog-ausdauer-kinder">
-    <div  class="uebungskatalog-list">
+    <div class="uebungskatalog-list">
         <div class="uebungskatalog-list__ausdauer">
             <button class="uebungskatalog-list__button" id="ausdauer-800-meter">
                 <span class="uebungskatalog-list__text">800 Meter Lauf</span>
@@ -170,7 +173,7 @@
     </div>
 </template>
 <template id="uebungskatalog-kraft-kinder">
-    <div  class="uebungskatalog-list">
+    <div class="uebungskatalog-list">
         <div class="uebungskatalog-list__ausdauer">
             <button class="uebungskatalog-list__button" id="kraft-werfen">
                 <span class="uebungskatalog-list__text">Werfen</span>
@@ -206,7 +209,7 @@
     </div>
 </template>
 <template id="uebungskatalog-schnelligkeit-kinder">
-    <div  class="uebungskatalog-list">
+    <div class="uebungskatalog-list">
         <div class="uebungskatalog-list__ausdauer">
             <button class="uebungskatalog-list__button" id="schnelligkeit-laufen">
                 <span class="uebungskatalog-list__text">Laufen</span>
@@ -242,7 +245,7 @@
     </div>
 </template>
 <template id="uebungskatalog-koordination-kinder">
-    <div  class="uebungskatalog-list">
+    <div class="uebungskatalog-list">
         <div class="uebungskatalog-list__ausdauer">
             <button class="uebungskatalog-list__button" id="koordination-hochsprung">
                 <span class="uebungskatalog-list__text">Hochsprung</span>
@@ -357,66 +360,85 @@
 
         <div id="playerCard-detail" class="uebersicht-section__main" hidden="true">
             <div style="display: flex">
-            <div class="player-info__background">
-                <div class="player-top">
-                    <div class="player-name">
-                        <h4 id="overview-player-name">No Player</h4>
-                    </div>
-                    <div id="overview__change-option" class="overview__change-option">
-                        <button id="overview-change-option-button" class="change-option">
-                            <svg class="change-option__icon" width="24" height="24" viewBox="0 0 24 24">
-                                <use href="images/icons/options-icon.svg#Capa_1"></use>
-                            </svg>
-                            <span class="button-focus"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="player-bottom">
-                    <div class="player-bd">
-                        <div class="col-tag">
-                            <p>Geburtstag</p>
+                <div class="player-info__background">
+                    <div class="player-top">
+                        <div class="player-name">
+                            <h4 id="overview-player-name">No Player</h4>
                         </div>
-                        <div id="overview-player-bd" class="col-info">
-                            DATA_ER
+                        <div id="overview__change-option" class="overview__change-option">
+                            <button id="overview-change-option-button" class="change-option">
+                                <svg class="change-option__icon" width="24" height="24" viewBox="0 0 24 24">
+                                    <use href="images/icons/options-icon.svg#Capa_1"></use>
+                                </svg>
+                                <span class="button-focus"></span>
+                            </button>
                         </div>
                     </div>
-                    <div class="player-gender">
-                        <div class="col-tag">
-                            <p>Geschlecht</p>
+                    <div class="player-bottom">
+                        <div class="player-bd">
+                            <div class="col-tag">
+                                <p>Geburtstag</p>
+                            </div>
+                            <div id="overview-player-bd" class="col-info">
+                                DATA_ER
+                            </div>
                         </div>
-                        <div id="overview-player-gender" class="col-info">
-                            DATA_ER
+                        <div class="player-gender">
+                            <div class="col-tag">
+                                <p>Geschlecht</p>
+                            </div>
+                            <div id="overview-player-gender" class="col-info">
+                                DATA_ER
+                            </div>
                         </div>
-                    </div>
-                    <div class="player-username">
-                        <div class="col-tag">
-                            <p>E-Mail-Addresse</p>
+                        <div class="player-username">
+                            <div class="col-tag">
+                                <p>E-Mail-Addresse</p>
+                            </div>
+                            <div id="overview-player-email" class="col-info">
+                                DATA_ER
+                            </div>
                         </div>
-                        <div id="overview-player-email" class="col-info">
-                            DATA_ER
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Hello -->
-            <div class="swim-certificate-info__background" style="margin-left: 15px">
-                <div class="swim-certificate-top">
-                    <div class="swim-title">
-                        <h4>Schwimmnachweis vorhanden?</h4>
                     </div>
                 </div>
-                <div class="swim-certificate-bottom" style="width: 100%;">
-                    <div style="width: 70%">
-                        <select id="" class="form-item__input swim-form" name="smiwcertificate" aria-required="true">
-                        <option value="true">Vorhanden</option>
-                        <option value="false">Nicht vorhanden</option>
-                    </select></div>
-                    <div style="width: 45%">
-                        <button class="baestaetigen-button">
-                        Bestätigen
-                    </button></div>
+                <!-- Hello -->
+                <div class="swim-certificate-info__background" style="margin-left: 15px">
+                    <div class="swim-certificate-top">
+                        <div class="swim-title">
+                            <h4>Schwimmnachweis vorhanden?</h4>
+                        </div>
+                    </div>
+                    <div class="swim-certificate-bottom" style="width: 100%;">
+                        <div style="width: 70%">
+                            <select id="" class="form-item__input swim-form" name="smiwcertificate"
+                                    aria-required="true">
+                                <option value="true">Vorhanden</option>
+                                <option value="false">Nicht vorhanden</option>
+                            </select></div>
+                        <div style="width: 45%">
+                            <button class="baestaetigen-button">
+                                Bestätigen
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="swim-certificate-info__background" style="margin-left: 15px">
+                    <div class="swim-certificate-top">
+                        <div class="swim-title">
+                            <h4>Exportiere die Einzelprüftkarte</h4>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" id="pruefkarte-jahr" name="pruefkarte-jahr" placeholder="jahr" class="form-item__input swim-form">
+                    </div>
+                    <div class="swim-certificate-bottom" style="width: 100%;">
+                        <div style="width: 45%">
+                            <button class="baestaetigen-button" id="export-pruefkarte">
+                                Exportieren
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="player-info__attributes">
                 <div class="attribute attribute-ausdauer">
@@ -464,15 +486,18 @@
                         <h3>Kraft</h3>
                         <div class="exercise-dropdown">
                             <div class="form-exercise form-item form-gender">
-                                <select id="change-exercise-kraft" class="form-item__input exercise-input" name="uebung" aria-required="true">
+                                <select id="change-exercise-kraft" class="form-item__input exercise-input" name="uebung"
+                                        aria-required="true">
                                 </select>
-                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Übung</label>
+                                <label for="change-section-gender"
+                                       class="form-item__micro form-item-exercise">Übung</label>
                             </div>
                             <div class="form-exercise1 form-item form-gender">
                                 <select id="change-exercise-year-kraft" class="form-item__input exercise-input1" name="jahr" aria-required="true">
                                     <option value="NichtsAusgewält">Übung Auswählen</option>
                                 </select>
-                                <label for="change-section-gender" class="form-item__micro form-item-exercise">Jahr</label>
+                                <label for="change-section-gender"
+                                       class="form-item__micro form-item-exercise">Jahr</label>
                             </div>
                         </div>
                         <button id="create-exercise-action-kraft" class="add-player__button-icon1">
@@ -594,9 +619,6 @@
                 <div class="user-info__name">
                     <p id="user-name-long">No Player!</p>
                 </div>
-                <div class="user-info__specialty">
-                    <p id="user-speciality">Error</p>
-                </div>
             </div>
         </div>
         <div id="playerCard__change-option" class="playerCard__change-option">
@@ -628,30 +650,36 @@
                     <p class="change-section__main-info">Bitte geben Sie die Spielerinformationen an</p>
                     <form action="#" class="change-section__main-content">
                         <div class="form-item form-first-name">
-                            <input id="change-section-name" placeholder=" " class="form-item__input" type="text" name="fname" aria-required="true">
+                            <input id="change-section-name" placeholder=" " class="form-item__input" type="text"
+                                   name="fname" aria-required="true">
                             <label for="change-section-name" class="form-item__micro">Vorname</label>
                         </div>
                         <div class="form-item form-last-name">
-                            <input id="change-section-lastname" placeholder=" " class="form-item__input" type="text" name="lname" aria-required="true">
+                            <input id="change-section-lastname" placeholder=" " class="form-item__input" type="text"
+                                   name="lname" aria-required="true">
                             <label for="change-section-lastname" class="form-item__micro">Nachname</label>
                         </div>
                         <div class="form-item form-birthday">
-                            <input id="change-section-birthday" placeholder=" " class="form-item__input" type="date" name="birthday" aria-required="true">
+                            <input id="change-section-birthday" placeholder=" " class="form-item__input" type="date"
+                                   name="birthday" aria-required="true">
                             <label for="change-section-birthday" class="form-item__micro">Geburtstag</label>
                         </div>
                         <div class="form-item form-gender">
-                            <select id="change-section-gender" class="form-item__input" name="gender" aria-required="true">
+                            <select id="change-section-gender" class="form-item__input" name="gender"
+                                    aria-required="true">
                                 <option value="M">Männlich</option>
                                 <option value="W">Weiblich</option>
                             </select>
                             <label for="change-section-gender" class="form-item__micro">Geschlecht</label>
                         </div>
                         <div class="form-item form-email" id="add-player-username">
-                            <input id="change-section-username" placeholder=" " class="form-item__input" type="email" name="email" aria-required="true">
+                            <input id="change-section-username" placeholder=" " class="form-item__input" type="email"
+                                   name="email" aria-required="true">
                             <label for="change-section-username" class="form-item__micro">E-Mail-Addresse</label>
                         </div>
                         <div class="form-item form-password" id="add-player-password">
-                            <input id="change-section-password" placeholder=" " class="form-item__input" type="password" name="password" aria-required="true">
+                            <input id="change-section-password" placeholder=" " class="form-item__input" type="password"
+                                   name="password" aria-required="true">
                             <label for="change-section-password" class="form-item__micro">Passwort</label>
                         </div>
                         <div class="change-section__buttons">
@@ -772,6 +800,7 @@
                             <use href="images/icons/csv-icon.svg#Layer_1"></use>
                         </svg>
                     </div>
+
                     <div class="change-button__text">Athleten importieren</div>
                 </label>
             </div>
@@ -796,15 +825,17 @@
                     <br>
                 </div>
                 <div class="exercise-section__main">
-                    <p class="exercise-section__main-info" id = "erreichte-leistung"></p>
+                    <p class="exercise-section__main-info" id="erreichte-leistung"></p>
                     <br>
                     <form action="#" class="exercise-section__main-content">
                         <div class="form-item form-exercise-result">
-                            <input id="exercise-result" placeholder=" " class="form-item__input" type="number" name="result" aria-required="true">
+                            <input id="exercise-result" placeholder=" " class="form-item__input" type="number"
+                                   name="result" aria-required="true">
                             <label for="exercise-result" class="form-item__micro">Ergebnis</label>
                         </div>
                         <div class="form-item form-birthday">
-                            <input id="exercise-date" placeholder=" " class="form-item__input" type="date" name="exercisedate" aria-required="true" value="">
+                            <input id="exercise-date" placeholder=" " class="form-item__input" type="date"
+                                   name="exercisedate" aria-required="true" value="">
                             <label for="exercise-date" class="form-item__micro">Datum</label>
                         </div>
                         <div class="change-section__buttons">
@@ -830,6 +861,43 @@
         </div>
     </div>
 </template>
+<template id="exercise-exists-popup">
+    <div class="exercise-exists-popup" id="popup-exercise-exists">
+        <div class="exercise-exists-overlay" id="exercise-exists-overlay"></div>
+        <div class="exercise-exists-content" style="height: 250px">
+            <div class="exercise-exists-section" id="exercise-exists-input">
+                <div class="exercise-exists-section__header">
+                    <h2 class="exercise-exists-section__header-text">Es existiert bereits eine Leistung an diesem
+                        Tag.</h2>
+                    <h3 class="exercise-exists-section__header-text">Wollen Sie die Leistung überschreiben?</h3>
+                    <br>
+                </div>
+                <div class="exercise-exists-section__main">
+                    <br>
+                    <form action="#" class="exercise-exists-section__main-content">
+                        <div class="change-section__buttons">
+                            <div class="button--cancel" id="cancelOverwrite">
+                                <div>
+                                    Abbrechen
+                                </div>
+                                <div class="button--cancel__arrow">
+                                    <div class="button--cancel__arrow-left"></div>
+                                    <div class="button--cancel__arrow-right"></div>
+                                </div>
+                            </div>
+                            <div class="change-section__save-button">
+                                <button class="button--next" type="button" value="submit" id="confirmOverwrite">
+                                    Überschreiben
+                                    <span class="button--next__arrow"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 <div id="main-wrapper">
     <div class="full-width main">
         <main id="main">
@@ -841,17 +909,23 @@
                     <div class="header-nav__button">
                         <a class="my-profile header-nav__button" role="button" href="/adminarea">
                         <span class="button__text">
-                             Administationsbereich
+                             Administrationsbereich
                         </span>
                         </a>
                     </div>
                     <div class="nav-button__text">
-
                     </div>
                     <div class="header-nav__button">
                         <a class="my-profile header-nav__button" role="button" href="/logout">
                         <span class="button__text">
                              Abmelden
+                        </span>
+                        </a>
+                    </div>
+                    <div class="header-nav__button">
+                        <a class="my-profile header-nav__button" role="button" href="/userdocu">
+                        <span class="button__text">
+                             FAQ
                         </span>
                         </a>
                     </div>
@@ -861,7 +935,8 @@
                 <div class="nav-menu" id="nav-menu" aria-expanded="false">
                     <div class="nav-expand-wrapper">
                         <button id="nav-expand-button" class="nav-button">
-                            <img class="nav-button__icon" width="24px" viewBox="0 0 24 24" src="images/icons/Menu-Icon.svg#Ebene_x5F_1">
+                            <img class="nav-button__icon" width="24px" viewBox="0 0 24 24"
+                                 src="images/icons/Menu-Icon.svg#Ebene_x5F_1">
                         </button>
                     </div>
                     <div id="nav-meine-dsa" class="meine-dsa navigation" aria-label="Meine DSA">
@@ -876,7 +951,7 @@
                             Meine DSA
                         </div>
                     </div>
-                    <div  id="nav-meine-athleten" class="meine-athleten navigation" aria-label="Meine Athleten">
+                    <div id="nav-meine-athleten" class="meine-athleten navigation" aria-label="Meine Athleten">
                         <button class="nav-button" aria-pressed="false" role="button" type="button">
                             <div class="nav-button__content">
                                 <svg class="nav-button__icon" width="24" height="24" viewBox="0 0 24 24">

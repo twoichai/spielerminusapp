@@ -10,6 +10,10 @@ import lombok.Data;
 @Table(name = "rule")
 @Data
 public class Rule {
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " [id=" + id + ", other fields...]";
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

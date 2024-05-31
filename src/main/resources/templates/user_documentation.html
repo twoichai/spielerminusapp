@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nutzer Dokumentation</title>
+    <style>
+        body {
+            font-family: Montserrat, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(95, 194, 206, 0.87);
+         animation: fadeInAnimation ease 1s;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+
+        header {
+            background-color: #FF4500;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            line-height: 1.6;
+            color: #666;
+        }
+        nav {
+            margin: 20px 0;
+            padding: 10px 0;
+            background-color: #e2e2e2;
+            text-align: center;
+            background-color: #FF4500;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+
+        }
+        nav a:hover {
+            text-decoration: underline;
+
+        }
+        footer {
+            background-color: #FF4500;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Nutzer Dokumentation</h1>
+</header>
+<div class="container">
+    <nav>
+
+        <a style="color: white" href="/">Zurück zu der Applikation</a>
+
+    </nav>
+    <section id="einleitung">
+        <h2>Herzlich Willkommen!</h2>
+        <p>Sehr geehrter Kunde,
+            diese Datei wurde Ihnen vom Team Spaten bereitgestellt, um Sie mit unserer Applikation SpielerMinus
+            vertraut zu machen. Hier finden Sie auch Informationen über unseren Werdegang, die Philosophie des
+            Teams und weitere wichtige Details.
+            <p>Bei Fragen wenden Sie sich bitte an unseren Product Owner <b>Illya</b> Benyuk oder seinen Stellvertreter Niklas
+        Ewes. Alternativ steht Ihnen unser gesamtes Team zur Verfügung!
+            </p>
+    </section>
+    <section id="verwendung-athletenbereich">
+        <h2>Dateien</h2>
+            <p>In diesem Paket haben Sie die Applikation, Admin-Zugangsdaten mit Einmal-Passwort und diese
+                Anleitung erhalten. Separat wird jedes Teammitglied seinen Bericht über die Erfahrungen im Team und
+                die Arbeit nach der Scrum-Methode in das HVS hochladen.</p>
+        <h2>Athletenbereich </h2>
+        <p>Vielleicht fragen Sie sich, "Was kann ich im Athletenbereich tun?"
+            Hier ein kleiner Überblick über die Funktionen:
+        </p>
+        <ol>
+            <li>Sie können nach Ihren Kriterien Athletenliste sortieren.</li>
+            <li>Sie können Athleten hinzufügen, indem Sie auf "+" klicken</li>
+            <li>Es ist Ihnen möglich, Athleten zu exportieren & importieren, zu ändern und zu löschen.</li>
+        </ol>
+        <p>Bei der detaillierten Einsicht können Sie die Sportarten nach Kategorien eintragen, dabei wird ein
+            Ergebnisgraf erstellt und Sie können zwischen verschiedenen Jahren wechseln.</p>
+        <h2>Exporte und Importe</h2>
+        <p>Wie gewünscht, haben wir die Funktionen implementiert, Athleten mithilfe einer CSV-Datei zu
+            importieren und zu exportieren. Bei doppelten Werten wird der bestehende Athlet überschrieben, wobei
+            Name, Nachname und Geburtstag überprüft werden. Zusätzlich lässt sich die Prüfkarte leicht als PDF
+            exportieren.</p>
+        <p>Athleten werden immer vor der Löschung exportiert.
+            Dies ist ein Sicherheitsmechanismus der Webseite, falls ausversehen Löschungen stattfinden.
+            Jeder einzelne Athlet kann ebenfalls exportiert werden.</p>
+    </section>
+    <section id="verwendung-übungskatalog">
+        <h2>Übungskatalog</h2>
+        <p>Sie können den aktuellen Übungskatalog einsehen, dabei können Sie:</p>
+        <ol>
+            <li>Regel für unterschiedliche Kategorien überprüfen.</li>
+            <li>bestehende Werte für Erhalt der Medaillen anpassen (Vorsicht geboten!).</li>
+            <li>Neue Regeln einfügen oder löschen.</li>
+        </ol>
+    </section>
+    <section id="admin-bereich">
+        <h2>Was ist in dem Adminbereich?</h2>
+        <p>Für Sie sind zwei Methoden implementiert:
+        </p>
+        <ol>
+            <li>Passwortänderung</li>
+            <li>E-Mailveränderung</li>
+        </ol>
+        <p>In beiden Fällen müssen Sie Ihre alten Werte angeben und gegebenenfalls mit Passwort bestätigen. Das
+            Passwort wird dabei auf die Stärke überprüft und muss mindestens 12 Zeichen haben.
+        </p>
+    </section>
+    <section id="info-team">
+        <h2>Was und wer ist Team Spaten?</h2>
+        <p>Team Spaten ist eine dynamische Gruppe technikbegeisterter Studierender, die sich durch ihre Leidenschaft für innovative Softwarelösungen und fortschrittliche Entwicklungspraktiken auszeichnet. </p>
+        <p>
+           <p>Dabei hat sich unsere Expertise aufgeteilt:</p>
+            <p><b>Frontend:</b> für die Erstellung von dem Frontend und Styleguide hat sich Herr Al-Barakat eingesetzt, dabei stand Herr Kirschner ihm stets beiseite</p>
+            <p><b>Architektur:</b> für die Erstellung der Architektur hat sich Herr Benyuk eingesetzt</p>
+            <p><b>Backend:</b> für das Rückgrat der Applikation war Herr Ewes zuständig</p>
+            <p><b>Product Owner:</b> für die Kommunikation mit anderen Product Owners und dem Kunden hat sich Herr Benyuk eingesetzt</p>
+            <p><b>Scrum Masters:</b> jeweils Herr Ewes und Herr Al-Barakat haben sich für das Management des Teams eingesetzt
+            <p><b>Jira und Branding:</b> Herr Ackermann war jeweils für unsere Jira Führung und Branding von Team Spaten zuständig</p>
+        <p><b>Dokumentation und Videoaufnahmen:</b> Herr Amen war für Videoanleitungen und die Dokumentation zuständig</p>
+    </section>
+    <section id="philosophie">
+        <h2>Philosophie des Teams</h2>
+        <p>Team Spaten folgt starkem Fokus auf die Scrum-Methodik, die uns ermöglicht, effizient und agil zu
+            arbeiten. Das Team setzt auf offene Kommunikation und gegenseitige Wertschätzung, was zu einer
+            produktiveren und positiven Arbeitsumgebung führt. Unser Ansatz kombiniert regelmäßige Sprints und
+            Reviews, durch die wir stetig lernen und uns verbessern. Dieses System fördert nicht nur technisches
+            know-how und Kundenzufriedenheit, sondern stärkt auch den Zusammenhalt und das Engagement im
+            Team.
+        </p>
+    </section>
+    <section id="unser-weg">
+        <h2>Der Weg zum Erfolg</h2>
+        <p>Das Entwicklerteam Spaten hatte eine Interessante Reise. Der Start war holprig, jedoch waren die
+            Vorstellungen groß und der Weg zum Erfolg war voller Herausforderungen. Sie stießen auf technische
+            Schwierigkeiten, enge Deadlines und das Erlernen neuer Technologien, was ihre Entschlossenheit und
+            Fähigkeiten auf die Probe stellte.
+
+           <p>In kritischen Momenten fanden sie neue Wege, ihre Probleme zu lösen und passten ihre Strategien an,
+        das Anhand der erlernten Scrum-Methodiken. Diese Phasen der Selbstreflexion und Anpassung führten
+        zu sichtbaren Erfolgen und einer allgemeinen Stärkung der Teamdynamik.
+    </p>
+        <p>Durch die Ambitionen und eine kontinuierliche Verbesserung verwandelte sich Team Spaten von einem a
+            Studententeam zu einem starken und funktionierenden Entwicklerteam. Heute steht Team Spaten stärker
+            denn je da, bereit, jede neue Herausforderung anzunehmen.</p>
+    </section>
+
+</div>
+
+    <div>
+        <p>&copy; 2024 Team Spaten.    Alle Rechte vorbehalten.</p>
+   </div>
+</body>
+</html>

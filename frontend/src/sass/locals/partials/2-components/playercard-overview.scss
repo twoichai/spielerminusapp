@@ -10,6 +10,15 @@
   box-shadow: inset 0.5em 0 config.$brandcolor-blue;
 }
 
+.swim-certificate-info__backgroundIllya {
+  display: block;
+  height: 120px;
+  width: 300px;
+  padding: 10px 20px;
+  border: 1px solid config.$neutral-color-200;
+  border-radius: 10px;
+
+}
 .swim-certificate-info__background {
   display: block;
   height: 120px;
