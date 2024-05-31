@@ -1181,40 +1181,39 @@ customElements.define(
                 const thisMetric = shadowRoot.querySelector('#change-table-metric').value;
                 console.log(checkInputField(shadowRoot));
                 if(checkInputField(shadowRoot)) {
-                    try {
-                        thisValueBronze = reOrder(thisValueBronze);
-                        thisValueSilver = reOrder(thisValueSilver);
-                        thisValueGold = reOrder(thisValueGold);
-
-                        axios.put("/rules/update/" + id,
-                            {
-                                valueGold: thisValueGold,
-                                valueSilver: thisValueSilver,
-                                valueBronze: thisValueBronze
-                            }).then(response => {
-                            if(response.status == 200) {
-                                popUp.remove();
-                                axios.get("/athletes/exercises",
-                                    {
-                                    }).then(response => {
-                                    if(response.status == 200)
-                                    {
-                                        for (let item of response.data) {
-                                            if(item.id == _currentTableInEdit) {
-                                                createUebungskatalogDetailTable(item);
+                    thisValueBronze = reOrder(thisValueBronze);
+                    thisValueSilver = reOrder(thisValueSilver);
+                    thisValueGold = reOrder(thisValueGold);
+                    {
+                        try {
+                            axios.put("/rules/update/" + id,
+                                {
+                                    valueGold: thisValueGold,
+                                    valueSilver: thisValueSilver,
+                                    valueBronze: thisValueBronze
+                                }).then(response => {
+                                if (response.status == 200) {
+                                    popUp.remove();
+                                    axios.get("/athletes/exercises",
+                                        {}).then(response => {
+                                        if (response.status == 200) {
+                                            for (let item of response.data) {
+                                                if (item.id == _currentTableInEdit) {
+                                                    createUebungskatalogDetailTable(item);
+                                                }
                                             }
                                         }
-                                    }
-                                });
-                            }
-                        });
-                    }
-                    catch (e) {
-                        alert(e);
+                                    });
+                                }
+                            });
+                        }
+                        catch (e) {
+                            alert(e);
+                        }
                     }
                 }
                 else {
-                    alert("Die Werte wurden nicht an der Einheit angepasst: Minuten: tt:tt, Meter: m,mm ")
+                    alert("Die Werte wurden nicht an der Einheit angepasst: Minuten: tt:tt | Meter: m,mm | Alles andere: wwww");
                 }
             });
         }
@@ -1277,9 +1276,10 @@ function checkInputField(popup) {
     let goldValue = popup.querySelector('#change-table-gold-value').value;
     const metric = popup.querySelector('#change-table-metric').value;
 
-    if(metric == "ANZAHL" || metric == "PUNKTE" || metric == "CENTIMETER" || metric == "DEZISEKUNDEN" || metric == "GESAMTPUNKTE") {
+    if(metric == "ANZAHL" || metric == "PUNKTE" || metric === "CENTIMETER" || metric == "DEZISEKUNDEN" || metric == "GESAMTPUNKTE") {
         if(containsOnlyDigits(bronzeValue) && containsOnlyDigits(silverValue) && containsOnlyDigits(goldValue)) {
             if(firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
+                if(bronzeValue.length <= 4 && silverValue.length <= 4 && goldValue.length <= 4)
                 return true;
             }
             else {
@@ -1306,6 +1306,8 @@ function checkInputField(popup) {
             if(firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
                 if(containsOnlyDigits(reOrder(bronzeValue)) && containsOnlyDigits(reOrder(silverValue)) && containsOnlyDigits(reOrder(goldValue))) {
                     if(reOrder(bronzeValue).length < 4 && reOrder(silverValue).length < 4 && reOrder(goldValue).length < 4 ) {
+                        conole.log(reOrder(bronzeValue).length);
+                        console.log(reOrder(bronzeValue));
                         return true;
                     }
                 }

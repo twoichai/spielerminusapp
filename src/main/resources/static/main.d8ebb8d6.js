@@ -1241,42 +1241,44 @@ customElements.define("change-table-popup", /*#__PURE__*/function (_HTMLElement3
         var thisMetric = shadowRoot.querySelector('#change-table-metric').value;
         console.log(checkInputField(shadowRoot));
         if (checkInputField(shadowRoot)) {
-          try {
-            thisValueBronze = reOrder(thisValueBronze);
-            thisValueSilver = reOrder(thisValueSilver);
-            thisValueGold = reOrder(thisValueGold);
-            axios.put("/rules/update/" + id, {
-              valueGold: thisValueGold,
-              valueSilver: thisValueSilver,
-              valueBronze: thisValueBronze
-            }).then(function (response) {
-              if (response.status == 200) {
-                popUp.remove();
-                axios.get("/athletes/exercises", {}).then(function (response) {
-                  if (response.status == 200) {
-                    var _iterator5 = _createForOfIteratorHelper(response.data),
-                      _step5;
-                    try {
-                      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                        var item = _step5.value;
-                        if (item.id == _currentTableInEdit) {
-                          createUebungskatalogDetailTable(item);
+          thisValueBronze = reOrder(thisValueBronze);
+          thisValueSilver = reOrder(thisValueSilver);
+          thisValueGold = reOrder(thisValueGold);
+          {
+            try {
+              axios.put("/rules/update/" + id, {
+                valueGold: thisValueGold,
+                valueSilver: thisValueSilver,
+                valueBronze: thisValueBronze
+              }).then(function (response) {
+                if (response.status == 200) {
+                  popUp.remove();
+                  axios.get("/athletes/exercises", {}).then(function (response) {
+                    if (response.status == 200) {
+                      var _iterator5 = _createForOfIteratorHelper(response.data),
+                        _step5;
+                      try {
+                        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                          var item = _step5.value;
+                          if (item.id == _currentTableInEdit) {
+                            createUebungskatalogDetailTable(item);
+                          }
                         }
+                      } catch (err) {
+                        _iterator5.e(err);
+                      } finally {
+                        _iterator5.f();
                       }
-                    } catch (err) {
-                      _iterator5.e(err);
-                    } finally {
-                      _iterator5.f();
                     }
-                  }
-                });
-              }
-            });
-          } catch (e) {
-            alert(e);
+                  });
+                }
+              });
+            } catch (e) {
+              alert(e);
+            }
           }
         } else {
-          alert("Die Werte wurden nicht an der Einheit angepasst: Minuten: tt:tt, Meter: m,mm ");
+          alert("Die Werte wurden nicht an der Einheit angepasst: Minuten: tt:tt | Meter: m,mm | Alles andere: wwww");
         }
       });
     }
@@ -1341,10 +1343,10 @@ function checkInputField(popup) {
   var silverValue = popup.querySelector('#change-table-silver-value').value;
   var goldValue = popup.querySelector('#change-table-gold-value').value;
   var metric = popup.querySelector('#change-table-metric').value;
-  if (metric == "ANZAHL" || metric == "PUNKTE" || metric == "CENTIMETER" || metric == "DEZISEKUNDEN" || metric == "GESAMTPUNKTE") {
+  if (metric == "ANZAHL" || metric == "PUNKTE" || metric === "CENTIMETER" || metric == "DEZISEKUNDEN" || metric == "GESAMTPUNKTE") {
     if (containsOnlyDigits(bronzeValue) && containsOnlyDigits(silverValue) && containsOnlyDigits(goldValue)) {
       if (firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
-        return true;
+        if (bronzeValue.length <= 4 && silverValue.length <= 4 && goldValue.length <= 4) return true;
       } else {
         return false;
       }
@@ -1368,6 +1370,8 @@ function checkInputField(popup) {
     if (firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
       if (containsOnlyDigits(reOrder(bronzeValue)) && containsOnlyDigits(reOrder(silverValue)) && containsOnlyDigits(reOrder(goldValue))) {
         if (reOrder(bronzeValue).length < 4 && reOrder(silverValue).length < 4 && reOrder(goldValue).length < 4) {
+          conole.log(reOrder(bronzeValue).length);
+          console.log(reOrder(bronzeValue));
           return true;
         }
       }
