@@ -14,7 +14,10 @@
 
     <style>
         body {
-            animation: fadeInAnimation ease 2s;
+            animation: fadeInAnimation ease 1s;
+        }
+        .hidden {
+            visibility: hidden;
         }
 
         @keyframes fadeInAnimation {
@@ -402,7 +405,7 @@
                     </div>
                 </div>
                 <!-- Hello -->
-                <div class="swim-certificate-info__background" style="margin-left: 15px">
+                <div class="swim-certificate-info__backgroundIllya" style="margin-left: 15px">
                     <div class="swim-certificate-top">
                         <div class="swim-title">
                             <h4>Schwimmnachweis vorhanden?</h4>
@@ -410,30 +413,31 @@
                     </div>
                     <div class="swim-certificate-bottom" style="width: 100%;">
                         <div style="width: 70%">
-                            <select id="" class="form-item__input swim-form" name="smiwcertificate"
+                            <select id="swim-select" class="form-item__input swim-form" name="smiwcertificate"
                                     aria-required="true">
                                 <option value="true">Vorhanden</option>
                                 <option value="false">Nicht vorhanden</option>
                             </select></div>
                         <div style="width: 45%">
-                            <button class="baestaetigen-button">
+                            <button id="swim-confirm" class="baestaetigen-button">
                                 Bestätigen
                             </button>
                         </div>
                     </div>
                 </div>
+
                 <div class="swim-certificate-info__background" style="margin-left: 15px">
                     <div class="swim-certificate-top">
                         <div class="swim-title">
                             <h4>Exportiere die Einzelprüftkarte</h4>
                         </div>
                     </div>
-                    <div>
-                        <input type="text" id="pruefkarte-jahr" name="pruefkarte-jahr" placeholder="jahr" class="form-item__input swim-form">
-                    </div>
                     <div class="swim-certificate-bottom" style="width: 100%;">
-                        <div style="width: 45%">
-                            <button class="baestaetigen-button" id="export-pruefkarte">
+                        <div style="width: 50%">
+                             <input type="text" id="pruefkarte-jahr" name="pruefkarte-jahr" placeholder="jahr" class="form-item__input swim-form">
+                        </div>
+                        <div style="margin-left: 20px; width: 45%">
+                            <button  class="baestaetigen-button" id="export-pruefkarte">
                                 Exportieren
                             </button>
                         </div>
@@ -519,7 +523,7 @@
             </button>
         </div>
         <div class="playerCard__swim-ability">
-            <div class="ability-icon">
+            <div id="swim-icon"  class="ability-icon">
                 <img src="images/imgs/swim-icon.png">
             </div>
         </div>

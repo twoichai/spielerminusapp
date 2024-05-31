@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            animation: fadeInAnimation ease 2s;
+            animation: fadeInAnimation ease 1s;
         }
         @keyframes fadeInAnimation {
             0% {
@@ -295,7 +295,7 @@
         }
 
         // Send the old email, new email, and password to the backend
-        axios.put('/admin/1/change-email',
+        axios.put('/admin/1/'+ 'oldemail',
             {
                 oldemail: oldemail,
                 newemail: newemail,

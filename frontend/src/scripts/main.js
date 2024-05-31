@@ -63,6 +63,7 @@ function getAllPlayer() {
                 playerCard.setAttribute("id", item.id);
                 playerCard.setAttribute("swim-certificate", item.swimmingCerticate);
 
+
                 playerList.appendChild(playerCard);
             }
 
@@ -909,7 +910,9 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
 function swimFunction (){
     try {
         const swimSelectValue = document.getElementById("swim-select").value;
-        axios.patch('athletes/swimming-certificate/' + playerCard.getAttribute("id") + "/" + swimSelectValue, {
+        const testValue = _activePlayercard.getAttribute("id")
+        console.log(testValue)
+        axios.patch('athletes/swimming-certificate/' + _activePlayercard.getAttribute("id") + "/" + swimSelectValue, {
         }).then(response => {
             if (response.status === 200) {
                 alert("Sportabzeicheneinstellungen wurden geändert")
