@@ -180,6 +180,7 @@ var tmp;
 var _uebungskatalogCurrentActiv = null;
 var _currentTableId;
 var _currentTableMetric;
+var _currentTableInEdit;
 window.onload = function (event) {
   createMeineDSA();
 };
@@ -873,6 +874,7 @@ function showUebungskatalogTable(evt) {
           var item = _step3.value;
           if (item.id == id) {
             createUebungskatalogDetailTable(item);
+            _currentTableInEdit = id;
           }
         }
       } catch (err) {
@@ -1225,29 +1227,56 @@ customElements.define("change-table-popup", /*#__PURE__*/function (_HTMLElement3
       fillUpContent(shadowRoot, "6 - 7", "M");
       shadowRoot.querySelector('#change-table-gender').addEventListener("change", function (evt) {
         var selectedAgeOption = shadowRoot.querySelector("#change-table-age").value;
-        fillUpContent(shadowRoot, selectedAgeOption, evt.target.value);
+        _this6.setAttribute("data-id", fillUpContent(shadowRoot, selectedAgeOption, evt.target.value));
       });
       shadowRoot.querySelector('#change-table-age').addEventListener("change", function (evt) {
         var selectedGenderOption = shadowRoot.querySelector('#change-table-gender').value;
-        fillUpContent(shadowRoot, evt.target.value, selectedGenderOption);
+        _this6.setAttribute("data-id", fillUpContent(shadowRoot, evt.target.value, selectedGenderOption));
       });
       shadowRoot.querySelector('#send-table-button').addEventListener("click", function (evt) {
         var id = _this6.getAttribute("data-id");
         var thisValueBronze = shadowRoot.querySelector('#change-table-bronze-value').value;
         var thisValueSilver = shadowRoot.querySelector('#change-table-silver-value').value;
         var thisValueGold = shadowRoot.querySelector('#change-table-gold-value').value;
-        try {
-          axios.put("/rules/update/" + id, {
-            valueGold: thisValueGold,
-            valueSilver: thisValueSilver,
-            valueBronze: thisValueBronze
-          }).then(function (response) {
-            if (response.status == 200) {
-              console.log("HITTTT");
-            }
-          });
-        } catch (e) {
-          console.log(e);
+        var thisMetric = shadowRoot.querySelector('#change-table-metric').value;
+        console.log(checkInputField(shadowRoot));
+        if (checkInputField(shadowRoot)) {
+          try {
+            thisValueBronze = reOrder(thisValueBronze);
+            thisValueSilver = reOrder(thisValueSilver);
+            thisValueGold = reOrder(thisValueGold);
+            axios.put("/rules/update/" + id, {
+              valueGold: thisValueGold,
+              valueSilver: thisValueSilver,
+              valueBronze: thisValueBronze
+            }).then(function (response) {
+              if (response.status == 200) {
+                popUp.remove();
+                axios.get("/athletes/exercises", {}).then(function (response) {
+                  if (response.status == 200) {
+                    var _iterator5 = _createForOfIteratorHelper(response.data),
+                      _step5;
+                    try {
+                      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                        var item = _step5.value;
+                        if (item.id == _currentTableInEdit) {
+                          createUebungskatalogDetailTable(item);
+                        }
+                      }
+                    } catch (err) {
+                      _iterator5.e(err);
+                    } finally {
+                      _iterator5.f();
+                    }
+                  }
+                });
+              }
+            });
+          } catch (e) {
+            alert(e);
+          }
+        } else {
+          alert("Die Werte wurden nicht an der Einheit angepasst: Minuten: tt:tt, Meter: m,mm ");
         }
       });
     }
@@ -1261,40 +1290,127 @@ function fillUpContent(popup, age, gender) {
   var table = document.getElementById(_currentTableId).querySelector("#uebungskatalog-table__body");
   tableMetric.setAttribute("value", _currentTableMetric);
   tableMetric.textContent = _currentTableMetric;
-  fillUpTableAge(table, gender, age, tableBronze, tableSilver, tableGold);
+  return fillUpTableAge(table, gender, age, tableBronze, tableSilver, tableGold);
 }
 function fillUpTableAge(table, gender, age, tableBronze, tableSilver, tableGold) {
   var tableRowAge, helper;
   tableBronze.setAttribute("value", "");
   tableSilver.setAttribute("value", "");
   tableGold.setAttribute("value", "");
-  var _iterator5 = _createForOfIteratorHelper(table.childNodes),
-    _step5;
+  var _iterator6 = _createForOfIteratorHelper(table.childNodes),
+    _step6;
   try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var item = _step5.value;
+    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+      var item = _step6.value;
       var option = document.createElement("option");
       if (item.nodeType != Node.TEXT_NODE) {
-        console.log(item.childNodes);
         helper = item.childNodes[3].textContent;
         if (helper == gender) {
           tableRowAge = item.childNodes[1].textContent;
           if (tableRowAge == age) {
+            console.log(item);
             helper = item.childNodes[7].textContent;
             tableBronze.setAttribute("value", helper);
             helper = item.childNodes[9].textContent;
             tableSilver.setAttribute("value", helper);
             helper = item.childNodes[11].textContent;
             tableGold.setAttribute("value", helper);
+            return item.getAttribute("data-set-id");
           }
         }
       }
     }
   } catch (err) {
-    _iterator5.e(err);
+    _iterator6.e(err);
   } finally {
-    _iterator5.f();
+    _iterator6.f();
   }
+}
+function reOrder(str) {
+  var word = "";
+  for (var i = 0; i < str.length; i++) {
+    if (str[i] != ':' && str[i] != ',') {
+      word += str[i];
+    }
+  }
+  console.log(word);
+  return word;
+}
+function checkInputField(popup) {
+  var bronzeValue = popup.querySelector('#change-table-bronze-value').value;
+  var silverValue = popup.querySelector('#change-table-silver-value').value;
+  var goldValue = popup.querySelector('#change-table-gold-value').value;
+  var metric = popup.querySelector('#change-table-metric').value;
+  if (metric == "ANZAHL" || metric == "PUNKTE" || metric == "CENTIMETER" || metric == "DEZISEKUNDEN" || metric == "GESAMTPUNKTE") {
+    if (containsOnlyDigits(bronzeValue) && containsOnlyDigits(silverValue) && containsOnlyDigits(goldValue)) {
+      if (firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+  if (metric == "MINUTEN") {
+    if (firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
+      console.log("first");
+      if (containsOnlyDigits(reOrder(bronzeValue)) && containsOnlyDigits(reOrder(silverValue)) && containsOnlyDigits(reOrder(goldValue))) {
+        console.log("contains");
+        if (reOrder(bronzeValue).length < 5 && reOrder(silverValue).length < 5 && reOrder(goldValue).length < 5) {
+          console.log("bronze");
+          return true;
+        }
+      }
+    }
+  }
+  if (metric == "METER") {
+    if (firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
+      if (containsOnlyDigits(reOrder(bronzeValue)) && containsOnlyDigits(reOrder(silverValue)) && containsOnlyDigits(reOrder(goldValue))) {
+        if (reOrder(bronzeValue).length < 4 && reOrder(silverValue).length < 4 && reOrder(goldValue).length < 4) {
+          return true;
+        }
+      }
+    }
+  }
+}
+function containsOnlyDigits(str) {
+  return /^\d+$/.test(str);
+}
+function firstIsNumber(str) {
+  if (containsOnlyDigits(str[0]) && str[0] > 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function convertTime(input, metric) {
+  var finalTime;
+  if (metric == "MINUTEN") {
+    if (input.length % 2 == 0) {
+      finalTime = input[0] + input[1] + ":" + input[2] + input[3];
+    } else {
+      finalTime = input[0] + ":" + input[1] + input[2];
+    }
+  }
+  if (metric == "METER") {
+    if (input.length % 2 == 0) {
+      finalTime = input[0] + input[1] + "," + input[2] + input[3];
+    } else {
+      finalTime = input[0] + "," + input[1] + input[2];
+    }
+  }
+  if (metric == "SEKUNDEN") {
+    if (input.length % 2 == 0) {
+      finalTime = input[0] + "," + input[1];
+    } else {
+      finalTime = input[0] + input[1] + "," + input[2];
+    }
+  }
+  if (metric == "ANZAHL" || metric == "PUNKTE" || metric == "CENTIMETER" || metric == "DEZISEKUNDEN" || metric == "GESAMTPUNKTE") {
+    return input;
+  }
+  return finalTime;
 }
 
 // Hier beginnt der Code Snippet für die Webkomponente: Change-section-popup.

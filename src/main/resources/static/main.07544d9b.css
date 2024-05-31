@@ -689,6 +689,7 @@ td {
 
 tr {
   background-color: rgba(97, 189, 171, 0.6);
+  transition: color 1s ease;
 }
 
 thead th {

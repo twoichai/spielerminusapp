@@ -37,6 +37,7 @@ let tmp;
 let _uebungskatalogCurrentActiv = null;
 let _currentTableId;
 let _currentTableMetric;
+let _currentTableInEdit;
 
 window.onload = (event) => {
     createMeineDSA();
@@ -776,6 +777,7 @@ function showUebungskatalogTable(evt) {
             for (let item of response.data) {
                 if(item.id == id) {
                     createUebungskatalogDetailTable(item);
+                    _currentTableInEdit = id;
                 }
             }
         }
@@ -1162,34 +1164,57 @@ customElements.define(
             shadowRoot.querySelector('#change-table-gender').addEventListener("change", (evt) => {
                 const selectedAgeOption = shadowRoot.querySelector("#change-table-age").value;
 
-                fillUpContent(shadowRoot, selectedAgeOption, evt.target.value);
+                this.setAttribute("data-id", fillUpContent(shadowRoot, selectedAgeOption, evt.target.value));
             })
 
             shadowRoot.querySelector('#change-table-age').addEventListener("change", (evt) => {
                 const selectedGenderOption = shadowRoot.querySelector('#change-table-gender').value;
 
-                fillUpContent(shadowRoot, evt.target.value, selectedGenderOption);
+                this.setAttribute("data-id", fillUpContent(shadowRoot, evt.target.value, selectedGenderOption));
             });
 
             shadowRoot.querySelector('#send-table-button').addEventListener("click", (evt) => {
                 const id = this.getAttribute("data-id");
-                const thisValueBronze = shadowRoot.querySelector('#change-table-bronze-value').value;
-                const thisValueSilver = shadowRoot.querySelector('#change-table-silver-value').value;
-                const thisValueGold = shadowRoot.querySelector('#change-table-gold-value').value;
-                try {
-                    axios.put("/rules/update/" + id,
-                    {
-                        valueGold: thisValueGold,
-                        valueSilver: thisValueSilver,
-                        valueBronze: thisValueBronze
-                    }).then(response => {
-                        if(response.status == 200) {
-                            console.log("HITTTT")
-                        }
-                    });
+                let thisValueBronze = shadowRoot.querySelector('#change-table-bronze-value').value;
+                let thisValueSilver = shadowRoot.querySelector('#change-table-silver-value').value;
+                let thisValueGold = shadowRoot.querySelector('#change-table-gold-value').value;
+                const thisMetric = shadowRoot.querySelector('#change-table-metric').value;
+                console.log(checkInputField(shadowRoot));
+                if(checkInputField(shadowRoot)) {
+                    try {
+                        thisValueBronze = reOrder(thisValueBronze);
+                        thisValueSilver = reOrder(thisValueSilver);
+                        thisValueGold = reOrder(thisValueGold);
+
+                        axios.put("/rules/update/" + id,
+                            {
+                                valueGold: thisValueGold,
+                                valueSilver: thisValueSilver,
+                                valueBronze: thisValueBronze
+                            }).then(response => {
+                            if(response.status == 200) {
+                                popUp.remove();
+                                axios.get("/athletes/exercises",
+                                    {
+                                    }).then(response => {
+                                    if(response.status == 200)
+                                    {
+                                        for (let item of response.data) {
+                                            if(item.id == _currentTableInEdit) {
+                                                createUebungskatalogDetailTable(item);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    catch (e) {
+                        alert(e);
+                    }
                 }
-                catch (e) {
-                    console.log(e);
+                else {
+                    alert("Die Werte wurden nicht an der Einheit angepasst: Minuten: tt:tt, Meter: m,mm ")
                 }
             });
         }
@@ -1203,7 +1228,7 @@ function fillUpContent(popup, age, gender) {
 
     tableMetric.setAttribute("value", _currentTableMetric);
     tableMetric.textContent = _currentTableMetric;
-    fillUpTableAge(table, gender, age, tableBronze, tableSilver, tableGold);
+    return fillUpTableAge(table, gender, age, tableBronze, tableSilver, tableGold);
 }
 
 function fillUpTableAge(table, gender, age, tableBronze, tableSilver, tableGold) {
@@ -1215,11 +1240,11 @@ function fillUpTableAge(table, gender, age, tableBronze, tableSilver, tableGold)
     for (let item of table.childNodes) {
         let option = document.createElement("option");
         if(item.nodeType != Node.TEXT_NODE) {
-            console.log(item.childNodes);
             helper = item.childNodes[3].textContent;
             if(helper == gender) {
                 tableRowAge = item.childNodes[1].textContent;
                 if(tableRowAge == age) {
+                    console.log(item);
                     helper = item.childNodes[7].textContent;
                     tableBronze.setAttribute("value", helper);
 
@@ -1228,10 +1253,110 @@ function fillUpTableAge(table, gender, age, tableBronze, tableSilver, tableGold)
 
                     helper = item.childNodes[11].textContent;
                     tableGold.setAttribute("value", helper);
+                    return item.getAttribute("data-set-id");
                 }
             }
         }
     }
+}
+
+function reOrder(str) {
+    let word = "";
+    for(let i = 0; i<str.length; i++) {
+        if(str[i] != ':' && str[i] != ',') {
+            word += str[i];
+        }
+    }
+    console.log(word);
+    return word;
+}
+
+function checkInputField(popup) {
+    let bronzeValue = popup.querySelector('#change-table-bronze-value').value;
+    let silverValue = popup.querySelector('#change-table-silver-value').value;
+    let goldValue = popup.querySelector('#change-table-gold-value').value;
+    const metric = popup.querySelector('#change-table-metric').value;
+
+    if(metric == "ANZAHL" || metric == "PUNKTE" || metric == "CENTIMETER" || metric == "DEZISEKUNDEN" || metric == "GESAMTPUNKTE") {
+        if(containsOnlyDigits(bronzeValue) && containsOnlyDigits(silverValue) && containsOnlyDigits(goldValue)) {
+            if(firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+    if(metric == "MINUTEN") {
+            if(firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
+                console.log("first")
+                if(containsOnlyDigits(reOrder(bronzeValue)) && containsOnlyDigits(reOrder(silverValue)) && containsOnlyDigits(reOrder(goldValue))) {
+                    console.log("contains");
+                    if(reOrder(bronzeValue).length < 5 && reOrder(silverValue).length < 5 && reOrder(goldValue).length < 5 ) {
+                        console.log("bronze");
+                        return true;
+                    }
+                }
+            }
+    }
+    if(metric == "METER") {
+            if(firstIsNumber(bronzeValue) && firstIsNumber(silverValue) && firstIsNumber(goldValue)) {
+                if(containsOnlyDigits(reOrder(bronzeValue)) && containsOnlyDigits(reOrder(silverValue)) && containsOnlyDigits(reOrder(goldValue))) {
+                    if(reOrder(bronzeValue).length < 4 && reOrder(silverValue).length < 4 && reOrder(goldValue).length < 4 ) {
+                        return true;
+                    }
+                }
+            }
+    }
+}
+function containsOnlyDigits(str) {
+    return /^\d+$/.test(str);
+}
+
+function firstIsNumber(str) {
+    if(containsOnlyDigits(str[0]) && str[0] > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+function convertTime(input, metric) {
+    let finalTime
+    if(metric == "MINUTEN") {
+        if(input.length % 2 == 0) {
+            finalTime = input[0] + input[1] + ":" + input[2] + input[3];
+        }
+        else {
+            finalTime = input[0] + ":" + input[1] + input[2];
+        }
+    }
+    if(metric == "METER") {
+        if(input.length % 2 == 0) {
+            finalTime = input[0] + input[1] + "," + input[2] + input[3];
+        }
+        else {
+            finalTime = input[0] + "," + input[1] + input[2];
+        }
+    }
+    if(metric == "SEKUNDEN") {
+        if(input.length % 2 == 0) {
+            finalTime = input[0] + "," + input[1];
+        }
+        else {
+            finalTime = input[0] + input[1] + "," + input[2];
+        }
+    }
+    if(metric == "ANZAHL" || metric == "PUNKTE" || metric == "CENTIMETER" || metric == "DEZISEKUNDEN" || metric == "GESAMTPUNKTE") {
+        return input;
+    }
+
+    return finalTime;
 }
 
 // Hier beginnt der Code Snippet für die Webkomponente: Change-section-popup.
