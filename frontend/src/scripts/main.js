@@ -474,7 +474,6 @@ function expandNav() {
 function createMeineDSA() {
     const main = document.querySelector("#main-view");
     main.innerHTML = document.querySelector("#meine-DSA").innerHTML
-
     const activeNav = document.querySelector("#active-nav");
     activeNav.setAttribute("style", "transform: translate(0, -165px); visibility: visible");
 
@@ -1023,6 +1022,10 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         _currentActive = playerCardDom;
         playerCardDom.setAttribute("active", true);
         passOverviewPlayerInfos(overview, playerCard);
+        document.getElementById('result-medal-by-excercise-id-kraft').innerHTML = "";
+        document.getElementById('result-medal-by-excercise-id-ausdauer').innerHTML = "";
+        document.getElementById('result-medal-by-excercise-id-koordination').innerHTML = "";
+        document.getElementById('result-medal-by-excercise-id-schnelligkeit').innerHTML = "";
         const ExBtnActionKraft = document.getElementById("create-exercise-action-kraft");
         ExBtnActionKraft.addEventListener("click", () => {
             createExercisePopup("popup-exercise", "kraft");
@@ -1080,7 +1083,11 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         createExerciseDropdownYear(player_id, "ausdauer");
         createExerciseDropdown("KOORDINATION", player_id);
         createExerciseDropdownYear(player_id, "koordination");
-        createCharts();
+
+        if (kchart == null) {
+            createCharts();
+        }
+
 
 
         const dropdownau = document.getElementById("change-exercise-ausdauer");
@@ -1205,7 +1212,6 @@ customElements.define(
 
             const userNameFull = this.shadowRoot.querySelector('#user-name-long');
             userNameFull.textContent = this.getAttribute("data-fname") + " " + this.getAttribute("data-lname");
-
             this.addEventListener("click", (evt) => {
                 if (!_popupPin) {
                     selectActivePlayerCard(this.shadowRoot.getElementById("playerCardDom"), this);
@@ -1543,7 +1549,7 @@ customElements.define(
                                 } else {
                                     _popupPin = false;
                                     popUp.remove();
-                                    createExerciseDropdownYear(athleteId)
+                                    createExerciseDropdownYear(athleteId, data_exercise_type)
                                     alert("Die Leistung wurde erfolgreich erfasst!");
                                 }
                             }
@@ -1988,22 +1994,20 @@ function changeChartExercise(Extitle, player_id, mychart, extype, year) {
 
                 }else {
                     bestvalue.textContent = groessterWert;
-                    var formatted4String = capitalizeFirstLetterOnly(metric);
-                    bestmetric.textContent = formatted4String;
+                    if (metric != null) {
+                        var formatted4String = capitalizeFirstLetterOnly(metric);
+                        bestmetric.textContent = formatted4String;
+                    }
                 }
-
+                document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
                 if ( getmedal === "GOLD") {
-                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
                     document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = '<img src="' + goldURL + '" alt="Medaille">';
                 } else if ( getmedal === "SILBER") {
-                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
                     document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = '<img src="' + silberURL + '" alt="Medaille">';
                 } else if ( getmedal === "BRONZE") {
-                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
                     document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = '<img src="' + bronzeURL + '" alt="Medaille">';
                 } else {
-                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
-                    document.getElementById('result-medal-by-excercise-id-' + extype).innerHTML = "";
+                    document.getElementById('result-medal-by-excercise-id-' + extype).textContent = "no Medal yet!";
                 }
 
             }
