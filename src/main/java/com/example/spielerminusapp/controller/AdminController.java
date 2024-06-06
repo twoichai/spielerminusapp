@@ -23,9 +23,9 @@ public class AdminController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PutMapping("/{adminId}/{oldEmail}")
+    @PutMapping("/{adminId}/")
     public ResponseEntity<?> changeEmail(@PathVariable Long adminId,
-                                         @PathVariable String oldEmail,
+                                         @RequestParam String oldEmail,
                                          @RequestParam String newEmail,
                                          @RequestParam String password) {
         // Retrieve the admin by adminId
