@@ -1,3 +1,5 @@
+@use "../../../config";
+
 table {
   border-collapse: collapse;
   overflow: hidden;
@@ -11,39 +13,21 @@ table {
 th,
 td {
   padding: 15px;
-  background-color: rgba(255,255,255,0.2);
-  color: #000;
+  color: config.$neutral-color-100;
+  text-align: center;
 }
 
-th {
-  text-align: left;
+tr {
+  background-color: rgba(97,189,171,0.6);
+  transition: color 1s ease;
 }
 
 thead {
   th {
-    background-color: #55608f;
+    background-color: config.$brandcolor-green;
   }
 }
 
-tbody {
-  tr {
-    &:hover {
-      background-color: rgba(255,255,255,0.3);
-    }
-  }
-  td {
-    position: relative;
-    &:hover {
-      &:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: -9999px;
-        bottom: -9999px;
-        background-color: rgba(255,255,255,0.2);
-        z-index: -1;
-      }
-    }
-  }
+.white-background {
+  background-color: rgba(97,189,171,0.4)
 }

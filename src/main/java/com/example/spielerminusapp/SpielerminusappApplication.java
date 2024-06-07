@@ -9,6 +9,5 @@ public class SpielerminusappApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpielerminusappApplication.class, args);
 	}
-	//TODO: DB INITIALIZATION VIA JAVA CODE AND NOT SQL
 
 }

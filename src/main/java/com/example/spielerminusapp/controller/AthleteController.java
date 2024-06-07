@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.Year;
 import java.util.List;
 import java.util.Optional;
 
@@ -134,15 +135,15 @@ public class AthleteController {
         }
     }
 
-    @PatchMapping("/swimming-certificate/{id}")
-    public Athlete updateSwimmingCertificate(@PathVariable Long id, @RequestParam boolean swimmingCertificate) {
+    @PatchMapping("/swimming-certificate/{id}/{swimmingCertificate}")
+    public Athlete updateSwimmingCertificate(@PathVariable Long id, @PathVariable boolean swimmingCertificate) {
         return athleteService.updateSwimmingCertificate(id, swimmingCertificate);
     }
 
-    @GetMapping("/einzelpruefkarte/{id}")
-    public void exportEinzelpruefkarte(@PathVariable Long id, HttpServletResponse response) throws IOException {
+    @GetMapping("/einzelpruefkarte/{id}/{year}")
+    public void exportEinzelpruefkarte(@PathVariable Long id, @PathVariable Year year, HttpServletResponse response) throws IOException {
         // Generate the PDF file
-        athleteService.createPruefkartePDF(id);
+        athleteService.createPruefkartePDF(id, year);
 
         // Specify the path to the generated PDF file
         String filename = "src/main/resources/pdf/pruefkarte.pdf";

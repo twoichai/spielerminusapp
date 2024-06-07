@@ -35,5 +35,9 @@ public class LoginController {
     public String adminDetails() {
         return "admin_details";
     }
+    @GetMapping("/userdocu")
+    public String userDocumentation() {
+        return "user_documentation";
+    }
 
 }

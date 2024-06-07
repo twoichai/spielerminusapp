@@ -17,7 +17,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            animation: fadeInAnimation ease 2s;
+            animation: fadeInAnimation ease 1s;
         }
         @keyframes fadeInAnimation {
             0% {
@@ -183,20 +183,20 @@
     </form>
 
     <h2>E-Mail ändern</h2>
-    <form id="oldemailForm" onsubmit="changeEmail()">
+    <form id="oldEmailForm" onsubmit="changeEmail()">
         <div>
-            <label for="oldemail">Ihre E-Mail:</label>
-            <input type="email" id="oldemail" name="oldemail" pattern=".{12,}" style="margin-bottom: 16px" required>
+            <label for="oldEmail">Ihre E-Mail:</label>
+            <input type="email" id="oldEmail" name="oldEmail" pattern=".{12,}" style="margin-bottom: 16px" required>
         </div>
         <div>
-            <label for="newemail">Ihre neue E-Mail:</label>
-            <input type="email" id="newemail" name="newemail" pattern=".{12,}" style="margin-bottom: 16px" required>
+            <label for="newEmail">Ihre neue E-Mail:</label>
+            <input type="email" id="newEmail" name="newEmail" pattern=".{12,}" style="margin-bottom: 16px" required>
         </div>
         <div>
-            <label for="passwordemail">Bestätigen Sie Ihren Passwort:</label>
-            <input type="password" id="passwordemail" name="confirmationPassword" pattern=".{12,}" style="margin-bottom: 16px" required>
+            <label for="password">Bestätigen Sie Ihr Passwort:</label>
+            <input type="password" id="password" name="password" pattern=".{12,}" style="margin-bottom: 16px" required>
         </div>
-        <button type="submit" class="custom-button" onclick="changeEmail()">E-Mail Speichern</button>
+        <button type="submit" class="custom-button">E-Mail Speichern</button>
     </form>
 </div>
 <template id="fehlerMeldung">
@@ -267,17 +267,17 @@
         return false;
     }
     function changeEmail() {
-        const oldemail = document.getElementById("oldemail").value;
-        const newemail = document.getElementById("newemail").value;
+        const oldEmail = document.getElementById("oldEmail").value;
+        const newEmail = document.getElementById("newEmail").value;
         const password = document.getElementById("passwordemail").value;
-
+        const thisConfirmationPassword = document.getElementById("confirmationPassword").value;
         // Check if the old email, new email, and password are provided
         if (!oldemmail) {
             displayError("Alte E-Mail muss angegeben werden");
             return false;
         }
 
-        if (!newemail) {
+        if (!newEmail) {
             displayError("Neue E-Mail muss angegeben werden");
             return false;
         }
@@ -289,16 +289,16 @@
 
         // Simple email format validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(newemail)) {
+        if (!emailRegex.test(newEmail)) {
             displayError("Ungültiges E-Mail-Format");
             return false;
         }
 
         // Send the old email, new email, and password to the backend
-        axios.put('/admin/1/change-email',
-            {
-                oldemail: oldemail,
-                newemail: newemail,
+        axios.put('/admin/'+ 1 ,
+            {//http://localhost:8080/adminarea?oldEmail=admin.mail%40mail.com&newEmail=admin.ffmail%40mail.com&password=T9*hCv%3Fg%7DK%21w
+                //http://localhost:8080/admin/1/?oldEmail=admin.mail%40mail.com&newEmail=admin.mail11%40mail.com&password=X%3A%21g%5BQ%3EQRXN%21
+                newEmail: newEmail,
                 password: password
             }).then(response => {
             if(response.status === 200) {
