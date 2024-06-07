@@ -141,9 +141,11 @@ public class AthleteController {
     }
 
     @GetMapping("/einzelpruefkarte/{id}/{year}")
-    public void exportEinzelpruefkarte(@PathVariable Long id, @PathVariable Year year, HttpServletResponse response) throws IOException {
+    public ResponseEntity<Boolean> exportEinzelpruefkarte(@PathVariable Long id, @PathVariable Year year, HttpServletResponse response) throws IOException {
         // Generate the PDF file
-        athleteService.createPruefkartePDF(id, year);
+        if(!athleteService.createPruefkartePDF(id, year)){
+            return ResponseEntity.ok(false);
+        }
 
         // Specify the path to the generated PDF file
         String filename = "src/main/resources/pdf/pruefkarte.pdf";
@@ -164,5 +166,6 @@ public class AthleteController {
             }
             os.flush();
         }
+        return ResponseEntity.ok(true);
     }
 }

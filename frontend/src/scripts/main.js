@@ -51,7 +51,7 @@ let _exerciseDate = null;
 let _exerciseExId = null;
 let _exerciseAtId = null;
 let _exerciseResult = null;
-
+let _currentChart = null;
 
 window.onload = (event) => {
     createMeineDSA();
@@ -572,7 +572,7 @@ function deleteMeineAthleten(id) {
     }
 }
 
-function createUebungskatalog() {
+function createUebungskatalog(){
     const main = document.querySelector("#main-view");
 
     main.innerHTML = document.querySelector("#uebungskatalog-t").innerHTML;
@@ -1005,7 +1005,6 @@ function createTableRow(tableRow, item) {
     }
 }
 
-
 function selectActivePlayerCard(playerCardDom, playerCard) {
     _activePlayercard = playerCard;
     const overview = document.getElementById("playerCard-detail");
@@ -1026,22 +1025,7 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         document.getElementById('result-medal-by-excercise-id-ausdauer').innerHTML = "";
         document.getElementById('result-medal-by-excercise-id-koordination').innerHTML = "";
         document.getElementById('result-medal-by-excercise-id-schnelligkeit').innerHTML = "";
-        const ExBtnActionKraft = document.getElementById("create-exercise-action-kraft");
-        ExBtnActionKraft.addEventListener("click", () => {
-            createExercisePopup("popup-exercise", "kraft");
-        });
-        const ExBtnActionAus = document.getElementById("create-exercise-action-ausdauer");
-        ExBtnActionAus.addEventListener("click", () => {
-            createExercisePopup("popup-exercise", "ausdauer");
-        });
-        const ExBtnActionKoo = document.getElementById("create-exercise-action-koordination");
-        ExBtnActionKoo.addEventListener("click", () => {
-            createExercisePopup("popup-exercise", "koordination");
-        });
-        const ExBtnActionSch = document.getElementById("create-exercise-action-schnelligkeit");
-        ExBtnActionSch.addEventListener("click", () => {
-            createExercisePopup("popup-exercise", "schnelligkeit");
-        });
+
         const einzelpruefKarteBtn = document.getElementById("export-pruefkarte");
         einzelpruefKarteBtn.addEventListener("click", () => {
             let pruefYear = document.getElementById("pruefkarte-jahr").value;
@@ -1084,11 +1068,7 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
         createExerciseDropdown("KOORDINATION", player_id);
         createExerciseDropdownYear(player_id, "koordination");
 
-        if (kchart == null) {
-            createCharts();
-        }
-
-
+        createCharts();
 
         const dropdownau = document.getElementById("change-exercise-ausdauer");
         const dropdownsch = document.getElementById("change-exercise-schnelligkeit");
@@ -1101,46 +1081,55 @@ function selectActivePlayerCard(playerCardDom, playerCard) {
 
         //change in exercise dropdown
         dropdownsch.addEventListener("change", (evt) => {
-            console.log(evt.target.textContent)
             changeChartExercise( evt.target.value, player_id, schchart, "schnelligkeit", dropdownschy.value);
         })
         dropdownau.addEventListener("change", (evt) => {
-            console.log(evt.target.textContent)
             changeChartExercise( evt.target.value, player_id, auschart, "ausdauer", dropdownky.value);
         })
         dropdownk.addEventListener("change", (evt) => {
-            console.log(evt.target.textContent)
             changeChartExercise( evt.target.value, player_id, kchart, "kraft", dropdownauy.value);
         })
 
         dropdownkoo.addEventListener("change", (evt) => {
-            console.log(evt.target.textContent)
             changeChartExercise( evt.target.value, player_id, kochart, "koordination", dropdownschy.value);
         })
 
         //change in year dropdown
         dropdownschy.addEventListener("change", (evt) => {
-            console.log(evt.target.textContent)
             changeChartExercise( dropdownsch.value, player_id, schchart, "schnelligkeit", evt.target.value);
         })
 
         dropdownauy.addEventListener("change", (evt) => {
-            console.log(evt.target.textContent)
             changeChartExercise( dropdownau.value, player_id, auschart, "ausdauer", evt.target.value);
         })
 
         dropdownky.addEventListener("change", (evt) => {
-            console.log(dropdownk.value)
             changeChartExercise( dropdownk.value, player_id, kchart, "kraft", evt.target.value);
         })
 
         dropdownkooy.addEventListener("change", (evt) => {
-            console.log(dropdownkoo.value)
             changeChartExercise( dropdownkoo.value, player_id, kochart, "koordination", evt.target.value);
         })
 
+        const ExBtnActionKraft = document.getElementById("create-exercise-action-kraft");
+        ExBtnActionKraft.addEventListener("click", () => {
+            createExercisePopup("popup-exercise", "kraft", dropdownk.value, player_id, kchart, dropdownky.value);
+        });
+        const ExBtnActionAus = document.getElementById("create-exercise-action-ausdauer");
+        ExBtnActionAus.addEventListener("click", () => {
+            createExercisePopup("popup-exercise", "ausdauer", dropdownau.value, player_id, auschart, dropdownauy.value);
+        });
+        const ExBtnActionKoo = document.getElementById("create-exercise-action-koordination");
+        ExBtnActionKoo.addEventListener("click", () => {
+            createExercisePopup("popup-exercise", "koordination", dropdownkoo.value, player_id, kochart, dropdownkooy.value);
+        });
+        const ExBtnActionSch = document.getElementById("create-exercise-action-schnelligkeit");
+        ExBtnActionSch.addEventListener("click", () => {
+            createExercisePopup("popup-exercise", "schnelligkeit", dropdownsch.value, player_id, schchart, dropdownschy.value);
+        });
     }
 }
+
 function swimFunction (){
     try {
         const swimSelectValue = document.getElementById("swim-select").value;
@@ -1459,8 +1448,6 @@ customElements.define(
                     axios.put('athletes/exercises/updateCompletedExercise/' + _exerciseExId + "/" + _exerciseAtId
                         + "/" + _exerciseResult + "/" + _exerciseDate).then(response => {
 
-
-
                         if (response.status == 200) {
                             _popupPin = false;
                             popUp.remove();
@@ -1503,7 +1490,7 @@ customElements.define(
             const overlay = this.shadowRoot.getElementById("exercise-overlay");
             const closeBtn = this.shadowRoot.getElementById("cancelExercise")
             const dateField = this.shadowRoot.getElementById("exercise-date");
-            let data_exercise_type = _this.getAttribute("data-type");
+            let data_exercise_type = _this.getAttribute("popup-type");
             console.log(data_exercise_type);
             overlay.addEventListener('click', () => {
                 _popupPin = false;
@@ -1533,8 +1520,6 @@ customElements.define(
                         axios.post('athletes/exercises/saveCompletedExercise/' + exerciseId + "/" + athleteId
                             + "/" + result + "/" + date).then(response => {
 
-
-
                             if (response.status == 200) {
                                 if (response.data === false) {
                                     console.log(response.data);
@@ -1556,15 +1541,25 @@ customElements.define(
                         }).catch(error => {
                             console.error('Error:', error);
                         });
-                    } catch (e) {
+                        } catch (e) {
                         console.error(e);
                     }
+                    updateChart(popUp.getAttribute("popup-dropdown"),popUp.getAttribute("popup-player-id"),popUp.getAttribute("popup-type"), popUp.getAttribute("popup-evt"));
                 }
             }
 
 
         }
     });
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function updateChart(dropdown, player_id, typ, evt) {
+    sleep(4000);
+    changeChartExercise(dropdown, player_id, _currentChart, typ, evt);
+}
 
 customElements.define(
     "change-table-popup",
@@ -1628,7 +1623,6 @@ customElements.define(
                                     valueBronze: thisValueBronze
                                 }).then(response => {
                                 if (response.status == 200) {
-                                    popUp.remove();
                                     axios.get("/athletes/exercises",
                                         {}).then(response => {
                                         if (response.status == 200) {
@@ -1639,6 +1633,8 @@ customElements.define(
                                             }
                                         }
                                     });
+                                    _popupPin = false;
+                                    popUp.remove();
                                 }
                             });
                         }
@@ -1650,7 +1646,7 @@ customElements.define(
                 else {
                     alert("Die Werte wurden nicht an der Einheit angepasst: Minuten: tt:tt | Meter: m,mm | Alles andere: wwww");
                 }
-            });
+            }, {once: true});
         }
     });
 function fillUpContent(popup, age, gender) {
@@ -1803,11 +1799,16 @@ function createExerciseExistsPopUp() {
     const exerciseExists = document.createElement("exercise-exists-popup");
     main.appendChild(exerciseExists);
 }
-function createExercisePopup(id, typeBox) {
+function createExercisePopup(id, typeBox, dropdown, player_id, chart, evt) {
+    _currentChart = chart;
     _popupPin = true;
     const main = document.getElementById("main")
     const exercise = document.createElement("exercise-popup");
-    exercise.setAttribute("data-type", typeBox)
+    exercise.setAttribute("popup-dropdown", dropdown);
+    exercise.setAttribute("popup-player-id", player_id);
+    exercise.setAttribute("popup-evt", evt);
+    exercise.setAttribute("popup-type", typeBox)
+
     main.appendChild(exercise);
 }
 
@@ -1910,11 +1911,11 @@ function createExerciseDropdownYear(player_id, exertype) {
     }
 }
 
-
 function changeChartExercise(Extitle, player_id, mychart, extype, year) {
     //var exChart = document.getElementById("chart-" + ExType);
     try {
         axios.get('/api/completedExercises/ByPlayerId/' + player_id).then(response => {
+            console.log("Inside")
             if (response.status == 200) {
                 console.log(response.data)
                 daymonChart = [];

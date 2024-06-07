@@ -16,6 +16,7 @@
   background-color: transparent;
   animation: fadeInAnimation ease 1s;
   transition: background-color 0.3s;
+  z-index: 10001;
 
   &:hover:not([active="true"]) {
     background-color: config.$neutral-color-200;

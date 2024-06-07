@@ -230,7 +230,7 @@ public class AthleteService {
         throw new IllegalArgumentException("Date format not supported: " + dateStr);
     }
 
-    public void createPruefkartePDF(Long athleteId, Year year) throws IOException {
+    public boolean createPruefkartePDF(Long athleteId, Year year) throws IOException {
         Athlete athlete = athleteRepository.getReferenceById(athleteId);
         String src = "src/main/resources/pdf/DSA_Einzelpruefkarte_2024_FORMULAR_neu.pdf";
         String dest = "src/main/resources/pdf/pruefkarte.pdf";
@@ -418,5 +418,6 @@ public class AthleteService {
 
         form.flattenFields();
         pdfDoc.close();
+        return true;
     }
 }
